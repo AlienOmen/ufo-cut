@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} ist nicht mehr da: Das Laufwerk ist vielleicht nicht angeschlossen, oder der Ordner wurde verschoben oder gelöscht.",
   "start.folderNotFound": "Ordner nicht gefunden",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "Aus CapCut importieren",
   "start.importCapcutNote": "Ein CapCut-Entwurf als neues Projekt",
   "start.keyboardShortcuts": "Tastenkürzel",

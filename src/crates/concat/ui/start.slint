@@ -1584,12 +1584,17 @@ global Learn {
         name: "discord", glyph: Glyph.circle-play, external: true,
         title: "Alien Designer", note: I18n.t("start.discordNote"),
     };
+    // UFO Cut: the free browser tools on A.L.I.E.N.'s site.
+    out property <LearnItem> tools: {
+        name: "tools", glyph: Glyph.link, external: true,
+        title: "UFO Cut Tools", note: I18n.t("start.toolsNote"),
+    };
     out property <LearnItem> report: {
         name: "report", glyph: Glyph.bug, external: true,
         title: I18n.t("start.reportProblem"), note: I18n.t("start.reportProblemNote"),
     };
-    out property <[LearnItem]> desk: [docs, guide, keys, code, chat, report];
-    out property <[LearnItem]> phone: [docs, guide, code, chat, report];
+    out property <[LearnItem]> desk: [docs, guide, keys, tools, code, chat, report];
+    out property <[LearnItem]> phone: [docs, guide, tools, code, chat, report];
 }
 
 // The learn cards as a grid of rows, for the wide page under the projects

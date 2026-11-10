@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} больше нет: возможно, диск отключён, или папку переместили или удалили.",
   "start.folderNotFound": "Папка не найдена",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "Импорт из CapCut",
   "start.importCapcutNote": "Черновик CapCut как новый проект",
   "start.keyboardShortcuts": "Горячие клавиши",

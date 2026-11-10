@@ -113,6 +113,7 @@ pub fn link(name: &str) -> Option<String> {
         // now the studio's card and "discord" the course's.
         "guides" | "first-edit" | "report" | "release-notes" => SITE.to_owned(),
         "github" => STUDIO.to_owned(),
+        "tools" => format!("{SITE}/tools/"),
         "discord" => {
             let edition = match crate::i18n::current().as_str() {
                 "ar" => "ar",

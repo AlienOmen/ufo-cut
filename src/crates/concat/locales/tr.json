@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} artık orada değil: sürücüsü çıkarılmış olabilir ya da klasör taşınmış veya silinmiş.",
   "start.folderNotFound": "Klasör bulunamadı",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "CapCut'tan içe aktar",
   "start.importCapcutNote": "Bir CapCut taslağı, yeni proje olarak",
   "start.keyboardShortcuts": "Klavye kısayolları",

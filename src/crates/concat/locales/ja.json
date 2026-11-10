@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} はもうありません。ドライブが外されたか、フォルダーが移動または削除された可能性があります。",
   "start.folderNotFound": "フォルダーが見つかりません",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "CapCut から読み込む",
   "start.importCapcutNote": "CapCut の下書きを新しいプロジェクトに",
   "start.keyboardShortcuts": "キーボードショートカット",

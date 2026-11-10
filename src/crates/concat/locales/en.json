@@ -722,6 +722,7 @@
   "start.folderMissing": "{0} is not there any more: its drive may be unplugged, or the folder was moved or deleted.",
   "start.folderNotFound": "Folder not found",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "Import from CapCut",
   "start.importCapcutNote": "A CapCut draft, as a new project",
   "start.keyboardShortcuts": "Keyboard shortcuts",

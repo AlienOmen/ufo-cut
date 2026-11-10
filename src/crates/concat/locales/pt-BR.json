@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} não está mais lá: a unidade pode estar desconectada, ou a pasta foi movida ou excluída.",
   "start.folderNotFound": "Pasta não encontrada",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "Importar do CapCut",
   "start.importCapcutNote": "Um rascunho do CapCut, como novo projeto",
   "start.keyboardShortcuts": "Atalhos de teclado",

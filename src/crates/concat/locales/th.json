@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} ไม่อยู่ที่นั่นแล้ว: ไดรฟ์อาจถูกถอดออก หรือโฟลเดอร์ถูกย้ายหรือลบไปแล้ว",
   "start.folderNotFound": "ไม่พบโฟลเดอร์",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "นำเข้าจาก CapCut",
   "start.importCapcutNote": "ฉบับร่าง CapCut เป็นโปรเจกต์ใหม่",
   "start.keyboardShortcuts": "แป้นพิมพ์ลัด",

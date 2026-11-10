@@ -753,6 +753,7 @@
   "start.folderMissing": "{0} 已不在原处：所在驱动器可能已拔出，或文件夹已被移动或删除。",
   "start.folderNotFound": "找不到文件夹",
   "start.githubNote": "The studio behind UFO Cut",
+  "start.toolsNote": "Compress, convert, trim, GIFs and subtitles, free in your browser",
   "start.importCapcut": "从 CapCut 导入",
   "start.importCapcutNote": "将 CapCut 草稿作为新项目",
   "start.keyboardShortcuts": "键盘快捷键",
