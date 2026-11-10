@@ -44,7 +44,7 @@ pub fn contract_schema() -> Value {
     json!({
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": ID,
-        "title": "Concat API",
+        "title": "UFO Cut API",
         "apiVersion": API_VERSION,
         "concat": env!("CARGO_PKG_VERSION"),
         "request": request,

@@ -111,7 +111,7 @@ fn locate() -> Result<(SocketAddr, String), String> {
     match discovery::read(&path)? {
         Some(listing) => Ok((listing.address, listing.token)),
         None => Err(
-            "the Concat window is not serving the API: open Concat, then Settings > Automation, and turn on Scripts and apps"
+            "the UFO Cut window is not serving the API: open UFO Cut, then Settings > Automation, and turn on Scripts and apps"
                 .to_owned(),
         ),
     }
@@ -146,7 +146,7 @@ impl Backend for Window {
             Err(error)
                 if error
                     .message
-                    .starts_with("the connection to the Concat server") =>
+                    .starts_with("the connection to the UFO Cut server") =>
             {
                 let again = Window::find().map_err(|why| {
                     ApiError::failed(format!(

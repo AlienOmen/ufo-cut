@@ -1065,7 +1065,7 @@ pub(crate) fn restart(project: Option<std::path::PathBuf>) {
     log::info!("close: restarting for a setting read at launch");
     quit_for_switch(move || {
         if let Err(error) = updates::restart(project.as_deref()) {
-            log::warn!("restart: could not start Concat again: {error}");
+            log::warn!("restart: could not start UFO Cut again: {error}");
         }
     });
 }

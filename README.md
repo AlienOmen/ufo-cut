@@ -1,3 +1,5 @@
+> **UFO Cut** is a fork of [Concat](https://github.com/jub0t/Concat), published by A.L.I.E.N. under AGPL-3.0-or-later. It is not the official Concat. See [`FORK.md`](FORK.md) for what is changed. The text below is Concat's own README.
+
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/jub0t/Concat@main/assets/concat-mark-dark.png" alt="Concat" width="100" />
 </p>

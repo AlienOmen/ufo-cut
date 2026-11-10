@@ -24,7 +24,7 @@ use std::path::{Path, PathBuf};
 /// The app identifier, which is also the folder name everywhere. Every
 /// release so far has used it; a phone treats a new one as another app,
 /// so it changes only with a domain of the project's own behind it.
-pub const IDENTIFIER: &str = "app.concat.editor";
+pub const IDENTIFIER: &str = "app.ufocut.editor";
 
 /// The identifier builds of `main` used between 2026-10-26 and
 /// 2026-11-04, never released. Those builds moved the folder to it and
@@ -129,7 +129,7 @@ const DATA_FOLDERS: [&str; 10] = [
     "logs",           // logs.rs
     "audio",          // sounds.rs: the Audio page's own sounds; see `library`
     "voices",         // voices.rs: saved cloned voices; see `library`
-    "sounds",         // sounds.rs: Concat's sounds, downloaded on first use
+    "sounds",         // sounds.rs: UFO Cut's sounds, downloaded on first use
 ];
 
 /// Moves what an older build kept under `from` - Windows kept models and

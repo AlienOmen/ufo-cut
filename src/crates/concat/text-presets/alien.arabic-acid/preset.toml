@@ -1,0 +1,14 @@
+id = "alien.arabic-acid"
+name = "ALIEN Arabic acid"
+language = "Arabic"
+order = 39
+
+# Right to left, joined, in the bundled Arabic UI face, in acid.
+[style]
+content = "مرحبا"
+fontFamily = "Noto Sans Arabic UI"
+fontWeight = 400
+fontSize = 0.1
+color = "#c8ff00"
+strokeWidth = 0.008
+strokeColor = "#0a0b0a"

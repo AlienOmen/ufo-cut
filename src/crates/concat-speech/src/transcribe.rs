@@ -336,7 +336,7 @@ pub fn cpu_backend() -> Result<String, String> {
                 }
             }
             Err(format!(
-                "whisper's CPU kernels (ggml-cpu-*) are missing from {} - reinstall Concat",
+                "whisper's CPU kernels (ggml-cpu-*) are missing from {} - reinstall UFO Cut",
                 folders[0].display()
             ))
         })

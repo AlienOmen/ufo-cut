@@ -135,9 +135,9 @@ impl std::fmt::Display for Refusal {
             Refusal::Here(holder) => write!(f, "open in {holder}"),
             Refusal::Elsewhere(owner) => {
                 let what = if owner.role == "window" {
-                    "a Concat window"
+                    "a UFO Cut window"
                 } else {
-                    "another Concat process"
+                    "another UFO Cut process"
                 };
                 match owner.pid {
                     Some(pid) => write!(f, "open in {what} (process {pid})"),
@@ -1773,7 +1773,7 @@ mod tests {
         let refused = err(api.dispatch(Request::ProjectOpen { path: path.clone() }));
         assert_eq!(refused.code, ErrorCode::Refused);
         assert!(
-            refused.message.contains("a Concat window (process"),
+            refused.message.contains("a UFO Cut window (process"),
             "{}",
             refused.message
         );
@@ -1787,7 +1787,7 @@ mod tests {
 
         let refused = err(other.dispatch(Request::ProjectOpen { path: path.clone() }));
         assert!(
-            refused.message.contains("another Concat process"),
+            refused.message.contains("another UFO Cut process"),
             "{}",
             refused.message
         );

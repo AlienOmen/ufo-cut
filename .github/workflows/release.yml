@@ -102,19 +102,9 @@ jobs:
       ref: ${{ needs.check.outputs.tag }}
     secrets: inherit
 
-  # `sign` is the one thing that puts the repository's Android key into a
-  # run; a pull request's build of mobile.yml never gets it.
-  phones:
-    needs: [check, engine]
-    uses: ./.github/workflows/mobile.yml
-    with:
-      ref: ${{ needs.check.outputs.tag }}
-      sign: true
-    secrets: inherit
-
   publish:
     name: Publish release
-    needs: [check, build, phones]
+    needs: [check, build]
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -123,7 +113,7 @@ jobs:
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           path: bundles
-          pattern: Concat-*
+          pattern: UFO-Cut-*
           merge-multiple: true
 
       # The tree the release is cut from: the notes are read out of its
@@ -189,7 +179,7 @@ jobs:
       - uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: ${{ needs.check.outputs.tag }}
-          name: Concat ${{ needs.check.outputs.tag }}
+          name: UFO Cut ${{ needs.check.outputs.tag }}
           draft: true
           prerelease: ${{ contains(needs.check.outputs.tag, '-') }}
           body_path: ${{ runner.temp }}/notes.md

@@ -167,7 +167,7 @@ impl SoundsPane {
                 }
                 Ok(None) => self.concat = ConcatState::Soon,
                 Err(error) => {
-                    log::info!("sounds: the Concat list could not be fetched: {error}");
+                    log::info!("sounds: the UFO Cut list could not be fetched: {error}");
                     // A list already on screen stays: the refresh failed,
                     // not the shelf.
                     if self.concat != ConcatState::Ready {

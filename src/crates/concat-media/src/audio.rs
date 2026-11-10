@@ -1910,9 +1910,9 @@ mod tests {
             assert_eq!(&bytes[..4], b"RIFF");
             assert_eq!(&bytes[8..12], b"WAVE");
             let mut decoder = AudioDecoder::open(&output, &AudioOptions::default())
-                .expect("Concat opens the saved WAV");
+                .expect("UFO Cut opens the saved WAV");
             let mut actual = Vec::new();
-            while let Some(samples) = decoder.next_i16().expect("Concat decodes the WAV") {
+            while let Some(samples) = decoder.next_i16().expect("UFO Cut decodes the WAV") {
                 actual.extend(samples);
             }
             assert_eq!(actual.len(), 6007 * 2, "exact stereo sample count");

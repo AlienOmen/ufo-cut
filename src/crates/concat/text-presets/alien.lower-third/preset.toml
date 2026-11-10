@@ -1,0 +1,16 @@
+id = "alien.lower-third"
+name = "ALIEN Lower third"
+language = "Latin"
+order = 1
+offsetY = 0.32
+
+# A name strip: void ink on an acid plate.
+[style]
+content = "Nombre — Cargo"
+fontFamily = "Hanken Grotesk"
+fontWeight = 600
+fontSize = 0.05
+color = "#0a0b0a"
+background = "#c8ff00"
+align = "left"
+shadow = false

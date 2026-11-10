@@ -1,0 +1,19 @@
+# UFO Cut: build the Windows installer, and nothing else.
+#
+# Started by hand from the Actions tab. It runs build-app.yml, whose
+# matrix in this fork is the Windows x86_64 row alone, and leaves the
+# bundle on the run as an artifact (UFO-Cut-windows-x86_64): the setup
+# .exe, the .msi and the portable zip. Nothing is published; a release
+# is release.yml's job.
+name: UFO Cut for Windows
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    uses: ./.github/workflows/build-app.yml
+    secrets: inherit

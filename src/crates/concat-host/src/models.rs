@@ -31,7 +31,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use crate::net::Cause;
 
 /// The repository the mirror lives on.
-pub const REPO: &str = "jub0t/Concat";
+pub const REPO: &str = "AlienOmen/ufo-cut-assets";
 
 /// The release every model is mirrored on.
 ///
@@ -49,10 +49,10 @@ pub fn mirror(file: &str) -> String {
 /// the shelf is asked for and never at startup. The schema, and where the
 /// files go, is `docs/AUDIO_LIBRARY.md`.
 pub const SOUNDS_MANIFEST: &str =
-    "https://raw.githubusercontent.com/concatapp/assets/main/audio/manifest.json";
+    "https://raw.githubusercontent.com/AlienOmen/ufo-cut-assets/main/audio/manifest.json";
 
 /// The repository the sounds live in.
-pub const SOUNDS_REPO: &str = "concatapp/assets";
+pub const SOUNDS_REPO: &str = "AlienOmen/ufo-cut-assets";
 
 /// The release the sounds are mirrored on, so a file moved in the
 /// repository does not take a sound off the shelf.

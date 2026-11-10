@@ -150,7 +150,7 @@ pub fn create(
     // just as safe from being clobbered as a new one.
     if is_project(&root) {
         return Err(format!(
-            "a Concat project already exists at {}",
+            "a UFO Cut project already exists at {}",
             root.display()
         ));
     }
@@ -465,7 +465,7 @@ pub fn read_document(path: &str) -> Result<Option<serde_json::Value>, String> {
     };
     serde_json::from_slice(&bytes)
         .map(Some)
-        .map_err(|error| format!("{} is not a Concat project: {error}", manifest.display()))
+        .map_err(|error| format!("{} is not a UFO Cut project: {error}", manifest.display()))
 }
 
 /// Reads an existing project's settings.
@@ -476,7 +476,7 @@ pub fn open(path: &str) -> Result<ProjectInfo, String> {
     let bytes = std::fs::read(&manifest)
         .map_err(|error| format!("could not read {}: {error}", manifest.display()))?;
     let document: Manifest = serde_json::from_slice(&bytes)
-        .map_err(|error| format!("{} is not a Concat project: {error}", manifest.display()))?;
+        .map_err(|error| format!("{} is not a UFO Cut project: {error}", manifest.display()))?;
 
     if document.video.rate_den == 0 {
         return Err(format!("{} has an invalid frame rate", manifest.display()));

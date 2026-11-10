@@ -36,7 +36,7 @@ CRATES = ROOT / "src" / "crates"
 
 # The repository the mirror lives on, and the engine constant that must
 # agree with this file about which release holds it.
-REPO = "jub0t/Concat"
+REPO = "AlienOmen/ufo-cut-assets"
 HOST_MODELS = CRATES / "concat-host" / "src" / "models.rs"
 
 # Where each family's table lives in the engine, for --check.

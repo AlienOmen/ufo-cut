@@ -544,7 +544,7 @@ mod tests {
     #[test]
     fn a_module_is_named_without_its_folder() {
         assert_eq!(
-            file_name(r"C:\Program Files\Concat\onnxruntime.dll"),
+            file_name(r"C:\Program Files\UFO Cut\onnxruntime.dll"),
             "onnxruntime.dll"
         );
         assert_eq!(

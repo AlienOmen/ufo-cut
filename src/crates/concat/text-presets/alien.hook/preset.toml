@@ -1,0 +1,20 @@
+id = "alien.hook"
+name = "ALIEN Hook"
+language = "Latin"
+order = 1
+offsetY = -0.28
+
+# The first two seconds of a reel: big, with the second word in acid.
+[style]
+content = "MIRA ESTO"
+fontFamily = "Montserrat"
+fontWeight = 900
+fontSize = 0.11
+color = "#ecede4"
+strokeWidth = 0.014
+strokeColor = "#0a0b0a"
+
+[[style.runs]]
+start = 5
+end = 9
+color = "#c8ff00"
