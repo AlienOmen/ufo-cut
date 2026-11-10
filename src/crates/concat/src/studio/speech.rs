@@ -92,6 +92,9 @@ impl Studio {
         /// How long that trial may take before the package is refused.
         const TRIAL_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(3);
         let dir = Self::looks_dir(&self.host.dirs);
+        // UFO Cut: the A.L.I.E.N. looks, among the user's own from the
+        // first run on.
+        crate::alien_looks::seed(&dir);
         // Looks an earlier build imported, onto the format 2 look first.
         for id in concat_effects::looks::upgrade(&dir) {
             log::info!("{id}: the imported look now reads its table in light");

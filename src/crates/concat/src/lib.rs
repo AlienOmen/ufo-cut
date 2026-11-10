@@ -31,6 +31,7 @@ mod ui {
     slint::include_modules!();
 }
 
+mod alien_looks;
 mod batch_volume;
 mod chips;
 mod dock;

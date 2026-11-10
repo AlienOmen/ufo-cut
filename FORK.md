@@ -40,6 +40,12 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
 - The test and Nix workflows run only when started by hand.
 - Five A.L.I.E.N. title presets are added (`text-presets/alien.*`).
 - The first launch asks which language to use, once (2026-11-10).
+- The start screen's cards go to A.L.I.E.N.'s pages; the GitHub and
+  Discord cards are now the studio's and the Alien Designer course's.
+- The Audio page has a "UFO Cut" shelf: the app's sounds and music, by
+  category, read from UFO Cut's own asset repository.
+- Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
+  the user's LUTs on the first run (`src/alien_looks.rs`).
 
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.

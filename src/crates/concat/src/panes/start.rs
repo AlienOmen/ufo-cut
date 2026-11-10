@@ -95,7 +95,9 @@ pub fn shown<'a>(
 }
 
 /// The official site, which the guides and the developer docs are pages of.
-const SITE: &str = "https://concat.standalones.org";
+const SITE: &str = "https://itsthealienlab.pages.dev";
+/// UFO Cut: the studio that publishes it.
+const STUDIO: &str = "https://itsthealien.pages.dev";
 /// The repository: the code, the issues, the releases.
 pub const REPOSITORY: &str = "https://github.com/AlienOmen/ufo-cut";
 
@@ -106,15 +108,19 @@ pub const REPOSITORY: &str = "https://github.com/AlienOmen/ufo-cut";
 /// "shortcuts" is not here: it opens Settings, not a page.
 pub fn link(name: &str) -> Option<String> {
     Some(match name {
-        "guides" => format!("{SITE}/guides/"),
-        "first-edit" => format!("{SITE}/guides/first-edit/"),
-        "report" => format!("{SITE}/guides/report-a-problem/"),
-        "github" => REPOSITORY.to_owned(),
-        // The invite the README carries.
-        "discord" => "https://discord.gg/DVuPfpXfqP".to_owned(),
-        // The notes for the release this build is, under the tag the
-        // release workflow pushes.
-        "release-notes" => format!("{REPOSITORY}/releases/tag/v{}", env!("CARGO_PKG_VERSION")),
+        // UFO Cut: every card goes to a page of A.L.I.E.N.'s own. The
+        // names are the ones the screen has always sent: "github" is
+        // now the studio's card and "discord" the course's.
+        "guides" | "first-edit" | "report" | "release-notes" => SITE.to_owned(),
+        "github" => STUDIO.to_owned(),
+        "discord" => {
+            let edition = match crate::i18n::current().as_str() {
+                "ar" => "ar",
+                "es" => "es",
+                _ => "en",
+            };
+            format!("{SITE}/designer/{edition}")
+        }
         _ => return None,
     })
 }
@@ -699,10 +705,7 @@ mod tests {
                 "{name}"
             );
         }
-        assert_eq!(
-            link("release-notes").unwrap(),
-            format!("{REPOSITORY}/releases/tag/v{}", env!("CARGO_PKG_VERSION"))
-        );
+        assert_eq!(link("release-notes").unwrap(), SITE);
         assert_eq!(link("nowhere"), None);
     }
 
