@@ -72,15 +72,9 @@ on:
       ANDROID_KEY_PASSWORD:
         description: The key's own password; the keystore's when unset
         required: false
-  pull_request:
-  # Every push to main, so main is known to build for phones; a push that
-  # changes only words for people to read builds nothing.
-  push:
-    branches: [main]
-    paths-ignore:
-      - "**.md"
-      - "docs/**"
-      - "scripts/readme/**"
+  # UFO Cut: started by hand only. On a private repository every push and
+  # pull request here spent macOS and Linux minutes on phone builds this
+  # fork does not ship (2026-11-10).
   workflow_dispatch:
 
 # Keyed by the calling workflow too, so a call from a release never shares
