@@ -1169,6 +1169,71 @@ export component App inherits Window {
         neighbour(by) => { root.open-menu-from-keys(Math.mod(root.open-menu + by, 3)); }
     }
 
+    // UFO Cut: the first launch asks which language to speak, once. Until
+    // an answer is saved the question covers the whole window; Settings
+    // changes the answer afterwards. The heading is in three languages
+    // because no language has been chosen to say it in, and each name in
+    // the grid is the language's own name for itself.
+    if root.settings.ask-language: Rectangle {
+        x: 0;
+        y: 0;
+        width: root.width;
+        height: root.height;
+        background: Theme.launch-page;
+
+        // Nothing under the question takes a click meant for it.
+        TouchArea { }
+
+        VerticalLayout {
+            alignment: center;
+            spacing: 28px;
+
+            Text {
+                horizontal-alignment: center;
+                text: "Choose your language  ·  Elige tu idioma  ·  اختر لغتك";
+                color: Theme.fg;
+                font-size: Theme.fs-xl;
+                font-weight: Theme.weight-title;
+            }
+
+            HorizontalLayout {
+                alignment: center;
+
+                language-grid := Rectangle {
+                    property <int> columns: root.width < 640px ? 2 : 3;
+                    property <length> cell-w: 196px;
+                    property <length> cell-h: 42px;
+                    width: self.columns * self.cell-w;
+                    height: Math.ceil(root.languages.length / self.columns) * self.cell-h;
+
+                    for name[index] in root.languages: Rectangle {
+                        x: Math.mod(index, language-grid.columns) * language-grid.cell-w + 4px;
+                        y: Math.floor(index / language-grid.columns) * language-grid.cell-h + 4px;
+                        width: language-grid.cell-w - 8px;
+                        height: language-grid.cell-h - 8px;
+                        border-radius: Theme.r;
+                        background: pick.has-hover ? Theme.accent : Theme.launch-field;
+
+                        Text {
+                            width: 100%;
+                            height: 100%;
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                            text: name;
+                            color: pick.has-hover ? Theme.on-accent : Theme.fg;
+                            font-size: Theme.fs;
+                        }
+
+                        pick := TouchArea {
+                            mouse-cursor: pointer;
+                            clicked => { root.settings-language-changed(index); }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Last of all, and over everything including the sheets: an export that
     // failed behind a dialog is exactly the case a notice is for. It takes no
     // events — there is no TouchArea anywhere in it — so covering the window

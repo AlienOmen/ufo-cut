@@ -70,6 +70,9 @@ export struct SettingsData {
     /// 6 Version, 7 Shortcuts
     tab: int,
     language: int,
+    /// UFO Cut: no language has been chosen yet, so the window asks
+    /// which one before anything else (app.slint)
+    ask-language: bool,
     /// what the log records: 0 errors only, 1 warnings, 2 normal, 3
     /// debug, 4 everything
     log-level: int,

@@ -39,6 +39,7 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   install.
 - The test and Nix workflows run only when started by hand.
 - Five A.L.I.E.N. title presets are added (`text-presets/alien.*`).
+- The first launch asks which language to use, once (2026-11-10).
 
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.

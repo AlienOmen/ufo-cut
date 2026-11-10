@@ -963,6 +963,8 @@ impl SettingsPane {
             ))),
             capturing: self.capturing.clone().unwrap_or_default().into(),
             language: self.language as i32,
+            // UFO Cut: until a language is saved, the window asks for one.
+            ask_language: studio.prefs.locale.is_none(),
             log_level: LOG_LEVELS
                 .iter()
                 .position(|level| *level == log::max_level())
