@@ -107,6 +107,12 @@ env:
   # sets each target's kernels are built for are the job's, by its `ggml`
   # row in the matrix; see the job's `env`.
   GGML_NATIVE: "OFF"
+  # UFO Cut: this fork builds on a private repository's runner, which has
+  # less memory than the public ones, and rustc ran out of it compiling
+  # the window crate as one unit under fat LTO (2026-11-10). Thin LTO
+  # over sixteen units fits; upstream does the same for Intel macOS.
+  CARGO_PROFILE_APP_LTO: "thin"
+  CARGO_PROFILE_APP_CODEGEN_UNITS: "16"
 
 jobs:
   app:
