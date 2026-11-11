@@ -488,6 +488,7 @@
   "settings.automatic": "تلقائي",
   "settings.automation": "الأتمتة",
   "settings.aiTitle": "مساعدو الذكاء الاصطناعي",
+  "settings.aboutFork": "UFO Cut من A.L.I.E.N. مبني على Concat، محرر الفيديو الحر مفتوح المصدر، ومرخّص برخصة AGPL-3.0. الشيفرة المصدرية: github.com/AlienOmen/ufo-cut",
   "settings.aiHint": "دع Claude أو أي مساعد يدعم MCP يحرّر بواسطة UFO Cut. انسخ أحد الخيارين والصقه في المساعد ثم أعد تشغيله. الملف CONNECT-AI.md بجانب البرنامج يشرح كل الخطوات.",
   "settings.aiCopyCommand": "انسخ لـ Claude Code",
   "settings.aiCopyConfig": "انسخ الإعدادات لتطبيقات أخرى",

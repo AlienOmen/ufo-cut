@@ -1775,7 +1775,7 @@ export component MediaPane inherits Rectangle {
     /// UFO Cut: the web address typed into the Media page's link field.
     callback import-link(url: string, quality: int);
     property <string> link-url;
-    /// 0 best, then 4K, 1440p, 1080p, 720p, 480p, 360p.
+    /// 0 best, then 4K, 1440p, 1080p, 720p, 480p, 360p, and 7 the sound alone.
     property <int> link-quality: 3;
     callback filter-changed(filter: MediaFilter);
     /// The sort dropdown beside the import button picked a new order.
@@ -2530,7 +2530,7 @@ export component MediaPane inherits Rectangle {
                     Select {
                         horizontal-stretch: 0;
                         width: self.natural-width;
-                        options: [I18n.t("mediaPane.linkBest"), "4K", "1440p", "1080p", "720p", "480p", "360p"];
+                        options: [I18n.t("mediaPane.linkBest"), "4K", "1440p", "1080p", "720p", "480p", "360p", "MP3"];
                         current <=> root.link-quality;
                     }
                     Rectangle {
@@ -2693,11 +2693,12 @@ export component MediaPane inherits Rectangle {
                         height: 60px;
                         for label[index] in [
                             I18n.t("common.all"), I18n.t("sounds.catWhoosh"), I18n.t("sounds.catImpact"),
-                            I18n.t("sounds.catRiser"), I18n.t("sounds.catAmbience"), I18n.t("sounds.catMusic")
+                            I18n.t("sounds.catRiser"), I18n.t("sounds.catAmbience"), I18n.t("sounds.catMusic"),
+                            "Interface", "Sci-fi"
                         ]: Rectangle {
-                            x: Math.mod(index, 3) * sound-chips.width / 3 + 2px;
-                            y: Math.floor(index / 3) * 30px + 2px;
-                            width: sound-chips.width / 3 - 4px;
+                            x: Math.mod(index, 4) * sound-chips.width / 4 + 2px;
+                            y: Math.floor(index / 4) * 30px + 2px;
+                            width: sound-chips.width / 4 - 4px;
                             height: 26px;
                             border-radius: Theme.r-sm;
                             background: Sounds.concat-category == index ? Theme.accent

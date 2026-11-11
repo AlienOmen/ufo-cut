@@ -1,0 +1,15 @@
+id = "alien.signature"
+name = "ALIEN Signature"
+language = "Latin"
+order = 1
+offsetY = 0.36
+
+# A handwritten sign-off in acid.
+[style]
+content = "Hecho con cariño"
+fontFamily = "Lobster"
+fontWeight = 400
+fontSize = 0.07
+color = "#c8ff00"
+strokeWidth = 0.006
+strokeColor = "#0a0b0a"

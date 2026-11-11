@@ -1,0 +1,15 @@
+id = "alien.offer"
+name = "ALIEN Offer tag"
+language = "Latin"
+order = 1
+offsetY = -0.3
+
+# A price or an offer: void ink on an acid plate, large.
+[style]
+content = "OFERTA"
+fontFamily = "Montserrat"
+fontWeight = 900
+fontSize = 0.09
+color = "#0a0b0a"
+background = "#c8ff00"
+shadow = false

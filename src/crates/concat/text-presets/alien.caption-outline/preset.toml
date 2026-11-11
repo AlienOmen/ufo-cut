@@ -1,0 +1,15 @@
+id = "alien.caption-outline"
+name = "ALIEN Caption outline"
+language = "Latin"
+order = 1
+offsetY = 0.3
+
+# Off-white words with a heavy black edge: readable over any picture.
+[style]
+content = "Se lee sobre todo"
+fontFamily = "Inter"
+fontWeight = 800
+fontSize = 0.06
+color = "#ecede4"
+strokeWidth = 0.016
+strokeColor = "#0a0b0a"

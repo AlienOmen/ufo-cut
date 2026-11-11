@@ -1,0 +1,15 @@
+id = "alien.caption-box"
+name = "ALIEN Caption box"
+language = "Latin"
+order = 1
+offsetY = 0.3
+
+# White words on a black box, the caption style of short videos.
+[style]
+content = "Así se ve tu subtítulo"
+fontFamily = "Montserrat"
+fontWeight = 800
+fontSize = 0.055
+color = "#ffffff"
+background = "#0a0b0a"
+shadow = false

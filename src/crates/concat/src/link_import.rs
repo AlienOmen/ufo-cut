@@ -16,6 +16,7 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::atomic::AtomicBool;
+use std::time::Duration;
 
 use crate::host::spawn_in_project;
 use crate::i18n::{t, tf};
@@ -72,7 +73,10 @@ fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf
     // ffmpeg program joins the two. Without one, the largest file that
     // already holds both is taken instead.
     let joiner = joiner(tools).is_ok();
+    // The last row of the page's list: the sound alone.
+    let sound_only = quality == 7;
     let format = match (joiner, height) {
+        _ if sound_only => "ba/b".to_owned(),
         (true, _) => "bv*+ba/b".to_owned(),
         (false, Some(height)) => format!("b[height<={height}]/b"),
         (false, None) => "b".to_owned(),
@@ -98,7 +102,9 @@ fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf
         ])
         .arg(folder)
         .args(["-f", &format]);
-    if joiner {
+    if joiner && sound_only {
+        command.args(["-x", "--audio-format", "mp3", "--ffmpeg-location"]).arg(tools);
+    } else if joiner {
         command.args(["--merge-output-format", "mp4", "--ffmpeg-location"]).arg(tools);
         if let Some(height) = height {
             command.args(["-S", &format!("res:{height}")]);
@@ -140,6 +146,12 @@ fn tool(tools: &Path) -> Result<PathBuf, String> {
         "cancelled",
         &mut |_, _| {},
     )?;
+    // A program that is about to be run is checked against the digest
+    // its own release publishes; one that does not match is thrown away.
+    if let Err(error) = published_digest().and_then(|digest| concat_host::models::verify(&partial, &digest)) {
+        let _ = std::fs::remove_file(&partial);
+        return Err(error);
+    }
     std::fs::rename(&partial, &path).map_err(|error| error.to_string())?;
     #[cfg(unix)]
     {
@@ -147,6 +159,33 @@ fn tool(tools: &Path) -> Result<PathBuf, String> {
         let _ = std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o755));
     }
     Ok(path)
+}
+
+/// The SHA-256 yt-dlp's release lists for this system's file.
+fn published_digest() -> Result<String, String> {
+    use std::io::Read;
+    let response = concat_host::net::get(
+        &format!("{RELEASES}/SHA2-256SUMS"),
+        Duration::from_secs(15),
+        Duration::from_secs(30),
+        concat_host::net::Trust::Shipped,
+        &|request| request,
+    )
+    .map_err(|failure| failure.cause.describe())?;
+    let mut text = String::new();
+    response
+        .into_reader()
+        .take(64 * 1024)
+        .read_to_string(&mut text)
+        .map_err(|error| error.to_string())?;
+    text.lines()
+        .find_map(|line| {
+            let mut parts = line.split_whitespace();
+            let digest = parts.next()?;
+            let name = parts.next()?.trim_start_matches('*');
+            (name == TOOL).then(|| digest.to_ascii_lowercase())
+        })
+        .ok_or_else(|| "the release lists no digest for yt-dlp".to_owned())
 }
 
 /// The ffmpeg program that joins picture and sound, fetched once. A

@@ -111,7 +111,11 @@ pub fn link(name: &str) -> Option<String> {
         // UFO Cut: every card goes to a page of A.L.I.E.N.'s own. The
         // names are the ones the screen has always sent: "github" is
         // now the studio's card and "discord" the course's.
-        "guides" | "first-edit" | "report" | "release-notes" => SITE.to_owned(),
+        "guides" | "first-edit" => SITE.to_owned(),
+        // The repository is where a problem is reported and where each
+        // release is described.
+        "report" => format!("{REPOSITORY}/issues"),
+        "release-notes" => format!("{REPOSITORY}/releases"),
         "github" => STUDIO.to_owned(),
         "tools" => format!("{SITE}/tools/"),
         "discord" => {
@@ -706,7 +710,7 @@ mod tests {
                 "{name}"
             );
         }
-        assert_eq!(link("release-notes").unwrap(), SITE);
+        assert_eq!(link("release-notes").unwrap(), format!("{REPOSITORY}/releases"));
         assert_eq!(link("nowhere"), None);
     }
 

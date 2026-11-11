@@ -1,0 +1,14 @@
+id = "alien.title-big"
+name = "ALIEN Big title"
+language = "Latin"
+order = 1
+
+# One or two words, filling the frame.
+[style]
+content = "TÍTULO"
+fontFamily = "Montserrat"
+fontWeight = 900
+fontSize = 0.16
+color = "#ecede4"
+strokeWidth = 0.01
+strokeColor = "#0a0b0a"

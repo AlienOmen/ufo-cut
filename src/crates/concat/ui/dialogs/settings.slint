@@ -1729,6 +1729,14 @@ export component SettingsDialog inherits Sheet {
                         font-size: Theme.fs-lg;
                         font-weight: Theme.weight-title;
                     }
+                    // UFO Cut: what it is built on, its licence, and where
+                    // its source is, as the AGPL asks a program to say.
+                    Text {
+                        text: I18n.t("settings.aboutFork");
+                        color: Theme.fg-muted;
+                        font-size: Theme.fs-sm;
+                        wrap: word-wrap;
+                    }
                 }
 
                 // The block an issue report is opened with. Every line in it

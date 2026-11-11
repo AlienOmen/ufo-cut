@@ -457,6 +457,7 @@
   "settings.automatic": "Automatic",
   "settings.automation": "Automation",
   "settings.aiTitle": "AI assistants",
+  "settings.aboutFork": "UFO Cut by A.L.I.E.N. is built on Concat, the free open-source video editor, and is licensed under AGPL-3.0. Source code: github.com/AlienOmen/ufo-cut",
   "settings.aiHint": "Let Claude or another assistant that speaks MCP edit with UFO Cut. Copy one of these, paste it into the assistant, and restart it. The file CONNECT-AI.md beside the program has every step.",
   "settings.aiCopyCommand": "Copy for Claude Code",
   "settings.aiCopyConfig": "Copy settings for other apps",
