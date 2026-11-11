@@ -9,6 +9,7 @@ import { PaneKind, PaneSwitcher } from "pane-switcher.slint";
 import { TextAlignment } from "../timeline/model.slint";
 import { CatalogueEntryData, Library } from "../inspector/clip-inspector.slint";
 import { SearchField } from "../inspector/controls.slint";
+import { Field } from "../primitives/modal.slint";
 import { TextPresetData } from "../inspector/style-picker.slint";
 export { TextPresetData }
 import { Select } from "../primitives/select.slint";
@@ -1771,6 +1772,9 @@ export component MediaPane inherits Rectangle {
     callback captions-export-srt();
 
     callback import-media();
+    /// UFO Cut: the web address typed into the Media page's link field.
+    callback import-link(url: string);
+    property <string> link-url;
     callback filter-changed(filter: MediaFilter);
     /// The sort dropdown beside the import button picked a new order.
     callback sort-changed(index: int);
@@ -2485,7 +2489,39 @@ export component MediaPane inherits Rectangle {
                         busy: root.importing;
                         clicked => { root.import-media(); }
                     }
-                    Rectangle { horizontal-stretch: 1; }
+                    // UFO Cut: a video from a link. The address goes in the
+                    // field, the button fetches it, and it lands in the bin.
+                    Field {
+                        value: root.link-url;
+                        placeholder: I18n.t("mediaPane.linkPlaceholder");
+                        edited(text) => { root.link-url = text; }
+                    }
+                    Rectangle {
+                        horizontal-stretch: 0;
+                        height: Theme.h;
+                        width: link-label.preferred-width + 20px;
+                        border-radius: Theme.r;
+                        background: link-go.has-hover ? Theme.accent-hover : Theme.accent;
+                        opacity: root.link-url == "" ? 0.45 : 1;
+                        link-label := Text {
+                            width: 100%;
+                            height: 100%;
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                            text: I18n.t("mediaPane.importLink");
+                            color: Theme.on-accent;
+                            font-size: Theme.fs-sm;
+                        }
+                        link-go := TouchArea {
+                            mouse-cursor: pointer;
+                            clicked => {
+                                if (root.link-url != "") {
+                                    root.import-link(root.link-url);
+                                    root.link-url = "";
+                                }
+                            }
+                        }
+                    }
                     // Sort, and sort only: narrowing the bin by kind is the
                     // sidebar's, where each kind carries its count and the
                     // current one stays lit. A second control saying the same

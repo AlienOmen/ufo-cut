@@ -45,6 +45,7 @@ mod i18n;
 #[cfg(target_os = "ios")]
 mod ios;
 mod keymap;
+mod link_import;
 mod meters;
 mod motion_tiles;
 mod platform;
@@ -66,6 +67,7 @@ pub use platform::{LinkOpener, install_link_opener};
 pub use platform::{MicrophoneAccess, install_microphone_access};
 mod panes;
 mod prefs;
+mod setup_language;
 mod presets;
 mod source;
 mod speed_ramp;
@@ -978,6 +980,10 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
             );
         });
     });
+    // UFO Cut: a video from a link, fetched by yt-dlp on this machine.
+    editor.on_import_link(on_window!(|state, url: SharedString| {
+        link_import::start(&mut state, url.to_string());
+    }));
     // Font files, the way media files come in: the system's picker, and
     // the answer later, on the window's thread.
     editor.on_text_style_default(on_window!(|state| {

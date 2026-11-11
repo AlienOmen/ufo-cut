@@ -122,6 +122,7 @@ export component Seat inherits Rectangle {
             captions-export-srt => { Editor.captions-export-srt(); }
 
             import-media => { Editor.import-media(); }
+            import-link(url) => { Editor.import-link(url); }
             filter-changed(filter) => { Editor.media-filter-changed(filter); }
             sort-changed(index) => { Editor.media-sort-changed(index); }
             floor-pressed => { Editor.blur(); }

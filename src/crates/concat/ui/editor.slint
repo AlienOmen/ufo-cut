@@ -88,6 +88,8 @@ export global Editor {
     in-out property <int> media-jump-token;
 
     callback import-media();
+    /// UFO Cut: a video from a web address, fetched and imported.
+    callback import-link(url: string);
     callback media-filter-changed(filter: MediaFilter);
     callback media-sort-changed(index: int);
     callback media-select(id: int, additive: bool);

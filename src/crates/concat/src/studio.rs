@@ -2684,7 +2684,16 @@ impl Studio {
     /// A window with nothing open: the launch screen, with the recents list
     /// read off disk.
     pub fn new(host: Host) -> Self {
-        let prefs = Preferences::load(&host.dirs);
+        let mut prefs = Preferences::load(&host.dirs);
+        // UFO Cut: the setup asks for the language before anything else
+        // and leaves the answer beside the program. A first run takes
+        // it, so the person is asked once.
+        if prefs.locale.is_none()
+            && let Some(code) = crate::setup_language::chosen()
+        {
+            prefs.locale = Some(code.to_owned());
+            prefs.save(&host.dirs);
+        }
         // The panels where the last session left them, while Settings says
         // to; a saved dock this build cannot read is the default instead.
         let saved = prefs.layout.as_ref().filter(|_| prefs.remembers_layout());

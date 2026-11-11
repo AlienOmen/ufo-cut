@@ -44,6 +44,11 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   Discord cards are now the studio's and the Alien Designer course's.
 - The Audio page has a "UFO Cut" shelf: the app's sounds and music, by
   category, read from UFO Cut's own asset repository.
+- The Media page can import a video from a web address
+  (`src/link_import.rs`). It runs yt-dlp, a separate program that is not
+  part of UFO Cut and is fetched from its own releases on first use.
+- The Windows setup always asks for the language first, and the app opens
+  in that language on its first run (`src/setup_language.rs`).
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 

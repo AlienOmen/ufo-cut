@@ -60,7 +60,7 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 ; Follow Windows' display language when the setup speaks it, and ask only
 ; when it does not.
-ShowLanguageDialog=auto
+ShowLanguageDialog=yes
 
 [Languages]
 ; Every language the app ships. Inno Setup carries the official
@@ -113,6 +113,11 @@ Name: "{autoprograms}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{ap
 ; it turns off Settings > General > Draw on the GPU, which that window hides.
 Name: "{autoprograms}\UFO Cut (safe graphics)"; Filename: "{app}\concat.exe"; Parameters: "--software"; IconFilename: "{app}\concat.ico"
 Name: "{autodesktop}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"; Tasks: desktopicon
+
+[INI]
+; UFO Cut: the language chosen in this setup is the app's on its first
+; run (src/crates/concat/src/setup_language.rs reads it).
+Filename: "{app}\setup.ini"; Section: "Setup"; Key: "Language"; String: "{language}"; Flags: uninsdeleteentry uninsdeletesectionifempty
 
 [Run]
 Filename: "{app}\concat.exe"; Description: "{cm:LaunchProgram,UFO Cut}"; Flags: nowait postinstall skipifsilent
