@@ -270,6 +270,21 @@ pub struct SettingsPane {
     install_cancel: Arc<AtomicBool>,
 }
 
+/// UFO Cut: what connects an AI assistant to this program over MCP: the
+/// line Claude Code takes, and the settings block other assistants take.
+/// Both carry the path this program is running from.
+fn ai_setup() -> (String, String) {
+    let program = std::env::current_exe()
+        .map(|path| path.display().to_string())
+        .unwrap_or_else(|_| "concat".to_owned());
+    let command = format!("claude mcp add ufo-cut -- \"{program}\" --mcp");
+    let quoted = serde_json::to_string(&program).unwrap_or_default();
+    let config = format!(
+        "{{\"mcpServers\":{{\"ufo-cut\":{{\"command\":{quoted},\"args\":[\"--mcp\"]}}}}}}"
+    );
+    (command, config)
+}
+
 impl SettingsPane {
     /// Applies one message. The studio is the rest of the window; while
     /// this runs the studio's copy of the pane is a blank it must not read.
@@ -963,6 +978,8 @@ impl SettingsPane {
             ))),
             capturing: self.capturing.clone().unwrap_or_default().into(),
             language: self.language as i32,
+            ai_command: ai_setup().0.into(),
+            ai_config: ai_setup().1.into(),
             // UFO Cut: until a language is saved, the window asks for one.
             ask_language: studio.prefs.locale.is_none(),
             log_level: LOG_LEVELS

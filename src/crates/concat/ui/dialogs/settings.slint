@@ -104,6 +104,11 @@ export struct SettingsData {
     /// what a connection presents first: the chosen one, or the one the
     /// server made up when none was chosen
     server-token: string,
+    /// UFO Cut: the line that connects Claude Code to this program,
+    /// and the settings block other assistants take, both with this
+    /// program's own path in them
+    ai-command: string,
+    ai-config: string,
     /// "Listening on 127.0.0.1:7420 · 1 connected", "Off", or why not
     server-status: string,
     /// 0 off, 1 listening, 2 could not start: the status line's dot
@@ -772,6 +777,8 @@ export component SettingsDialog inherits Sheet {
     /// Copy was pressed a moment ago: its mark is a tick for a second
     /// and a half, so the press is seen to have worked.
     property <bool> token-copied;
+    /// UFO Cut: which AI button was pressed a moment ago, 1 or 2; 0 none.
+    property <int> ai-copied;
     changed open => {
         if (!root.open) {
             root.token-shown = false;
@@ -1529,6 +1536,75 @@ export component SettingsDialog inherits Sheet {
                             interval: 1500ms;
                             running: root.token-copied;
                             triggered => { root.token-copied = false; }
+                        }
+                    }
+                }
+
+                // UFO Cut: an AI assistant - Claude, or any other that speaks
+                // MCP - is connected with one line or one block of settings.
+                // Each button copies the right one with this program's own
+                // path already in it; CONNECT-AI.md beside the program has
+                // the steps.
+                DialogSection {
+                    ruled: false;
+                    title: I18n.t("settings.aiTitle");
+                    hint: I18n.t("settings.aiHint");
+
+                    Rectangle {
+                        min-height: 28px;
+                        max-height: 28px;
+
+                        HorizontalLayout {
+                            spacing: 6px;
+
+                            Button {
+                                glyph: root.ai-copied == 1 ? Glyph.check : Glyph.copy;
+                                label: I18n.t("settings.aiCopyCommand");
+                                clicked => {
+                                    ai-command-copy.select-all();
+                                    ai-command-copy.copy();
+                                    root.ai-copied = 1;
+                                }
+                            }
+
+                            Button {
+                                glyph: root.ai-copied == 2 ? Glyph.check : Glyph.copy;
+                                label: I18n.t("settings.aiCopyConfig");
+                                clicked => {
+                                    ai-config-copy.select-all();
+                                    ai-config-copy.copy();
+                                    root.ai-copied = 2;
+                                }
+                            }
+
+                            Rectangle { horizontal-stretch: 1; }
+                        }
+
+                        // What the buttons copy from, out of sight.
+                        ai-command-copy := TextInput {
+                            x: 0;
+                            y: 0;
+                            width: 1px;
+                            height: 1px;
+                            opacity: 0;
+                            text: root.data.ai-command;
+                            read-only: true;
+                        }
+
+                        ai-config-copy := TextInput {
+                            x: 0;
+                            y: 0;
+                            width: 1px;
+                            height: 1px;
+                            opacity: 0;
+                            text: root.data.ai-config;
+                            read-only: true;
+                        }
+
+                        Timer {
+                            interval: 1500ms;
+                            running: root.ai-copied != 0;
+                            triggered => { root.ai-copied = 0; }
                         }
                     }
                 }

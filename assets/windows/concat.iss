@@ -106,6 +106,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#Stage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\icons\concat.ico"; DestDir: "{app}"; Flags: ignoreversion
+; UFO Cut: the guide to connecting an AI assistant, beside the program.
+Source: "..\..\CONNECT-AI.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"

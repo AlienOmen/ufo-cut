@@ -2491,6 +2491,34 @@ export component MediaPane inherits Rectangle {
                         busy: root.importing;
                         clicked => { root.import-media(); }
                     }
+                    Rectangle { horizontal-stretch: 1; }
+                    // Sort, and sort only: narrowing the bin by kind is the
+                    // sidebar's, where each kind carries its count and the
+                    // current one stays lit. A second control saying the same
+                    // thing from the other side of the panel can only ever
+                    // agree with it or contradict it.
+                    //
+                    // Marked rather than worded: at the end of a row this
+                    // narrow, "Sort: Added" costs more room than it earns, and
+                    // the list behind it still spells all three out.
+                    Select {
+                        horizontal-stretch: 0;
+                        width: self.natural-width;
+                        options: [I18n.t("mediaPane.sortAdded"), I18n.t("mediaPane.sortName"),
+                            I18n.t("mediaPane.sortType")];
+                        icons: [Glyph.clock, Glyph.text-mark, Glyph.tag];
+                        current: 0;
+                        changed(index) => { root.sort-changed(index); }
+                    }
+                }
+
+                // UFO Cut: a row of its own for a video from a link, so the
+                // address has room to be read in a narrow library.
+                if root.tab == 0: HorizontalLayout {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    padding-bottom: 8px;
+                    spacing: 8px;
                     // UFO Cut: a video from a link. The address goes in the
                     // field, the button fetches it, and it lands in the bin.
                     Field {
@@ -2530,24 +2558,6 @@ export component MediaPane inherits Rectangle {
                                 }
                             }
                         }
-                    }
-                    // Sort, and sort only: narrowing the bin by kind is the
-                    // sidebar's, where each kind carries its count and the
-                    // current one stays lit. A second control saying the same
-                    // thing from the other side of the panel can only ever
-                    // agree with it or contradict it.
-                    //
-                    // Marked rather than worded: at the end of a row this
-                    // narrow, "Sort: Added" costs more room than it earns, and
-                    // the list behind it still spells all three out.
-                    Select {
-                        horizontal-stretch: 0;
-                        width: self.natural-width;
-                        options: [I18n.t("mediaPane.sortAdded"), I18n.t("mediaPane.sortName"),
-                            I18n.t("mediaPane.sortType")];
-                        icons: [Glyph.clock, Glyph.text-mark, Glyph.tag];
-                        current: 0;
-                        changed(index) => { root.sort-changed(index); }
                     }
                 }
 

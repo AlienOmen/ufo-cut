@@ -49,6 +49,12 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   part of UFO Cut and is fetched from its own releases on first use.
 - The Windows setup always asks for the language first, and the app opens
   in that language on its first run (`src/setup_language.rs`).
+- Import from link offers a quality choice, from 360p to the best a site
+  has; larger pictures are joined to their sound by an ffmpeg program
+  fetched once from the ffmpeg-static project.
+- Settings › Automation has an "AI assistants" section that copies the
+  line or the settings an assistant needs, and `CONNECT-AI.md` explains
+  the steps in English, Spanish and Arabic.
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 
