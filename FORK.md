@@ -55,6 +55,10 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
 - Settings › Automation has an "AI assistants" section that copies the
   line or the settings an assistant needs, and `CONNECT-AI.md` explains
   the steps in English, Spanish and Arabic.
+- Each launch opens on a short welcome: the clay UFO hovering, drawn by the
+  window (`ui/app.slint`).
+- The Windows setup puts a shortcut on the desktop by default, and beside
+  it one that opens `CONNECT-AI.html`, the guide as a page.
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 

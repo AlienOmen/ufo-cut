@@ -258,6 +258,8 @@ export component App inherits Window {
     // the workspace, when it does arrive, arrives with every callback already
     // bound rather than during the window's own construction.
     in property <bool> on-start: true;
+    /// UFO Cut: the welcome has been shown, or clicked past, in this run.
+    property <bool> intro-done;
     in property <StartData> start;
     in property <[ChipOption]> start-aspects;
     in property <[ChipOption]> start-sizes;
@@ -1231,6 +1233,74 @@ export component App inherits Window {
                     }
                 }
             }
+        }
+    }
+
+    // UFO Cut: the welcome. Each launch opens on the clay UFO hovering over
+    // its own light for a few seconds, with the name under it; a click or
+    // the timer moves on to whatever was going to be shown. Drawn here, not
+    // played from a file: the window has no video player of its own.
+    if !root.intro-done: Rectangle {
+        // seconds since the window began drawing, for the hover
+        property <float> beat: animation-tick() / 1s;
+        property <length> craft-w: Math.min(420px, root.width * 0.5);
+
+        x: 0;
+        y: 0;
+        width: root.width;
+        height: root.height;
+        background: Theme.launch-page;
+
+        TouchArea {
+            clicked => { root.intro-done = true; }
+        }
+
+        // The light under the craft, breathing with the hover.
+        Rectangle {
+            width: parent.craft-w * (0.72 + 0.06 * Math.sin(parent.beat * 150deg));
+            height: 26px;
+            x: (parent.width - self.width) / 2;
+            y: parent.height / 2 + 6px;
+            border-radius: 13px;
+            background: Theme.accent;
+            opacity: 0.16 + 0.06 * Math.sin(parent.beat * 150deg);
+        }
+
+        Image {
+            source: @image-url("assets/clay-ufo.png");
+            image-fit: contain;
+            width: parent.craft-w;
+            height: self.width * 0.6429;
+            x: (parent.width - self.width) / 2;
+            y: parent.height / 2 - self.height - 4px + 9px * Math.sin(parent.beat * 150deg);
+        }
+
+        Text {
+            x: 0;
+            y: parent.height / 2 + 52px;
+            width: parent.width;
+            horizontal-alignment: center;
+            text: "UFO Cut";
+            color: Theme.fg;
+            font-size: 46px;
+            font-weight: 800;
+        }
+
+        Text {
+            x: 0;
+            y: parent.height / 2 + 112px;
+            width: parent.width;
+            horizontal-alignment: center;
+            text: "by A.L.I.E.N.";
+            color: Theme.accent;
+            font-size: Theme.fs-lg;
+            font-weight: Theme.weight-title;
+        }
+
+        Timer {
+            interval: 3600ms;
+            running: !root.intro-done;
+            triggered => { root.intro-done = true; }
         }
     }
 

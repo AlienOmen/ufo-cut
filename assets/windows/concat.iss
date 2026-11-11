@@ -101,13 +101,14 @@ Name: "urdu"; MessagesFile: "languages\Urdu.isl"
 Name: "vietnamese"; MessagesFile: "languages\Vietnamese.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
 Source: "{#Stage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\icons\concat.ico"; DestDir: "{app}"; Flags: ignoreversion
 ; UFO Cut: the guide to connecting an AI assistant, beside the program.
 Source: "..\..\CONNECT-AI.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\CONNECT-AI.html"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"
@@ -115,6 +116,10 @@ Name: "{autoprograms}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{ap
 ; it turns off Settings > General > Draw on the GPU, which that window hides.
 Name: "{autoprograms}\UFO Cut (safe graphics)"; Filename: "{app}\concat.exe"; Parameters: "--software"; IconFilename: "{app}\concat.ico"
 Name: "{autodesktop}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"; Tasks: desktopicon
+; UFO Cut: the guide to connecting an AI assistant, beside the program's
+; own shortcut and in the Start menu. It opens in the browser.
+Name: "{autodesktop}\Connect UFO Cut to Claude"; Filename: "{app}\CONNECT-AI.html"; Tasks: desktopicon
+Name: "{autoprograms}\Connect UFO Cut to Claude"; Filename: "{app}\CONNECT-AI.html"
 
 [INI]
 ; UFO Cut: the language chosen in this setup is the app's on its first
