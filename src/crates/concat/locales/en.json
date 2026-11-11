@@ -728,6 +728,7 @@
   "link.notALink": "Paste a web address that starts with https://",
   "mediaPane.linkPlaceholder": "Paste a video link you own or may use",
   "mediaPane.importLink": "Get link",
+  "mediaPane.linkBest": "Best",
   "start.importCapcut": "Import from CapCut",
   "start.importCapcutNote": "A CapCut draft, as a new project",
   "start.keyboardShortcuts": "Keyboard shortcuts",

@@ -981,8 +981,8 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
         });
     });
     // UFO Cut: a video from a link, fetched by yt-dlp on this machine.
-    editor.on_import_link(on_window!(|state, url: SharedString| {
-        link_import::start(&mut state, url.to_string());
+    editor.on_import_link(on_window!(|state, url: SharedString, quality: i32| {
+        link_import::start(&mut state, url.to_string(), quality);
     }));
     // Font files, the way media files come in: the system's picker, and
     // the answer later, on the window's thread.

@@ -1773,8 +1773,10 @@ export component MediaPane inherits Rectangle {
 
     callback import-media();
     /// UFO Cut: the web address typed into the Media page's link field.
-    callback import-link(url: string);
+    callback import-link(url: string, quality: int);
     property <string> link-url;
+    /// 0 best, then 4K, 1440p, 1080p, 720p, 480p, 360p.
+    property <int> link-quality: 3;
     callback filter-changed(filter: MediaFilter);
     /// The sort dropdown beside the import button picked a new order.
     callback sort-changed(index: int);
@@ -2496,6 +2498,13 @@ export component MediaPane inherits Rectangle {
                         placeholder: I18n.t("mediaPane.linkPlaceholder");
                         edited(text) => { root.link-url = text; }
                     }
+                    // How large a picture to ask the site for.
+                    Select {
+                        horizontal-stretch: 0;
+                        width: self.natural-width;
+                        options: [I18n.t("mediaPane.linkBest"), "4K", "1440p", "1080p", "720p", "480p", "360p"];
+                        current <=> root.link-quality;
+                    }
                     Rectangle {
                         horizontal-stretch: 0;
                         height: Theme.h;
@@ -2516,7 +2525,7 @@ export component MediaPane inherits Rectangle {
                             mouse-cursor: pointer;
                             clicked => {
                                 if (root.link-url != "") {
-                                    root.import-link(root.link-url);
+                                    root.import-link(root.link-url, root.link-quality);
                                     root.link-url = "";
                                 }
                             }

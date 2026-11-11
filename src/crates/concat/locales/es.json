@@ -759,6 +759,7 @@
   "link.notALink": "Pega una dirección web que empiece con https://",
   "mediaPane.linkPlaceholder": "Pega un enlace de video tuyo o que puedas usar",
   "mediaPane.importLink": "Traer enlace",
+  "mediaPane.linkBest": "Máxima",
   "start.importCapcut": "Importar de CapCut",
   "start.importCapcutNote": "Un borrador de CapCut, como proyecto nuevo",
   "start.keyboardShortcuts": "Atajos de teclado",

@@ -89,7 +89,7 @@ export global Editor {
 
     callback import-media();
     /// UFO Cut: a video from a web address, fetched and imported.
-    callback import-link(url: string);
+    callback import-link(url: string, quality: int);
     callback media-filter-changed(filter: MediaFilter);
     callback media-sort-changed(index: int);
     callback media-select(id: int, additive: bool);

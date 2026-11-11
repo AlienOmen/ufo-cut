@@ -35,7 +35,7 @@ const TOOL: &str = "yt-dlp_linux";
 const RELEASES: &str = "https://github.com/yt-dlp/yt-dlp/releases/latest/download";
 
 /// Fetches the video at `url` into the open project and imports it.
-pub fn start(studio: &mut Studio, url: String) {
+pub fn start(studio: &mut Studio, url: String, quality: i32) {
     let url = url.trim().to_owned();
     let Some(session) = studio.session.as_ref() else {
         studio.notify(&t("sounds.openProjectFirst"), true);
@@ -52,7 +52,7 @@ pub fn start(studio: &mut Studio, url: String) {
     let tools = studio.host.dirs.data.join("tools");
     studio.notify(&t("link.getting"), false);
     spawn_in_project(
-        move || fetch(&tools, &folder, &url),
+        move || fetch(&tools, &folder, &url, quality),
         |studio, _, _, result: Result<PathBuf, String>| match result {
             Ok(file) => studio.handle(Msg::Media(MediaMsg::Import(vec![file]))),
             Err(error) => studio.notify(&tf("link.failed", &[&error]), true),
@@ -61,8 +61,22 @@ pub fn start(studio: &mut Studio, url: String) {
 }
 
 /// Runs yt-dlp on `url` and answers with the file it saved in `folder`.
-fn fetch(tools: &Path, folder: &Path, url: &str) -> Result<PathBuf, String> {
+fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf, String> {
     let tool = tool(tools)?;
+    // The tallest picture asked for; none is the best the site has.
+    let height = [0, 2160, 1440, 1080, 720, 480, 360]
+        .get(quality.max(0) as usize)
+        .copied()
+        .filter(|height| *height > 0);
+    // Sites keep their larger pictures apart from the sound, and an
+    // ffmpeg program joins the two. Without one, the largest file that
+    // already holds both is taken instead.
+    let joiner = joiner(tools).is_ok();
+    let format = match (joiner, height) {
+        (true, _) => "bv*+ba/b".to_owned(),
+        (false, Some(height)) => format!("b[height<={height}]/b"),
+        (false, None) => "b".to_owned(),
+    };
     std::fs::create_dir_all(folder).map_err(|error| error.to_string())?;
     let mut command = Command::new(&tool);
     command
@@ -76,10 +90,6 @@ fn fetch(tools: &Path, folder: &Path, url: &str) -> Result<PathBuf, String> {
             "utf-8",
             "--max-filesize",
             "2G",
-            // One file that already holds picture and sound: joining
-            // separate ones needs an ffmpeg program, which is not here.
-            "-f",
-            "b[ext=mp4]/b",
             "-o",
             "%(title).80s-%(id)s.%(ext)s",
             "--print",
@@ -87,8 +97,14 @@ fn fetch(tools: &Path, folder: &Path, url: &str) -> Result<PathBuf, String> {
             "-P",
         ])
         .arg(folder)
-        .arg("--")
-        .arg(url);
+        .args(["-f", &format]);
+    if joiner {
+        command.args(["--merge-output-format", "mp4", "--ffmpeg-location"]).arg(tools);
+        if let Some(height) = height {
+            command.args(["-S", &format!("res:{height}")]);
+        }
+    }
+    command.arg("--").arg(url);
     quiet(&mut command);
     let output = command.output().map_err(|error| error.to_string())?;
     let last = |text: &[u8]| {
@@ -130,6 +146,31 @@ fn tool(tools: &Path) -> Result<PathBuf, String> {
         use std::os::unix::fs::PermissionsExt;
         let _ = std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o755));
     }
+    Ok(path)
+}
+
+/// The ffmpeg program that joins picture and sound, fetched once. A
+/// ready-made Windows build from the ffmpeg-static project.
+fn joiner(tools: &Path) -> Result<PathBuf, String> {
+    let path = tools.join(if cfg!(windows) { "ffmpeg.exe" } else { "ffmpeg" });
+    if path.is_file() {
+        return Ok(path);
+    }
+    if !cfg!(windows) {
+        return Err("no ffmpeg program".to_owned());
+    }
+    std::fs::create_dir_all(tools).map_err(|error| error.to_string())?;
+    let partial = tools.join("ffmpeg.partial");
+    let never = AtomicBool::new(false);
+    concat_host::models::download(
+        "https://github.com/eugeneware/ffmpeg-static/releases/latest/download/ffmpeg-win32-x64",
+        &partial,
+        83_000_000,
+        &never,
+        "cancelled",
+        &mut |_, _| {},
+    )?;
+    std::fs::rename(&partial, &path).map_err(|error| error.to_string())?;
     Ok(path)
 }
 
