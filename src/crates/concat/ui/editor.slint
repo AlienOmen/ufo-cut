@@ -136,6 +136,13 @@ export global Editor {
     in-out property <string> library-audition;
     callback library-apply-audio(effect-id: string);
     callback library-save-template();
+    /// UFO Cut: the template library, a row each - name, folder, a line
+    /// about it and its poster - and the click that makes a project of one.
+    in-out property <[string]> template-names;
+    in-out property <[string]> template-paths;
+    in-out property <[string]> template-notes;
+    in-out property <[image]> template-posters;
+    callback library-use-template(path: string);
     /// Adjustments page: import `.cube` tables as looks of the user's own,
     /// which its LUTs shelf lists.
     callback library-import-lut();

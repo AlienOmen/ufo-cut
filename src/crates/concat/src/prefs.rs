@@ -111,6 +111,9 @@ pub struct Preferences {
     /// the stray dxcompiler.dll of #418 - or a driver that a later one did
     /// would otherwise leave Concat on the CPU for good.
     pub software_after_crash: Option<String>,
+    /// UFO Cut: where videos fetched from links are saved. None is the
+    /// open project's own `imports` folder.
+    pub link_folder: Option<String>,
     /// The magnetic timeline: a delete and a trim close the gap they would
     /// leave, on the lane they happen on. Off by default on a desk, because
     /// a gap is sometimes the point; ⇧⌫ ripples either way. Read it through

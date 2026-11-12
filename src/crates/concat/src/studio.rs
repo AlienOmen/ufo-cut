@@ -739,6 +739,11 @@ pub struct Models {
     pub catalogue_filters: Rc<VecModel<CatalogueEntryData>>,
     /// The looks made from tables, for the Adjustments page's LUTs shelf.
     pub catalogue_luts: Rc<VecModel<CatalogueEntryData>>,
+    /// UFO Cut: the template library's rows; see `alien_templates::publish`.
+    pub template_names: Rc<VecModel<SharedString>>,
+    pub template_paths: Rc<VecModel<SharedString>>,
+    pub template_notes: Rc<VecModel<SharedString>>,
+    pub template_posters: Rc<VecModel<slint::Image>>,
     pub catalogue_audio: Rc<VecModel<CatalogueEntryData>>,
     pub catalogue_transitions: Rc<VecModel<CatalogueEntryData>>,
     pub effect_groups: Rc<VecModel<SharedString>>,
@@ -847,6 +852,10 @@ impl Models {
             catalogue_effects: Rc::new(VecModel::default()),
             catalogue_filters: Rc::new(VecModel::default()),
             catalogue_luts: Rc::new(VecModel::default()),
+            template_names: Rc::new(VecModel::default()),
+            template_paths: Rc::new(VecModel::default()),
+            template_notes: Rc::new(VecModel::default()),
+            template_posters: Rc::new(VecModel::default()),
             catalogue_audio: Rc::new(VecModel::default()),
             catalogue_transitions: Rc::new(VecModel::default()),
             effect_groups: Rc::new(VecModel::default()),

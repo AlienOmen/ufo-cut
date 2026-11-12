@@ -13,8 +13,9 @@
 //! app's data folder. What a person fetches with it is theirs to answer
 //! for: the page says to use videos they own or may use.
 
+use std::io::{BufRead, BufReader, Read};
 use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::process::{Command, Stdio};
 use std::sync::atomic::AtomicBool;
 use std::time::Duration;
 
@@ -35,34 +36,110 @@ const TOOL: &str = "yt-dlp_linux";
 /// Where yt-dlp's newest release keeps its files.
 const RELEASES: &str = "https://github.com/yt-dlp/yt-dlp/releases/latest/download";
 
-/// Fetches the video at `url` into the open project and imports it.
+/// What the card's Folder button sends in place of a quality: a request
+/// to choose where links are saved, with no link to fetch.
+const CHOOSE_FOLDER: i32 = 100;
+/// The most links one click may queue.
+const MOST_LINKS: usize = 20;
+/// What a progress line from yt-dlp starts with; see `fetch`.
+const PROGRESS: &str = "UFOCUT";
+
+/// Fetches the videos at the links in `url` - one, or several apart by
+/// spaces, commas or new lines - one after another, and imports them
+/// into the open project.
 pub fn start(studio: &mut Studio, url: String, quality: i32) {
-    let url = url.trim().to_owned();
+    if quality == CHOOSE_FOLDER {
+        choose_folder(studio);
+        return;
+    }
     let Some(session) = studio.session.as_ref() else {
         studio.notify(&t("sounds.openProjectFirst"), true);
         return;
     };
-    let folder = PathBuf::from(session.path()).join("imports");
-    // A web address and nothing else: it is handed to another program, and
-    // must not be able to read as one of that program's options.
-    let web = url.starts_with("https://") || url.starts_with("http://");
-    if !web || url.len() > 2000 || url.chars().any(char::is_whitespace) {
+    // The folder the person chose, while it is still there; the project's
+    // own `imports` otherwise.
+    let folder = studio
+        .prefs
+        .link_folder
+        .as_deref()
+        .map(PathBuf::from)
+        .filter(|folder| folder.is_dir())
+        .unwrap_or_else(|| PathBuf::from(session.path()).join("imports"));
+    let links: Vec<String> = url
+        .split(|c: char| c.is_whitespace() || c == ',')
+        .map(str::trim)
+        .filter(|link| !link.is_empty())
+        .take(MOST_LINKS)
+        .map(str::to_owned)
+        .collect();
+    // Web addresses and nothing else: each is handed to another program,
+    // and must not be able to read as one of that program's options.
+    let web = |link: &String| {
+        (link.starts_with("https://") || link.starts_with("http://")) && link.len() <= 2000
+    };
+    if links.is_empty() || !links.iter().all(web) {
         studio.notify(&t("link.notALink"), true);
         return;
     }
     let tools = studio.host.dirs.data.join("tools");
     studio.notify(&t("link.getting"), false);
     spawn_in_project(
-        move || fetch(&tools, &folder, &url, quality),
-        |studio, _, _, result: Result<PathBuf, String>| match result {
-            Ok(file) => studio.handle(Msg::Media(MediaMsg::Import(vec![file]))),
-            Err(error) => studio.notify(&tf("link.failed", &[&error]), true),
+        move || {
+            let total = links.len();
+            let mut files = Vec::new();
+            let mut failure = None;
+            for (index, link) in links.iter().enumerate() {
+                match fetch(&tools, &folder, link, quality, index + 1, total) {
+                    Ok(file) => files.push(file),
+                    Err(error) => failure = Some(error),
+                }
+            }
+            (files, failure, total)
+        },
+        |studio, _, _, (files, failure, total): (Vec<PathBuf>, Option<String>, usize)| {
+            let got = files.len();
+            if got > 0 {
+                studio.handle(Msg::Media(MediaMsg::Import(files)));
+            }
+            match failure {
+                Some(error) if got == 0 => studio.notify(&tf("link.failed", &[&error]), true),
+                Some(error) => studio.notify(
+                    &format!("{got} of {total} downloaded. {}", tf("link.failed", &[&error])),
+                    true,
+                ),
+                None if total > 1 => {
+                    studio.notify(&format!("{got} of {total} videos downloaded"), false);
+                }
+                None => {}
+            }
         },
     );
 }
 
-/// Runs yt-dlp on `url` and answers with the file it saved in `folder`.
-fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf, String> {
+/// Asks where links are saved from now on, and remembers the answer.
+fn choose_folder(studio: &mut Studio) {
+    let from = studio.prefs.link_folder.clone().unwrap_or_default();
+    crate::host::after_dialog(
+        move || crate::platform::pick_folder("Save downloaded videos to", &from),
+        |studio, _, _, folder: PathBuf| {
+            let shown = folder.display().to_string();
+            studio.prefs.link_folder = Some(shown.clone());
+            studio.prefs.save(&studio.host.dirs);
+            studio.notify(&format!("Links now save to {shown}"), false);
+        },
+    );
+}
+
+/// Runs yt-dlp on `url` and answers with the file it saved in `folder`,
+/// saying how far along it is as it goes: link `index` of `total`.
+fn fetch(
+    tools: &Path,
+    folder: &Path,
+    url: &str,
+    quality: i32,
+    index: usize,
+    total: usize,
+) -> Result<PathBuf, String> {
     let tool = tool(tools)?;
     // The tallest picture asked for; none is the best the site has.
     let height = [0, 2160, 1440, 1080, 720, 480, 360]
@@ -87,7 +164,12 @@ fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf
         .args([
             "--no-playlist",
             "--no-warnings",
-            "--no-progress",
+            "--newline",
+            "--progress",
+            "--color",
+            "never",
+            "--progress-template",
+            "download:UFOCUT %(progress._percent_str)s",
             "--no-simulate",
             "--restrict-filenames",
             "--encoding",
@@ -112,18 +194,57 @@ fn fetch(tools: &Path, folder: &Path, url: &str, quality: i32) -> Result<PathBuf
     }
     command.arg("--").arg(url);
     quiet(&mut command);
-    let output = command.output().map_err(|error| error.to_string())?;
-    let last = |text: &[u8]| {
-        String::from_utf8_lossy(text)
+    let mut child = command
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .map_err(|error| error.to_string())?;
+    // What it complains of is read on a thread of its own, so a long
+    // complaint cannot fill its pipe and stop the program.
+    let complaints = child.stderr.take();
+    let complaints = std::thread::spawn(move || {
+        let mut text = String::new();
+        if let Some(mut pipe) = complaints {
+            let _ = pipe.read_to_string(&mut text);
+        }
+        text
+    });
+    // Its own lines are of two kinds: how far along it is, marked, and
+    // at the end the file it saved.
+    let mut saved = None;
+    let mut shown = -100.0_f64;
+    if let Some(pipe) = child.stdout.take() {
+        for line in BufReader::new(pipe).lines().map_while(Result::ok) {
+            let line = line.trim();
+            if let Some(percent) = line.strip_prefix(PROGRESS) {
+                let percent = percent.trim();
+                let value = percent.trim_end_matches('%').trim().parse::<f64>().unwrap_or(-1.0);
+                // Every five in a hundred, and when the sound starts over
+                // after the picture: often enough to see it move.
+                if value >= shown + 5.0 || value < shown {
+                    shown = value;
+                    let message = if total > 1 {
+                        format!("Link {index} of {total}: {percent}")
+                    } else {
+                        format!("Downloading: {percent}")
+                    };
+                    crate::host::on_ui(move |studio, _, _| studio.notify(&message, false));
+                }
+            } else if !line.is_empty() {
+                saved = Some(PathBuf::from(line));
+            }
+        }
+    }
+    let status = child.wait().map_err(|error| error.to_string())?;
+    let complaints = complaints.join().unwrap_or_default();
+    match saved {
+        Some(file) if status.success() && file.is_file() => Ok(file),
+        _ => Err(complaints
             .lines()
             .rev()
             .map(str::trim)
             .find(|line| !line.is_empty())
-            .map(str::to_owned)
-    };
-    match last(&output.stdout).map(PathBuf::from) {
-        Some(file) if output.status.success() && file.is_file() => Ok(file),
-        _ => Err(last(&output.stderr)
             .map(|line| line.trim_start_matches("ERROR: ").to_owned())
             .unwrap_or_else(|| "yt-dlp gave no answer".to_owned())),
     }
@@ -163,7 +284,6 @@ fn tool(tools: &Path) -> Result<PathBuf, String> {
 
 /// The SHA-256 yt-dlp's release lists for this system's file.
 fn published_digest() -> Result<String, String> {
-    use std::io::Read;
     let response = concat_host::net::get(
         &format!("{RELEASES}/SHA2-256SUMS"),
         Duration::from_secs(15),

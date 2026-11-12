@@ -251,9 +251,80 @@ impl Studio {
         let config = self.host.dirs.config.clone();
         spawn(
             move || templates::save(&config, &document, &settings, &path, &name),
-            |studio, _, _, result| match result {
-                Ok(info) => studio.notify(&tf("studio.savedTemplate", &[&info.name]), false),
+            |studio, _, models, result| match result {
+                Ok(info) => {
+                    crate::alien_templates::publish(&studio.host.dirs.config, models);
+                    studio.notify(&tf("studio.savedTemplate", &[&info.name]), false);
+                }
                 Err(error) => studio.notify(&error, true),
+            },
+        );
+    }
+
+    /// UFO Cut: makes a project from a template of the library and opens
+    /// it. A template with places for the user's clips asks for them
+    /// first, in the order the places come; fewer files than places are
+    /// gone round again, so one clip fills a whole template.
+    pub fn use_template(&mut self, template: String) {
+        let Some(info) = templates::list(&self.host.dirs.config)
+            .into_iter()
+            .find(|entry| entry.path == template)
+        else {
+            return;
+        };
+        let slots: Vec<String> = info
+            .slots
+            .iter()
+            .map(|slot| slot.media_id.clone())
+            .collect();
+        let name = info.name;
+        if slots.is_empty() {
+            self.make_from_template(template, name, slots, Vec::new());
+            return;
+        }
+        let title = format!("{name}: choose {} clip(s), in order", slots.len());
+        crate::host::pick_files_then(title, None, move |studio, _, _, files| {
+            studio.make_from_template(template, name, slots, files);
+        });
+    }
+
+    fn make_from_template(
+        &mut self,
+        template: String,
+        name: String,
+        slots: Vec<String>,
+        files: Vec<std::path::PathBuf>,
+    ) {
+        if !slots.is_empty() && files.is_empty() {
+            return;
+        }
+        let location = crate::panes::start::default_location();
+        spawn(
+            move || -> Result<concat_host::ProjectInfo, String> {
+                std::fs::create_dir_all(&location)
+                    .map_err(|error| format!("could not make {location}: {error}"))?;
+                let mut fills = Vec::new();
+                for (index, media_id) in slots.into_iter().enumerate() {
+                    let file = files[index % files.len()].to_string_lossy().into_owned();
+                    let item = concat_host::media::probe(&file)?.to_new_media();
+                    fills.push(templates::SlotFill { media_id, item });
+                }
+                // A name of its own: the library refuses a folder that is there.
+                let mut project = name.clone();
+                let mut number = 2;
+                while std::path::Path::new(&location)
+                    .join(concat_host::projects::folder_name(&project))
+                    .exists()
+                {
+                    project = format!("{name} {number}");
+                    number += 1;
+                }
+                templates::instantiate(&template, &location, &project, fills)
+            },
+            |studio, _, _, result| {
+                if let Err(error) = result.and_then(|info| studio.open_project(info)) {
+                    studio.notify(&error, true);
+                }
             },
         );
     }

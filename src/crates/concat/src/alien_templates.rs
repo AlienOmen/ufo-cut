@@ -127,3 +127,34 @@ pub fn seed(config: &Path) {
     }
     let _ = std::fs::write(mark, "");
 }
+
+/// Fills the window's template rows from the library under `config`:
+/// A.L.I.E.N.'s and the user's own alike, in name order.
+pub fn publish(config: &Path, models: &crate::studio::Models) {
+    let library = concat_host::templates::list(config);
+    let mut names = Vec::new();
+    let mut paths = Vec::new();
+    let mut notes = Vec::new();
+    let mut posters = Vec::new();
+    for template in &library {
+        let clips = match template.slots.len() {
+            0 => "no clips needed".to_owned(),
+            1 => "1 clip".to_owned(),
+            count => format!("{count} clips"),
+        };
+        names.push(slint::SharedString::from(template.name.as_str()));
+        paths.push(slint::SharedString::from(template.path.as_str()));
+        notes.push(slint::SharedString::from(format!(
+            "{} x {}  -  {clips}",
+            template.width, template.height
+        )));
+        posters.push(
+            slint::Image::load_from_path(&Path::new(&template.path).join("poster.jpg"))
+                .unwrap_or_default(),
+        );
+    }
+    models.template_names.set_vec(names);
+    models.template_paths.set_vec(paths);
+    models.template_notes.set_vec(notes);
+    models.template_posters.set_vec(posters);
+}

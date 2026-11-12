@@ -74,6 +74,11 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   the template library on the first run (`src/alien_templates.rs`).
 - `--software` (the "safe graphics" shortcut) draws in software for that
   launch only, instead of for every launch after it.
+- A template gallery on the Templates page: a click asks for the clips and
+  opens the project made of the template (`studio/speech.rs`,
+  `alien_templates.rs`, `ui/workspace/media-pane.slint`).
+- The link downloader takes several links at once, reports progress and
+  saves to a folder of the person's choice (`link_import.rs`).
 
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.

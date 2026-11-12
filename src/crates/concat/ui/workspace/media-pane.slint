@@ -1831,6 +1831,12 @@ export component MediaPane inherits Rectangle {
     callback apply-audio(effect-id: string);
     /// Templates page: open the save-as-template flow for this project.
     callback save-template();
+    /// UFO Cut: the template library, and the click on one of them.
+    in property <[string]> template-names;
+    in property <[string]> template-paths;
+    in property <[string]> template-notes;
+    in property <[image]> template-posters;
+    callback use-template(path: string);
     /// Adjustments page: bring in `.cube` tables as looks of the user's own.
     callback import-lut();
     /// Adjustments page: lay an adjustment layer at the playhead, called
@@ -2592,6 +2598,32 @@ export component MediaPane inherits Rectangle {
 
                                 Rectangle { horizontal-stretch: 1; }
 
+                                // UFO Cut: where the downloads are saved.
+                                Rectangle {
+                                    horizontal-stretch: 0;
+                                    height: Theme.h;
+                                    width: folder-label.preferred-width + 20px;
+                                    border-radius: Theme.r;
+                                    border-width: 1px;
+                                    border-color: folder-go.has-hover ? Theme.accent : Theme.line-strong;
+                                    background: Theme.field;
+
+                                    folder-label := Text {
+                                        width: 100%;
+                                        height: 100%;
+                                        horizontal-alignment: center;
+                                        vertical-alignment: center;
+                                        text: I18n.t("mediaPane.linkFolder");
+                                        color: Theme.fg;
+                                        font-size: Theme.fs-sm;
+                                    }
+
+                                    folder-go := TouchArea {
+                                        mouse-cursor: pointer;
+                                        clicked => { root.import-link("", 100); }
+                                    }
+                                }
+
                                 Rectangle {
                                     horizontal-stretch: 0;
                                     height: Theme.h;
@@ -3047,7 +3079,71 @@ export component MediaPane inherits Rectangle {
                     }
                 }
 
-                if root.tab == 6: Empty {
+                // UFO Cut: the template library. A click asks for the clips a
+                // template has places for and opens the project made of it.
+                if root.tab == 6 && root.template-names.length > 0: VerticalLayout {
+                    padding: 8px;
+                    padding-top: 0px;
+                    spacing: 6px;
+
+                    Text {
+                        text: "Pick a template, choose your clips, and it opens as a new project.";
+                        color: Theme.fg-muted;
+                        font-size: Theme.fs-sm;
+                        wrap: word-wrap;
+                    }
+                    for name[i] in root.template-names: Rectangle {
+                        height: 76px;
+                        border-radius: Theme.r;
+                        border-width: 1px;
+                        border-color: template-touch.has-hover ? Theme.accent : Theme.line;
+                        background: template-touch.has-hover ? Theme.field-hover : Theme.field;
+                        clip: true;
+
+                        HorizontalLayout {
+                            padding: 6px;
+                            spacing: 10px;
+
+                            Rectangle {
+                                width: 104px;
+                                border-radius: Theme.r-xs;
+                                background: #0a0b0a;
+                                clip: true;
+
+                                Image {
+                                    width: parent.width;
+                                    height: parent.height;
+                                    source: root.template-posters[i];
+                                    image-fit: contain;
+                                }
+                            }
+                            VerticalLayout {
+                                alignment: center;
+                                spacing: 3px;
+
+                                Text {
+                                    text: name;
+                                    color: Theme.fg;
+                                    font-size: Theme.fs-sm;
+                                    font-weight: 600;
+                                    overflow: elide;
+                                }
+                                Text {
+                                    text: root.template-notes[i];
+                                    color: Theme.fg-muted;
+                                    font-size: Theme.fs-xs;
+                                    overflow: elide;
+                                }
+                            }
+                        }
+                        template-touch := TouchArea {
+                            mouse-cursor: pointer;
+                            clicked => { root.use-template(root.template-paths[i]); }
+                        }
+                    }
+                }
+
+                if root.tab == 6 && root.template-names.length == 0: Empty {
                     glyph: Glyph.slot;
                     text: I18n.t("mediaPane.noTemplatesYetMark");
                 }
