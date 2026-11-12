@@ -348,7 +348,9 @@ impl Listed {
             && self.sha256.chars().all(|c| c.is_ascii_hexdigit())
             // A pack the person put on this machine is theirs to answer
             // for; what the app itself fetches must be CC0.
-            && (self.local.is_some() || license == "CC0" || license == "CC0-1.0")
+            // UFO Cut: its shelf also carries free packs, marked "Free" with
+            // their pack and author, beside the CC0 sounds.
+            && (self.local.is_some() || license == "CC0" || license == "CC0-1.0" || license == "FREE")
     }
 }
 
