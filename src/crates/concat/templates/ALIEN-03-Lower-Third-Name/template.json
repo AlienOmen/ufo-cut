@@ -1,0 +1,436 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 6.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "video",
+   "mediaId": "m1",
+   "name": "Your video",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "trackId": "T1"
+  },
+  {
+   "duration": 5.4,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "shape",
+   "mediaId": "",
+   "name": "Acid bar",
+   "offsetX": -0.4,
+   "offsetY": 0.335,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.3,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "unfold",
+     "seconds": 0.4
+    },
+    "out": {
+     "kind": "unfold",
+     "seconds": 0.3
+    }
+   },
+   "shape": {
+    "kind": "square",
+    "fill": "#C8FF00",
+    "width": 0.012,
+    "height": 0.135,
+    "stroke": "",
+    "strokeWidth": 0.0,
+    "cornerRadius": 0.0
+   },
+   "trackId": "T4"
+  },
+  {
+   "duration": 5.2,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "text",
+   "mediaId": "",
+   "name": "YOUR NAME",
+   "offsetX": -0.385,
+   "offsetY": 0.3,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.45,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slide-right",
+     "seconds": 0.5
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "left",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "YOUR NAME",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.07,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": true,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T3"
+  },
+  {
+   "duration": 5.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c4",
+   "kind": "text",
+   "mediaId": "",
+   "name": "Role or company",
+   "offsetX": -0.385,
+   "offsetY": 0.372,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.6,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slide-right",
+     "seconds": 0.5
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "left",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#C8FF00",
+    "content": "Role or company",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.036,
+    "fontWeight": 500.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": true,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "original",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T2"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [
+  {
+   "id": "m1",
+   "path": "",
+   "name": "Your video",
+   "duration": 6.0,
+   "kind": "video",
+   "width": 1920,
+   "height": 1080,
+   "hasAudio": false,
+   "placeholder": true
+  }
+ ],
+ "name": "ALIEN 03 - Lower Third Name",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 6.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "video",
+     "mediaId": "m1",
+     "name": "Your video",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "trackId": "T1"
+    },
+    {
+     "duration": 5.4,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "shape",
+     "mediaId": "",
+     "name": "Acid bar",
+     "offsetX": -0.4,
+     "offsetY": 0.335,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.3,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "unfold",
+       "seconds": 0.4
+      },
+      "out": {
+       "kind": "unfold",
+       "seconds": 0.3
+      }
+     },
+     "shape": {
+      "kind": "square",
+      "fill": "#C8FF00",
+      "width": 0.012,
+      "height": 0.135,
+      "stroke": "",
+      "strokeWidth": 0.0,
+      "cornerRadius": 0.0
+     },
+     "trackId": "T4"
+    },
+    {
+     "duration": 5.2,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "text",
+     "mediaId": "",
+     "name": "YOUR NAME",
+     "offsetX": -0.385,
+     "offsetY": 0.3,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.45,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slide-right",
+       "seconds": 0.5
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "left",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "YOUR NAME",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.07,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": true,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T3"
+    },
+    {
+     "duration": 5.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c4",
+     "kind": "text",
+     "mediaId": "",
+     "name": "Role or company",
+     "offsetX": -0.385,
+     "offsetY": 0.372,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.6,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slide-right",
+       "seconds": 0.5
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "left",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#C8FF00",
+      "content": "Role or company",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.036,
+      "fontWeight": 500.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": true,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "original",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T2"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T4",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1080,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1920
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T4",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1080,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1920
+ }
+}

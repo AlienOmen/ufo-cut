@@ -1,0 +1,652 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 6.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "video",
+   "mediaId": "m1",
+   "name": "Your video",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "trackId": "T1"
+  },
+  {
+   "duration": 6.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "shape",
+   "mediaId": "",
+   "name": "Shade",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "shape": {
+    "kind": "square",
+    "fill": "#0A0B0A80",
+    "width": 0.5825,
+    "height": 1.02,
+    "stroke": "",
+    "strokeWidth": 0.0,
+    "cornerRadius": 0.0
+   },
+   "trackId": "T2"
+  },
+  {
+   "duration": 6.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "text",
+   "mediaId": "",
+   "name": "TODAY ONLY",
+   "offsetX": 0.0,
+   "offsetY": -0.2,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "drop",
+     "seconds": 0.4
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "#0A0B0AE6",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "TODAY ONLY",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.0345,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.008,
+    "underline": false
+   },
+   "trackId": "T3"
+  },
+  {
+   "duration": 5.7,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c4",
+   "kind": "text",
+   "mediaId": "",
+   "name": "-50%",
+   "offsetX": 0.0,
+   "offsetY": -0.04,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.3,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "stomp",
+     "seconds": 0.6
+    },
+    "loop": {
+     "kind": "throb",
+     "seconds": 1.2,
+     "amount": 0.35
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#C8FF00",
+    "content": "-50%",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.1955,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": true,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T4"
+  },
+  {
+   "duration": 5.3,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c5",
+   "kind": "text",
+   "mediaId": "",
+   "name": "on everything",
+   "offsetX": 0.0,
+   "offsetY": 0.1,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.7,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "fade",
+     "seconds": 0.5
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "on everything",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.0414,
+    "fontWeight": 600.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": true,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "original",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T5"
+  },
+  {
+   "duration": 4.8,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c6",
+   "kind": "text",
+   "mediaId": "",
+   "name": "LINK IN BIO",
+   "offsetX": 0.0,
+   "offsetY": 0.33,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 1.2,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "beam",
+     "seconds": 0.5
+    },
+    "loop": {
+     "kind": "bounce",
+     "seconds": 1.0,
+     "amount": 0.5
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "#C8FF00",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#0A0B0A",
+    "content": "LINK IN BIO",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.046,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T6"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [
+  {
+   "id": "m1",
+   "path": "",
+   "name": "Your video",
+   "duration": 6.0,
+   "kind": "video",
+   "width": 1080,
+   "height": 1920,
+   "hasAudio": false,
+   "placeholder": true
+  }
+ ],
+ "name": "ALIEN 16 - Offer",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 6.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "video",
+     "mediaId": "m1",
+     "name": "Your video",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "trackId": "T1"
+    },
+    {
+     "duration": 6.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "shape",
+     "mediaId": "",
+     "name": "Shade",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "shape": {
+      "kind": "square",
+      "fill": "#0A0B0A80",
+      "width": 0.5825,
+      "height": 1.02,
+      "stroke": "",
+      "strokeWidth": 0.0,
+      "cornerRadius": 0.0
+     },
+     "trackId": "T2"
+    },
+    {
+     "duration": 6.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "text",
+     "mediaId": "",
+     "name": "TODAY ONLY",
+     "offsetX": 0.0,
+     "offsetY": -0.2,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "drop",
+       "seconds": 0.4
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "#0A0B0AE6",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "TODAY ONLY",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.0345,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.008,
+      "underline": false
+     },
+     "trackId": "T3"
+    },
+    {
+     "duration": 5.7,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c4",
+     "kind": "text",
+     "mediaId": "",
+     "name": "-50%",
+     "offsetX": 0.0,
+     "offsetY": -0.04,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.3,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "stomp",
+       "seconds": 0.6
+      },
+      "loop": {
+       "kind": "throb",
+       "seconds": 1.2,
+       "amount": 0.35
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#C8FF00",
+      "content": "-50%",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.1955,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": true,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T4"
+    },
+    {
+     "duration": 5.3,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c5",
+     "kind": "text",
+     "mediaId": "",
+     "name": "on everything",
+     "offsetX": 0.0,
+     "offsetY": 0.1,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.7,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "fade",
+       "seconds": 0.5
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "on everything",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.0414,
+      "fontWeight": 600.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": true,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "original",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T5"
+    },
+    {
+     "duration": 4.8,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c6",
+     "kind": "text",
+     "mediaId": "",
+     "name": "LINK IN BIO",
+     "offsetX": 0.0,
+     "offsetY": 0.33,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 1.2,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "beam",
+       "seconds": 0.5
+      },
+      "loop": {
+       "kind": "bounce",
+       "seconds": 1.0,
+       "amount": 0.5
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "#C8FF00",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#0A0B0A",
+      "content": "LINK IN BIO",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.046,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T6"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T4",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T5",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T6",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1920,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1080
+   },
+   "background": {
+    "kind": "blur",
+    "amount": 0.7
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T4",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T5",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T6",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1920,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1080
+ }
+}

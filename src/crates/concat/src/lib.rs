@@ -32,6 +32,7 @@ mod ui {
 }
 
 mod alien_looks;
+mod alien_templates;
 mod batch_volume;
 mod chips;
 mod dock;

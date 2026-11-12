@@ -1,0 +1,371 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 4.8,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "shape",
+   "mediaId": "",
+   "name": "Acid line",
+   "offsetX": 0.0,
+   "offsetY": 0.14950000000000002,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.2,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "stretch",
+     "seconds": 0.7
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "shape": {
+    "kind": "square",
+    "fill": "#C8FF00",
+    "width": 0.5,
+    "height": 0.008,
+    "stroke": "",
+    "strokeWidth": 0.0,
+    "cornerRadius": 0.0
+   },
+   "trackId": "T1"
+  },
+  {
+   "duration": 5.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "text",
+   "mediaId": "",
+   "name": "YOUR TITLE",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "stomp",
+     "seconds": 0.7
+    },
+    "out": {
+     "kind": "warp",
+     "seconds": 0.4
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "YOUR TITLE",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.195,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": -0.002,
+    "underline": false
+   },
+   "trackId": "T3"
+  },
+  {
+   "duration": 4.5,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "text",
+   "mediaId": "",
+   "name": "your subtitle goes here",
+   "offsetX": 0.0,
+   "offsetY": 0.24700000000000003,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.5,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slide-up",
+     "seconds": 0.5
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#C8FF00",
+    "content": "your subtitle goes here",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.0455,
+    "fontWeight": 500.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "original",
+    "tracking": 0.004,
+    "underline": false
+   },
+   "trackId": "T2"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [],
+ "name": "ALIEN 01 - Title Landing",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 4.8,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "shape",
+     "mediaId": "",
+     "name": "Acid line",
+     "offsetX": 0.0,
+     "offsetY": 0.14950000000000002,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.2,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "stretch",
+       "seconds": 0.7
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "shape": {
+      "kind": "square",
+      "fill": "#C8FF00",
+      "width": 0.5,
+      "height": 0.008,
+      "stroke": "",
+      "strokeWidth": 0.0,
+      "cornerRadius": 0.0
+     },
+     "trackId": "T1"
+    },
+    {
+     "duration": 5.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "text",
+     "mediaId": "",
+     "name": "YOUR TITLE",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "stomp",
+       "seconds": 0.7
+      },
+      "out": {
+       "kind": "warp",
+       "seconds": 0.4
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "YOUR TITLE",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.195,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": -0.002,
+      "underline": false
+     },
+     "trackId": "T3"
+    },
+    {
+     "duration": 4.5,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "text",
+     "mediaId": "",
+     "name": "your subtitle goes here",
+     "offsetX": 0.0,
+     "offsetY": 0.24700000000000003,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.5,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slide-up",
+       "seconds": 0.5
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#C8FF00",
+      "content": "your subtitle goes here",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.0455,
+      "fontWeight": 500.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "original",
+      "tracking": 0.004,
+      "underline": false
+     },
+     "trackId": "T2"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1080,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1920,
+    "canvas": "#0A0B0A"
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1080,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1920
+ }
+}

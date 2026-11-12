@@ -95,6 +95,7 @@ impl Studio {
         // UFO Cut: the A.L.I.E.N. looks, among the user's own from the
         // first run on.
         crate::alien_looks::seed(&dir);
+        crate::alien_templates::seed(&self.host.dirs.config);
         // Looks an earlier build imported, onto the format 2 look first.
         for id in concat_effects::looks::upgrade(&dir) {
             log::info!("{id}: the imported look now reads its table in light");

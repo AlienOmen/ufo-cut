@@ -1,0 +1,371 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 3.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "text",
+   "mediaId": "",
+   "name": "PART 01",
+   "offsetX": 0.0,
+   "offsetY": -0.156,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "blink",
+     "seconds": 0.5
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#C8FF00",
+    "content": "PART 01",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.039,
+    "fontWeight": 800.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.012,
+    "underline": false
+   },
+   "trackId": "T2"
+  },
+  {
+   "duration": 2.9,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "shape",
+   "mediaId": "",
+   "name": "Acid line",
+   "offsetX": 0.0,
+   "offsetY": -0.09100000000000001,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.1,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "stretch",
+     "seconds": 0.4
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "shape": {
+    "kind": "square",
+    "fill": "#C8FF00",
+    "width": 0.06,
+    "height": 0.006,
+    "stroke": "",
+    "strokeWidth": 0.0,
+    "cornerRadius": 0.0
+   },
+   "trackId": "T1"
+  },
+  {
+   "duration": 2.8,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "text",
+   "mediaId": "",
+   "name": "THE CHAPTER NAME",
+   "offsetX": 0.0,
+   "offsetY": 0.039,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.2,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "tilt",
+     "seconds": 0.5
+    },
+    "out": {
+     "kind": "abduct",
+     "seconds": 0.4
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "THE CHAPTER NAME",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.13,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T3"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [],
+ "name": "ALIEN 17 - Chapter Card",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 3.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "text",
+     "mediaId": "",
+     "name": "PART 01",
+     "offsetX": 0.0,
+     "offsetY": -0.156,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "blink",
+       "seconds": 0.5
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#C8FF00",
+      "content": "PART 01",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.039,
+      "fontWeight": 800.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.012,
+      "underline": false
+     },
+     "trackId": "T2"
+    },
+    {
+     "duration": 2.9,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "shape",
+     "mediaId": "",
+     "name": "Acid line",
+     "offsetX": 0.0,
+     "offsetY": -0.09100000000000001,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.1,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "stretch",
+       "seconds": 0.4
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "shape": {
+      "kind": "square",
+      "fill": "#C8FF00",
+      "width": 0.06,
+      "height": 0.006,
+      "stroke": "",
+      "strokeWidth": 0.0,
+      "cornerRadius": 0.0
+     },
+     "trackId": "T1"
+    },
+    {
+     "duration": 2.8,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "text",
+     "mediaId": "",
+     "name": "THE CHAPTER NAME",
+     "offsetX": 0.0,
+     "offsetY": 0.039,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.2,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "tilt",
+       "seconds": 0.5
+      },
+      "out": {
+       "kind": "abduct",
+       "seconds": 0.4
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "THE CHAPTER NAME",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.13,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T3"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1080,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1920,
+    "canvas": "#0A0B0A"
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1080,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1920
+ }
+}

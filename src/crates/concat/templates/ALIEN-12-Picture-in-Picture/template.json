@@ -1,0 +1,399 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 8.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "video",
+   "mediaId": "m1",
+   "name": "Main video",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "trackId": "T1"
+  },
+  {
+   "duration": 7.6,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "shape",
+   "mediaId": "",
+   "name": "Frame",
+   "offsetX": 0.31,
+   "offsetY": 0.29,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.4,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slingshot",
+     "seconds": 0.6
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "shape": {
+    "kind": "square",
+    "fill": "#C8FF00",
+    "width": 0.585,
+    "height": 0.335,
+    "stroke": "",
+    "strokeWidth": 0.0,
+    "cornerRadius": 0.04
+   },
+   "trackId": "T2"
+  },
+  {
+   "duration": 7.6,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "video",
+   "mediaId": "m2",
+   "name": "Small video",
+   "offsetX": 0.31,
+   "offsetY": 0.29,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 0.32,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.4,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slingshot",
+     "seconds": 0.6
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "trackId": "T3"
+  },
+  {
+   "duration": 7.1,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c4",
+   "kind": "text",
+   "mediaId": "",
+   "name": "REACTION",
+   "offsetX": 0.31,
+   "offsetY": 0.085,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.9,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "pop",
+     "seconds": 0.3
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "#C8FF00",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#0A0B0A",
+    "content": "REACTION",
+    "fontFamily": "Hanken Grotesk",
+    "fontSize": 0.0288,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#000000",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T4"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [
+  {
+   "id": "m1",
+   "path": "",
+   "name": "Main video",
+   "duration": 8.0,
+   "kind": "video",
+   "width": 1920,
+   "height": 1080,
+   "hasAudio": false,
+   "placeholder": true
+  },
+  {
+   "id": "m2",
+   "path": "",
+   "name": "Small video",
+   "duration": 7.6,
+   "kind": "video",
+   "width": 1920,
+   "height": 1080,
+   "hasAudio": false,
+   "placeholder": true
+  }
+ ],
+ "name": "ALIEN 12 - Picture in Picture",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 8.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "video",
+     "mediaId": "m1",
+     "name": "Main video",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "trackId": "T1"
+    },
+    {
+     "duration": 7.6,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "shape",
+     "mediaId": "",
+     "name": "Frame",
+     "offsetX": 0.31,
+     "offsetY": 0.29,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.4,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slingshot",
+       "seconds": 0.6
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "shape": {
+      "kind": "square",
+      "fill": "#C8FF00",
+      "width": 0.585,
+      "height": 0.335,
+      "stroke": "",
+      "strokeWidth": 0.0,
+      "cornerRadius": 0.04
+     },
+     "trackId": "T2"
+    },
+    {
+     "duration": 7.6,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "video",
+     "mediaId": "m2",
+     "name": "Small video",
+     "offsetX": 0.31,
+     "offsetY": 0.29,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 0.32,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.4,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slingshot",
+       "seconds": 0.6
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "trackId": "T3"
+    },
+    {
+     "duration": 7.1,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c4",
+     "kind": "text",
+     "mediaId": "",
+     "name": "REACTION",
+     "offsetX": 0.31,
+     "offsetY": 0.085,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.9,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "pop",
+       "seconds": 0.3
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "#C8FF00",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#0A0B0A",
+      "content": "REACTION",
+      "fontFamily": "Hanken Grotesk",
+      "fontSize": 0.0288,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#000000",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T4"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T4",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1080,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1920
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T4",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1080,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1920
+ }
+}
