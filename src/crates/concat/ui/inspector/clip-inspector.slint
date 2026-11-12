@@ -3179,12 +3179,21 @@ export component AnimatePanel inherits VerticalLayout {
         I18n.t("motion.zoomOut"), I18n.t("motion.pop"), I18n.t("motion.drop"),
         I18n.t("motion.rise"), I18n.t("motion.spin"), I18n.t("motion.flip"),
         I18n.t("motion.swing"), I18n.t("motion.squash"),
+        // UFO Cut: the ALIEN moves, in their own names.
+        "Beam", "Abduct", "Warp", "Glitch",
+        "Stomp", "Whip Left", "Whip Right", "Roll",
+        "Tumble", "Unfold", "Stretch", "Tilt",
+        "Punch", "Grow", "Slingshot", "Blink",
     ];
     /// The loops' names in Cycle::ALL's order.
     property <[string]> loops: [
         I18n.t("motion.pulse"), I18n.t("motion.heartbeat"), I18n.t("motion.float"),
         I18n.t("motion.wiggle"), I18n.t("motion.sway"), I18n.t("motion.jitter"),
         I18n.t("motion.spinLoop"), I18n.t("motion.flicker"), I18n.t("motion.breathe"),
+        // UFO Cut: the ALIEN loops.
+        "Hover", "Orbit", "Shake", "Nod",
+        "Rock", "Bounce", "Throb", "Strobe",
+        "Wobble", "Tick",
     ];
     /// An entrance or an exit longer than the clip would never finish.
     property <float> limit: Math.max(0.1, Math.min(10, root.selected.duration));

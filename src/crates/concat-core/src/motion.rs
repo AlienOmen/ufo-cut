@@ -48,11 +48,43 @@ pub enum Move {
     Swing,
     /// Squashed flat and wide, springing back to shape.
     Squash,
+    /// UFO Cut: Down a beam of light, thin at first.
+    Beam,
+    /// UFO Cut: Lifted away, shrinking and turning.
+    Abduct,
+    /// UFO Cut: Stretched to a streak, then itself.
+    Warp,
+    /// UFO Cut: In fits and starts, jumping about.
+    Glitch,
+    /// UFO Cut: Lands large and settles with a bounce.
+    Stomp,
+    /// UFO Cut: A fast pass from the right, smeared.
+    WhipLeft,
+    /// UFO Cut: A fast pass from the left, smeared.
+    WhipRight,
+    /// UFO Cut: Rolls in along the ground.
+    Roll,
+    /// UFO Cut: Falls in, turning as it comes.
+    Tumble,
+    /// UFO Cut: Opens from a line across its middle.
+    Unfold,
+    /// UFO Cut: Springs out sideways from a line.
+    Stretch,
+    /// UFO Cut: Leans in from below as it appears.
+    Tilt,
+    /// UFO Cut: Hits the frame from just past its size.
+    Punch,
+    /// UFO Cut: Grows from nothing, with no fade.
+    Shrink,
+    /// UFO Cut: Shot in from the side, past its place and back.
+    Slingshot,
+    /// UFO Cut: Flickers on like a failing light.
+    Blink,
 }
 
 impl Move {
     /// Every move, in the order the picker lists them.
-    pub const ALL: [Move; 14] = [
+    pub const ALL: [Move; 30] = [
         Move::Fade,
         Move::SlideLeft,
         Move::SlideRight,
@@ -67,6 +99,22 @@ impl Move {
         Move::Flip,
         Move::Swing,
         Move::Squash,
+        Move::Beam,
+        Move::Abduct,
+        Move::Warp,
+        Move::Glitch,
+        Move::Stomp,
+        Move::WhipLeft,
+        Move::WhipRight,
+        Move::Roll,
+        Move::Tumble,
+        Move::Unfold,
+        Move::Stretch,
+        Move::Tilt,
+        Move::Punch,
+        Move::Shrink,
+        Move::Slingshot,
+        Move::Blink,
     ];
 
     /// The move's name in documents and the API.
@@ -86,6 +134,22 @@ impl Move {
             Move::Flip => "flip",
             Move::Swing => "swing",
             Move::Squash => "squash",
+            Move::Beam => "beam",
+            Move::Abduct => "abduct",
+            Move::Warp => "warp",
+            Move::Glitch => "glitch",
+            Move::Stomp => "stomp",
+            Move::WhipLeft => "whip-left",
+            Move::WhipRight => "whip-right",
+            Move::Roll => "roll",
+            Move::Tumble => "tumble",
+            Move::Unfold => "unfold",
+            Move::Stretch => "stretch",
+            Move::Tilt => "tilt",
+            Move::Punch => "punch",
+            Move::Shrink => "shrink",
+            Move::Slingshot => "slingshot",
+            Move::Blink => "blink",
         }
     }
 
@@ -169,6 +233,92 @@ impl Move {
                     pose.stretch_y = 1.0 - gone;
                 }
             }
+            // UFO Cut: the ALIEN moves.
+            Move::Beam => {
+                if s < 0.0 {
+                    let p = ease_out(1.0 - gone);
+                    pose.dy = -(1.0 - p) * 0.6;
+                    pose.stretch_x = 0.2 + 0.8 * p;
+                    pose.opacity = ((1.0 - gone) * 3.0).min(1.0);
+                } else {
+                    pose.dy = -ease_in(gone) * 0.6;
+                    pose.stretch_x = 1.0 - 0.8 * gone;
+                    pose.opacity = 1.0 - gone;
+                }
+            }
+            Move::Abduct => {
+                pose.dy = -travel.abs() * 0.5;
+                pose.scale = (1.0 - travel.abs()).max(0.0);
+                pose.rotation = travel * 90.0;
+                pose.opacity = 1.0 - travel.abs().powi(3);
+            }
+            Move::Warp => {
+                pose.stretch_x = 1.0 + travel.abs() * 4.0;
+                pose.stretch_y = (1.0 - travel.abs() * 0.9).max(0.05);
+                pose.opacity = 1.0 - travel.abs().powi(2);
+            }
+            Move::Glitch => {
+                let step = (gone * 10.0).floor();
+                pose.dx = 0.06 * gone * (unit(step, 5) * 2.0 - 1.0);
+                pose.dy = 0.02 * gone * (unit(step, 6) * 2.0 - 1.0);
+                pose.opacity = (((1.0 - gone) * 6.0).ceil() / 6.0).clamp(0.0, 1.0);
+            }
+            Move::Stomp => {
+                if s < 0.0 {
+                    let p = 1.0 - gone;
+                    pose.scale = 1.0 + (1.0 - bounce_out(p)) * 2.0;
+                    pose.opacity = (p * 6.0).min(1.0);
+                } else {
+                    pose.scale = 1.0 + gone * gone * 2.0;
+                    pose.opacity = 1.0 - gone;
+                }
+            }
+            Move::WhipLeft => {
+                pose.dx = -travel * 1.2;
+                pose.stretch_x = 1.0 + travel.abs() * 0.8;
+            }
+            Move::WhipRight => {
+                pose.dx = travel * 1.2;
+                pose.stretch_x = 1.0 + travel.abs() * 0.8;
+            }
+            Move::Roll => {
+                pose.dx = travel;
+                pose.rotation = travel * 360.0;
+            }
+            Move::Tumble => {
+                pose.dy = travel * 1.1;
+                pose.rotation = travel * 180.0;
+            }
+            Move::Unfold => pose.stretch_y = (travel * std::f64::consts::FRAC_PI_2).cos(),
+            Move::Stretch => {
+                if s < 0.0 {
+                    pose.stretch_x = elastic_out(1.0 - gone).max(0.0);
+                    pose.opacity = ((1.0 - gone) * 6.0).min(1.0);
+                } else {
+                    pose.stretch_x = 1.0 - gone;
+                }
+            }
+            Move::Tilt => {
+                pose.rotation = travel * 14.0;
+                pose.dy = -travel * 0.08;
+                pose.opacity = 1.0 - travel.abs();
+            }
+            Move::Punch => {
+                pose.scale = 1.0 + travel.abs() * 0.6;
+                pose.opacity = 1.0 - travel.abs().powi(2);
+            }
+            Move::Shrink => pose.scale = (1.0 - travel.abs()).max(0.0),
+            Move::Slingshot => {
+                if s < 0.0 {
+                    pose.dx = -(1.0 - back_out(1.0 - gone));
+                } else {
+                    pose.dx = back_in(gone);
+                }
+            }
+            Move::Blink => {
+                let step = (gone * 8.0).floor();
+                pose.opacity = if step % 2.0 < 1.0 { 1.0 - gone } else { 0.0 };
+            }
         }
         pose
     }
@@ -195,11 +345,31 @@ pub enum Cycle {
     Flicker,
     /// Fades a little and back, slowly.
     Breathe,
+    /// UFO Cut: Hangs in the air like a craft.
+    Hover,
+    /// UFO Cut: Goes round a small circle.
+    Orbit,
+    /// UFO Cut: A fast shake from side to side.
+    Shake,
+    /// UFO Cut: Dips and comes back.
+    Nod,
+    /// UFO Cut: Rocks widely about its middle.
+    Rock,
+    /// UFO Cut: Bounces on the spot.
+    Bounce,
+    /// UFO Cut: Swells large and back.
+    Throb,
+    /// UFO Cut: On and off, hard.
+    Strobe,
+    /// UFO Cut: Squashes one way then the other.
+    Wobble,
+    /// UFO Cut: Turns in steps, like a second hand.
+    Tick,
 }
 
 impl Cycle {
     /// Every loop, in the order the picker lists them.
-    pub const ALL: [Cycle; 9] = [
+    pub const ALL: [Cycle; 19] = [
         Cycle::Pulse,
         Cycle::Heartbeat,
         Cycle::Float,
@@ -209,6 +379,16 @@ impl Cycle {
         Cycle::Spin,
         Cycle::Flicker,
         Cycle::Breathe,
+        Cycle::Hover,
+        Cycle::Orbit,
+        Cycle::Shake,
+        Cycle::Nod,
+        Cycle::Rock,
+        Cycle::Bounce,
+        Cycle::Throb,
+        Cycle::Strobe,
+        Cycle::Wobble,
+        Cycle::Tick,
     ];
 
     /// The loop's name in documents and the API.
@@ -223,6 +403,16 @@ impl Cycle {
             Cycle::Spin => "spin",
             Cycle::Flicker => "flicker",
             Cycle::Breathe => "breathe",
+            Cycle::Hover => "hover",
+            Cycle::Orbit => "orbit",
+            Cycle::Shake => "shake",
+            Cycle::Nod => "nod",
+            Cycle::Rock => "rock",
+            Cycle::Bounce => "bounce",
+            Cycle::Throb => "throb",
+            Cycle::Strobe => "strobe",
+            Cycle::Wobble => "wobble",
+            Cycle::Tick => "tick",
         }
     }
 
@@ -271,6 +461,30 @@ impl Cycle {
             Cycle::Breathe => {
                 pose.opacity = (1.0 - 0.35 * a * (0.5 - 0.5 * turn.cos())).clamp(0.0, 1.0);
             }
+            // UFO Cut: the ALIEN loops.
+            Cycle::Hover => {
+                pose.dy = -0.03 * a * turn.sin();
+                pose.scale = 1.0 + 0.015 * a * (turn * 2.0).sin();
+            }
+            Cycle::Orbit => {
+                pose.dx = 0.02 * a * turn.cos();
+                pose.dy = 0.02 * a * turn.sin();
+            }
+            Cycle::Shake => pose.dx = 0.012 * a * (turn * 6.0).sin(),
+            Cycle::Nod => pose.dy = 0.025 * a * (0.5 - 0.5 * turn.cos()),
+            Cycle::Rock => pose.rotation = 12.0 * a * turn.sin(),
+            Cycle::Bounce => pose.dy = -0.05 * a * (turn * 0.5).sin().abs(),
+            Cycle::Throb => pose.scale = 1.0 + 0.15 * a * (0.5 - 0.5 * turn.cos()),
+            Cycle::Strobe => {
+                if a > 0.0 && lap >= 0.5 {
+                    pose.opacity = (1.0 - a).clamp(0.0, 1.0);
+                }
+            }
+            Cycle::Wobble => {
+                pose.stretch_x = 1.0 + 0.08 * a * turn.sin();
+                pose.stretch_y = 1.0 - 0.08 * a * turn.sin();
+            }
+            Cycle::Tick => pose.rotation = if a > 0.0 { 360.0 * (lap * 12.0).floor() / 12.0 } else { 0.0 },
         }
         pose
     }
