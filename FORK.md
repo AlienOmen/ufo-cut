@@ -72,6 +72,8 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   the user's LUTs on the first run (`src/alien_looks.rs`).
 - Eighteen ALIEN templates (`src/crates/concat/templates/`) are added to
   the template library on the first run (`src/alien_templates.rs`).
+- `--software` (the "safe graphics" shortcut) draws in software for that
+  launch only, instead of for every launch after it.
 
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.
