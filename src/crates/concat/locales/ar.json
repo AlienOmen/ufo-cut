@@ -488,7 +488,7 @@
   "settings.automatic": "تلقائي",
   "settings.automation": "الأتمتة",
   "settings.aiTitle": "مساعدو الذكاء الاصطناعي",
-  "settings.aboutFork": "UFO Cut من A.L.I.E.N. برنامج حر مفتوح المصدر برخصة AGPL-3.0. يتضمن برمجيات © 2026 Jareer Abdullah والمساهمين. الشيفرة المصدرية: github.com/AlienOmen/ufo-cut",
+  "settings.aboutFork": "UFO Cut © 2026 A.L.I.E.N. (Ahmed Albadry). برنامج حر برخصة AGPL-3.0، ويتضمن برمجيات © 2026 Jareer Abdullah والمساهمين. الرخصة وإشعار الشيفرة المصدرية موجودان في مجلد البرنامج.",
   "settings.aiHint": "دع Claude أو أي مساعد يدعم MCP يحرّر بواسطة UFO Cut. انسخ أحد الخيارين والصقه في المساعد ثم أعد تشغيله. الملف CONNECT-AI.md بجانب البرنامج يشرح كل الخطوات.",
   "settings.aiCopyCommand": "انسخ لـ Claude Code",
   "settings.aiCopyConfig": "انسخ الإعدادات لتطبيقات أخرى",

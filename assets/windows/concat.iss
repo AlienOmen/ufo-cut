@@ -108,6 +108,7 @@ Source: "{#Stage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs crea
 Source: "..\icons\concat.ico"; DestDir: "{app}"; DestName: "ufocut.ico"; Flags: ignoreversion
 ; UFO Cut: the guide to connecting an AI assistant, beside the program.
 Source: "..\..\CONNECT-AI.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\UFO-CUT-NOTICE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\CONNECT-AI.html"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

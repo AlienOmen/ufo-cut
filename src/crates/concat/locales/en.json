@@ -457,7 +457,7 @@
   "settings.automatic": "Automatic",
   "settings.automation": "Automation",
   "settings.aiTitle": "AI assistants",
-  "settings.aboutFork": "UFO Cut by A.L.I.E.N. is free, open-source software under the AGPL-3.0 licence. It includes software © 2026 Jareer Abdullah and contributors. Source code: github.com/AlienOmen/ufo-cut",
+  "settings.aboutFork": "UFO Cut © 2026 A.L.I.E.N. (Ahmed Albadry). Free software under the AGPL-3.0 licence; it includes software © 2026 Jareer Abdullah and contributors. The licence and the notice about its source are in the program's folder.",
   "settings.aiHint": "Let Claude or another assistant that speaks MCP edit with UFO Cut. Copy one of these, paste it into the assistant, and restart it. The file CONNECT-AI.md beside the program has every step.",
   "settings.aiCopyCommand": "Copy for Claude Code",
   "settings.aiCopyConfig": "Copy settings for other apps",

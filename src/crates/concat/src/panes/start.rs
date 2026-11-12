@@ -99,6 +99,7 @@ const SITE: &str = "https://itsthealienlab.pages.dev";
 /// UFO Cut: the studio that publishes it.
 const STUDIO: &str = "https://itsthealien.pages.dev";
 /// The repository: the code, the issues, the releases.
+#[allow(dead_code)]
 pub const REPOSITORY: &str = "https://github.com/AlienOmen/ufo-cut";
 
 /// Where each of the launch screen's links goes, by the name the screen
@@ -111,11 +112,9 @@ pub fn link(name: &str) -> Option<String> {
         // UFO Cut: every card goes to a page of A.L.I.E.N.'s own. The
         // names are the ones the screen has always sent: "github" is
         // now the studio's card and "discord" the course's.
-        "guides" | "first-edit" => SITE.to_owned(),
-        // The repository is where a problem is reported and where each
-        // release is described.
-        "report" => format!("{REPOSITORY}/issues"),
-        "release-notes" => format!("{REPOSITORY}/releases"),
+        // UFO Cut's own page has the guide, the news and the way to
+        // reach A.L.I.E.N. about a problem.
+        "guides" | "first-edit" | "report" | "release-notes" => format!("{SITE}/ufo-cut/"),
         "github" => STUDIO.to_owned(),
         "tools" => format!("{SITE}/tools/"),
         "discord" => {
@@ -710,7 +709,7 @@ mod tests {
                 "{name}"
             );
         }
-        assert_eq!(link("release-notes").unwrap(), format!("{REPOSITORY}/releases"));
+        assert_eq!(link("release-notes").unwrap(), format!("{SITE}/ufo-cut/"));
         assert_eq!(link("nowhere"), None);
     }
 

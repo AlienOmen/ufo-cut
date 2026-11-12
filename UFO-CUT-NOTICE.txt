@@ -1,0 +1,21 @@
+UFO Cut
+=======
+
+Copyright (C) 2026 A.L.I.E.N. (Ahmed Albadry) - https://itsthealien.pages.dev
+Portions copyright (C) 2026 Jareer Abdullah and contributors.
+
+UFO Cut is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. It is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. The full text is in the file LICENSE beside
+this one.
+
+Source code
+-----------
+The complete corresponding source code of this version is available at:
+https://github.com/AlienOmen/ufo-cut
+
+Third-party components and their licences are listed in
+THIRD_PARTY_NOTICES.md beside this file.
