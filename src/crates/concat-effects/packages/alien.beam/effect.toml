@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.beam"
+name = "Beam"
+kind = "transition"
+category = "ALIEN"
+order = 0
+description = "A bar of acid light crosses the frame and the next shot is what it leaves behind."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

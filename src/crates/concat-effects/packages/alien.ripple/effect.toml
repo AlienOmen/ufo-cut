@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.ripple"
+name = "Ripple"
+kind = "transition"
+category = "ALIEN"
+order = 9
+description = "The picture ripples like water as one shot gives way to the other."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

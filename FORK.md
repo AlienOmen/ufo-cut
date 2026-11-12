@@ -67,6 +67,7 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
 - The Animate panel has sixteen more moves and ten more loops, the ALIEN
   set (`concat-core/src/motion.rs`).
 - The shelf accepts sounds marked Free beside the CC0 ones.
+- Ten ALIEN transitions (`concat-effects/packages/alien.*`).
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 

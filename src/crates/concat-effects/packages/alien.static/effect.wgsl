@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2026 A.L.I.E.N. (Ahmed Albadry)
+
+const ACID: vec3<f32> = vec3<f32>(0.784, 1.0, 0.0);
+
+fn ease(p: f32) -> f32 {
+    let q = clamp(p, 0.0, 1.0);
+    return q * q * (3.0 - 2.0 * q);
+}
+
+fn bell(p: f32) -> f32 {
+    return sin(3.14159265 * clamp(p, 0.0, 1.0));
+}
+
+fn transition(uv: vec2<f32>, progress: f32) -> vec4<f32> {
+    let p = clamp(progress, 0.0, 1.0);
+    let tick = floor(p * 24.0);
+    let grainy = hash(floor(uv * frame.size / 2.0), tick);
+    let coarse = hash(vec2<f32>(floor(uv.y * 90.0), tick), 5.0);
+    // Each grain switches when the cut reaches its own number.
+    let w = step(grainy, smoothstep(0.15, 0.85, p));
+    let base = mix(from_at(uv), to_at(uv), w);
+    let snow = bell(p) * 0.55;
+    let noise = vec3<f32>(mix(grainy, coarse, 0.3));
+    return vec4<f32>(mix(base.rgb, noise, snow), base.a);
+}

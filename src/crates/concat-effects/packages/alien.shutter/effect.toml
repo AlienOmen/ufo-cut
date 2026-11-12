@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.shutter"
+name = "Shutter"
+kind = "transition"
+category = "ALIEN"
+order = 8
+description = "Bars close over the last shot like a blind and open again on the next."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

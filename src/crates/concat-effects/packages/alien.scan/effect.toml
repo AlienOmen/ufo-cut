@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.scan"
+name = "Scan"
+kind = "transition"
+category = "ALIEN"
+order = 2
+description = "Scan lines sweep down the frame, each one switching to the next shot as it passes."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

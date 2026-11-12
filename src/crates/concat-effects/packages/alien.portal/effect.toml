@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.portal"
+name = "Portal"
+kind = "transition"
+category = "ALIEN"
+order = 3
+description = "A ring of acid light opens from the middle, and the next shot is through it."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

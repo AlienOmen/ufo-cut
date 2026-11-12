@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.static"
+name = "Static"
+kind = "transition"
+category = "ALIEN"
+order = 6
+description = "A lost signal: the picture dissolves into noise and the next shot tunes in."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

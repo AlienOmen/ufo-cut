@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.slice"
+name = "Slice"
+kind = "transition"
+category = "ALIEN"
+order = 7
+description = "The frame is cut into strips that slide apart in turn, uncovering the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

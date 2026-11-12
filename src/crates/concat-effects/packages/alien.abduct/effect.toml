@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.abduct"
+name = "Abduct"
+kind = "transition"
+category = "ALIEN"
+order = 1
+description = "The last shot is pulled up and away to a point; the next one was under it all along."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

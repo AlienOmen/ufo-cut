@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.acid-flash"
+name = "Acid Flash"
+kind = "transition"
+category = "ALIEN"
+order = 5
+description = "The frame burns out to acid green and comes back as the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

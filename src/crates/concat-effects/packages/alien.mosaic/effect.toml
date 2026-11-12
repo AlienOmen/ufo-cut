@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.mosaic"
+name = "Mosaic"
+kind = "transition"
+category = "ALIEN"
+order = 4
+description = "The picture breaks into large tiles, changes shot at its coarsest, and sharpens again."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"
