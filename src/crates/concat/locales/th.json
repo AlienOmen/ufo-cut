@@ -764,7 +764,6 @@
   "settings.aiHint": "ให้ Claude หรือผู้ช่วยอื่นที่รองรับ MCP ตัดต่อด้วย UFO Cut คัดลอกอันใดอันหนึ่งนี้ วางลงในผู้ช่วย แล้วรีสตาร์ตผู้ช่วย ไฟล์ CONNECT-AI.md ข้างโปรแกรมมีทุกขั้นตอน",
   "settings.aiCopyCommand": "คัดลอกสำหรับ Claude Code",
   "settings.aiCopyConfig": "คัดลอกการตั้งค่าสำหรับแอปอื่น",
-  "settings.aboutFork": "UFO Cut โดย A.L.I.E.N. สร้างบน Concat โปรแกรมตัดต่อวิดีโอโอเพนซอร์สฟรี และใช้สัญญาอนุญาต AGPL-3.0 ซอร์สโค้ด: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "นำเข้าจาก CapCut",
   "start.importCapcutNote": "ฉบับร่าง CapCut เป็นโปรเจกต์ใหม่",
   "start.keyboardShortcuts": "แป้นพิมพ์ลัด",

@@ -167,7 +167,7 @@ pub fn catalogue() -> Vec<Tool> {
     use Reply::{Raw, Summary};
     vec![
         Tool {
-            name: "concat_version",
+            name: "ufocut_version",
             title: "UFO Cut version",
             description: "What this UFO Cut speaks: the API version, the build, its capabilities, and how this MCP server reaches it (`mcp.mode`: \"window\" when it goes through the open UFO Cut window's server, \"headless\" when it runs the editor engine itself). Call it first if unsure what is available.",
             read_only: true,
@@ -972,7 +972,7 @@ mod tests {
     /// One call each tool may take, as an agent would write it.
     fn samples() -> Vec<(&'static str, Value)> {
         vec![
-            ("concat_version", json!({})),
+            ("ufocut_version", json!({})),
             ("project_list", json!({})),
             (
                 "project_create",

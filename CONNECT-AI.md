@@ -21,21 +21,18 @@ other assistants speak.
 ### Where the program is
 
 The examples use this path. If you installed UFO Cut "for everyone", it is
-`C:\Program Files\UFO Cut\concat.exe` instead.
+`C:\Program Files\UFO Cut\ufocut.exe` instead.
 
 ```text
-C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe
+C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe
 ```
-
-The program file is named `concat.exe` because UFO Cut is built on the
-open-source editor Concat.
 
 ### Claude Code
 
 Run this once in a terminal (PowerShell):
 
 ```powershell
-claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe" --mcp
+claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe" --mcp
 ```
 
 ### Claude desktop app
@@ -46,7 +43,7 @@ Open **Settings › Developer › Edit Config** and add:
 {
   "mcpServers": {
     "ufo-cut": {
-      "command": "C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\concat.exe",
+      "command": "C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe",
       "args": ["--mcp"]
     }
   }
@@ -61,7 +58,7 @@ Any app that can start a local MCP server takes the same two values:
 
 | Setting | Value |
 | --- | --- |
-| Command | the full path to `concat.exe` |
+| Command | the full path to `ufocut.exe` |
 | Arguments | `--mcp` |
 
 Apps that read an `mcpServers` block (Cursor, Windsurf, VS Code and others)
@@ -70,7 +67,7 @@ takes it in `config.toml`:
 
 ```toml
 [mcp_servers.ufo-cut]
-command = 'C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe'
+command = 'C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe'
 args = ["--mcp"]
 ```
 
@@ -122,21 +119,18 @@ entienden Claude y muchos otros asistentes.
 ### Dónde está el programa
 
 Los ejemplos usan esta ruta. Si instalaste UFO Cut "para todos", está en
-`C:\Program Files\UFO Cut\concat.exe`.
+`C:\Program Files\UFO Cut\ufocut.exe`.
 
 ```text
-C:\Users\TU-NOMBRE\AppData\Local\Programs\UFO Cut\concat.exe
+C:\Users\TU-NOMBRE\AppData\Local\Programs\UFO Cut\ufocut.exe
 ```
-
-El archivo se llama `concat.exe` porque UFO Cut está construido sobre el
-editor de código abierto Concat.
 
 ### Claude Code
 
 Ejecuta esto una vez en una terminal (PowerShell):
 
 ```powershell
-claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe" --mcp
+claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe" --mcp
 ```
 
 ### App de escritorio de Claude
@@ -147,7 +141,7 @@ Abre **Settings › Developer › Edit Config** y agrega:
 {
   "mcpServers": {
     "ufo-cut": {
-      "command": "C:\\Users\\TU-NOMBRE\\AppData\\Local\\Programs\\UFO Cut\\concat.exe",
+      "command": "C:\\Users\\TU-NOMBRE\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe",
       "args": ["--mcp"]
     }
   }
@@ -159,7 +153,7 @@ Guarda, cierra Claude por completo y vuelve a abrirlo.
 ### Otros asistentes
 
 Cualquier app que pueda iniciar un servidor MCP local usa los mismos dos
-valores: el **comando** es la ruta completa a `concat.exe` y el
+valores: el **comando** es la ruta completa a `ufocut.exe` y el
 **argumento** es `--mcp`. Las apps que leen un bloque `mcpServers` (Cursor,
 Windsurf, VS Code y otras) aceptan el mismo JSON de arriba.
 
@@ -211,20 +205,18 @@ Pídele al asistente:
 ### مكان البرنامج
 
 الأمثلة تستخدم هذا المسار. إذا ثبّتَّ UFO Cut «للجميع» فالمسار هو
-`C:\Program Files\UFO Cut\concat.exe`.
+`C:\Program Files\UFO Cut\ufocut.exe`.
 
 ```text
-C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe
+C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe
 ```
-
-اسم الملف `concat.exe` لأن UFO Cut مبني على المحرر مفتوح المصدر Concat.
 
 ### Claude Code
 
 نفّذ هذا السطر مرة واحدة في الطرفية (PowerShell):
 
 ```powershell
-claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe" --mcp
+claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe" --mcp
 ```
 
 ### تطبيق Claude لسطح المكتب
@@ -235,7 +227,7 @@ claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe" --mcp
 {
   "mcpServers": {
     "ufo-cut": {
-      "command": "C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\concat.exe",
+      "command": "C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe",
       "args": ["--mcp"]
     }
   }
@@ -247,7 +239,7 @@ claude mcp add ufo-cut -- "$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe" --mcp
 ### مساعدون آخرون
 
 أي تطبيق يستطيع تشغيل خادم MCP محلي يحتاج القيمتين نفسيهما: **الأمر** هو
-المسار الكامل إلى `concat.exe` و**المعطى** هو `--mcp`. التطبيقات التي تقرأ
+المسار الكامل إلى `ufocut.exe` و**المعطى** هو `--mcp`. التطبيقات التي تقرأ
 قسم `mcpServers` (مثل Cursor و Windsurf و VS Code) تقبل نص JSON نفسه.
 
 **ChatGPT:** حتى وقت كتابة هذا الدليل يتصل تطبيق ChatGPT بخوادم MCP على

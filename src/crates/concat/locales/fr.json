@@ -764,7 +764,6 @@
   "settings.aiHint": "Laissez Claude ou un autre assistant compatible MCP monter avec UFO Cut. Copiez l'une de ces options, collez-la dans l'assistant, puis redémarrez-le. Le fichier CONNECT-AI.md à côté du programme détaille chaque étape.",
   "settings.aiCopyCommand": "Copier pour Claude Code",
   "settings.aiCopyConfig": "Copier les réglages pour d'autres applis",
-  "settings.aboutFork": "UFO Cut par A.L.I.E.N. est basé sur Concat, l'éditeur vidéo libre et gratuit, et distribué sous licence AGPL-3.0. Code source : github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Importer depuis CapCut",
   "start.importCapcutNote": "Un brouillon CapCut, en nouveau projet",
   "start.keyboardShortcuts": "Raccourcis clavier",

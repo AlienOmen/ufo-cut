@@ -764,7 +764,6 @@
   "settings.aiHint": "Claude'un ya da MCP konuşan başka bir asistanın UFO Cut ile düzenleme yapmasına izin ver. Bunlardan birini kopyala, asistana yapıştır ve asistanı yeniden başlat. Programın yanındaki CONNECT-AI.md dosyasında tüm adımlar var.",
   "settings.aiCopyCommand": "Claude Code için kopyala",
   "settings.aiCopyConfig": "Diğer uygulamalar için ayarları kopyala",
-  "settings.aboutFork": "A.L.I.E.N. tarafından hazırlanan UFO Cut, ücretsiz ve açık kaynaklı video düzenleyici Concat üzerine kuruludur ve AGPL-3.0 ile lisanslanmıştır. Kaynak kod: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "CapCut'tan içe aktar",
   "start.importCapcutNote": "Bir CapCut taslağı, yeni proje olarak",
   "start.keyboardShortcuts": "Klavye kısayolları",

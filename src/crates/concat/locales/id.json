@@ -764,7 +764,6 @@
   "settings.aiHint": "Biarkan Claude atau asisten lain yang mendukung MCP mengedit dengan UFO Cut. Salin salah satu ini, tempel ke asisten, lalu mulai ulang asistennya. File CONNECT-AI.md di samping program berisi semua langkahnya.",
   "settings.aiCopyCommand": "Salin untuk Claude Code",
   "settings.aiCopyConfig": "Salin pengaturan untuk aplikasi lain",
-  "settings.aboutFork": "UFO Cut oleh A.L.I.E.N. dibangun di atas Concat, editor video open source gratis, dan dilisensikan di bawah AGPL-3.0. Kode sumber: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Impor dari CapCut",
   "start.importCapcutNote": "Draf CapCut, sebagai proyek baru",
   "start.keyboardShortcuts": "Pintasan keyboard",

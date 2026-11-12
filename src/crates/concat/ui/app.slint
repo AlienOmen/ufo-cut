@@ -1255,17 +1255,6 @@ export component App inherits Window {
             clicked => { root.intro-done = true; }
         }
 
-        // The light under the craft, breathing with the hover.
-        Rectangle {
-            width: parent.craft-w * (0.72 + 0.06 * Math.sin(parent.beat * 150deg));
-            height: 26px;
-            x: (parent.width - self.width) / 2;
-            y: parent.height / 2 + 6px;
-            border-radius: 13px;
-            background: Theme.accent;
-            opacity: 0.16 + 0.06 * Math.sin(parent.beat * 150deg);
-        }
-
         Image {
             source: @image-url("assets/clay-ufo.png");
             image-fit: contain;

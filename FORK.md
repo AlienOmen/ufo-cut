@@ -59,6 +59,9 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   window (`ui/app.slint`).
 - The Windows setup puts a shortcut on the desktop by default, and beside
   it one that opens `CONNECT-AI.html`, the guide as a page.
+- The program's file is `ufocut.exe`; a project's file is `ufocut.json` (a
+  `concat.json` is still read and renamed); the assistant tool is
+  `ufocut_version`. The Media page has a downloader card for links.
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 

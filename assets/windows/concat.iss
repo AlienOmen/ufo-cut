@@ -47,7 +47,7 @@ LicenseFile=..\..\LICENSE
 OutputDir={#Out}
 OutputBaseFilename=UFO-Cut-{#Version}-windows-{#Suffix}-setup
 SetupIconFile=..\icons\concat.ico
-UninstallDisplayIcon={app}\concat.ico
+UninstallDisplayIcon={app}\ufocut.ico
 UninstallDisplayName=UFO Cut
 Compression=lzma2/max
 SolidCompression=yes
@@ -105,21 +105,26 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "{#Stage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\icons\concat.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\icons\concat.ico"; DestDir: "{app}"; DestName: "ufocut.ico"; Flags: ignoreversion
 ; UFO Cut: the guide to connecting an AI assistant, beside the program.
 Source: "..\..\CONNECT-AI.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\CONNECT-AI.html"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{autoprograms}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"
+Name: "{autoprograms}\UFO Cut"; Filename: "{app}\ufocut.exe"; IconFilename: "{app}\ufocut.ico"
 ; The way in when a graphics driver draws the window as coloured squares:
 ; it turns off Settings > General > Draw on the GPU, which that window hides.
-Name: "{autoprograms}\UFO Cut (safe graphics)"; Filename: "{app}\concat.exe"; Parameters: "--software"; IconFilename: "{app}\concat.ico"
-Name: "{autodesktop}\UFO Cut"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"; Tasks: desktopicon
+Name: "{autoprograms}\UFO Cut (safe graphics)"; Filename: "{app}\ufocut.exe"; Parameters: "--software"; IconFilename: "{app}\ufocut.ico"
+Name: "{autodesktop}\UFO Cut"; Filename: "{app}\ufocut.exe"; IconFilename: "{app}\ufocut.ico"; Tasks: desktopicon
 ; UFO Cut: the guide to connecting an AI assistant, beside the program's
 ; own shortcut and in the Start menu. It opens in the browser.
 Name: "{autodesktop}\Connect UFO Cut to Claude"; Filename: "{app}\CONNECT-AI.html"; Tasks: desktopicon
 Name: "{autoprograms}\Connect UFO Cut to Claude"; Filename: "{app}\CONNECT-AI.html"
+
+[InstallDelete]
+; UFO Cut: the program's file and icon under the names earlier builds gave them.
+Type: files; Name: "{app}\concat.exe"
+Type: files; Name: "{app}\concat.ico"
 
 [INI]
 ; UFO Cut: the language chosen in this setup is the app's on its first
@@ -127,4 +132,4 @@ Name: "{autoprograms}\Connect UFO Cut to Claude"; Filename: "{app}\CONNECT-AI.ht
 Filename: "{app}\setup.ini"; Section: "Setup"; Key: "Language"; String: "{language}"; Flags: uninsdeleteentry uninsdeletesectionifempty
 
 [Run]
-Filename: "{app}\concat.exe"; Description: "{cm:LaunchProgram,UFO Cut}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ufocut.exe"; Description: "{cm:LaunchProgram,UFO Cut}"; Flags: nowait postinstall skipifsilent

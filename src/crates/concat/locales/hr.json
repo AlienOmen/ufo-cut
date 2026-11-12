@@ -764,7 +764,6 @@
   "settings.aiHint": "Neka Claude ili drugi asistent koji govori MCP montira u UFO Cut-u. Kopiraj jednu od ovih opcija, zalijepi je u asistenta i ponovno ga pokreni. Datoteka CONNECT-AI.md uz program sadrži sve korake.",
   "settings.aiCopyCommand": "Kopiraj za Claude Code",
   "settings.aiCopyConfig": "Kopiraj postavke za druge aplikacije",
-  "settings.aboutFork": "UFO Cut tvrtke A.L.I.E.N. temelji se na programu Concat, besplatnom videouređivaču otvorenog koda, i licenciran je pod AGPL-3.0. Izvorni kod: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Uvezi iz CapCuta",
   "start.importCapcutNote": "CapCut nacrt kao novi projekt",
   "start.keyboardShortcuts": "Tipkovnički prečaci",

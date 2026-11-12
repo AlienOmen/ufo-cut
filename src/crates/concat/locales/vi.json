@@ -764,7 +764,6 @@
   "settings.aiHint": "Để Claude hoặc trợ lý khác hỗ trợ MCP chỉnh sửa bằng UFO Cut. Sao chép một trong các mục này, dán vào trợ lý rồi khởi động lại trợ lý. Tệp CONNECT-AI.md cạnh chương trình có đầy đủ các bước.",
   "settings.aiCopyCommand": "Sao chép cho Claude Code",
   "settings.aiCopyConfig": "Sao chép cài đặt cho ứng dụng khác",
-  "settings.aboutFork": "UFO Cut của A.L.I.E.N. được xây dựng trên Concat, trình chỉnh sửa video mã nguồn mở miễn phí, và phát hành theo giấy phép AGPL-3.0. Mã nguồn: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Nhập từ CapCut",
   "start.importCapcutNote": "Một bản nháp CapCut, thành dự án mới",
   "start.keyboardShortcuts": "Phím tắt",

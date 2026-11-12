@@ -32,7 +32,7 @@ use std::path::{Path, PathBuf};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// The lock file's name in a project folder.
-pub const FILE: &str = "concat.lock";
+pub const FILE: &str = "ufocut.lock";
 
 /// How many times an open races a holder that is letting go - the file
 /// removed between this process opening it and locking it - before it

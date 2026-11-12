@@ -764,7 +764,6 @@
   "settings.aiHint": "Позвольте Claude или другому ассистенту с поддержкой MCP монтировать в UFO Cut. Скопируйте один из вариантов, вставьте его в ассистент и перезапустите его. Файл CONNECT-AI.md рядом с программой содержит все шаги.",
   "settings.aiCopyCommand": "Копировать для Claude Code",
   "settings.aiCopyConfig": "Копировать настройки для других приложений",
-  "settings.aboutFork": "UFO Cut от A.L.I.E.N. создан на основе Concat, бесплатного видеоредактора с открытым кодом, и распространяется по лицензии AGPL-3.0. Исходный код: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Импорт из CapCut",
   "start.importCapcutNote": "Черновик CapCut как новый проект",
   "start.keyboardShortcuts": "Горячие клавиши",

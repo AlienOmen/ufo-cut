@@ -764,7 +764,6 @@
   "settings.aiHint": "Claude など MCP に対応したアシスタントに UFO Cut で編集してもらえます。どちらかをコピーしてアシスタントに貼り付け、再起動してください。手順はすべてプログラムの隣にある CONNECT-AI.md に書かれています。",
   "settings.aiCopyCommand": "Claude Code 用にコピー",
   "settings.aiCopyConfig": "他のアプリ用の設定をコピー",
-  "settings.aboutFork": "A.L.I.E.N. の UFO Cut は、無料のオープンソース動画エディター Concat をベースに作られ、AGPL-3.0 ライセンスで公開されています。ソースコード: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "CapCut から読み込む",
   "start.importCapcutNote": "CapCut の下書きを新しいプロジェクトに",
   "start.keyboardShortcuts": "キーボードショートカット",

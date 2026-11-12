@@ -764,7 +764,6 @@
   "settings.aiHint": "Lass Claude oder einen anderen Assistenten, der MCP versteht, mit UFO Cut schneiden. Kopiere eine der Optionen, füge sie in den Assistenten ein und starte ihn neu. Die Datei CONNECT-AI.md neben dem Programm enthält alle Schritte.",
   "settings.aiCopyCommand": "Für Claude Code kopieren",
   "settings.aiCopyConfig": "Einstellungen für andere Apps kopieren",
-  "settings.aboutFork": "UFO Cut von A.L.I.E.N. basiert auf Concat, dem kostenlosen Open-Source-Videoeditor, und steht unter der AGPL-3.0. Quellcode: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "Aus CapCut importieren",
   "start.importCapcutNote": "Ein CapCut-Entwurf als neues Projekt",
   "start.keyboardShortcuts": "Tastenkürzel",

@@ -32,18 +32,17 @@
 <h3>The fast way</h3>
 <ol><li>Open UFO Cut and go to <b>Settings › Automation</b>.</li><li>Under <b>AI assistants</b>, press one of the two copy buttons. Your own program path is already filled in.</li><li>Paste it where the steps below say, then restart the assistant.</li></ol>
 <h3>Where the program is</h3>
-<p>The examples use this path. If you installed UFO Cut "for everyone", it is <code>C:\Program Files\UFO Cut\concat.exe</code> instead.</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe</pre></div>
-<p>The program file is named <code>concat.exe</code> because UFO Cut is built on the open-source editor Concat.</p>
+<p>The examples use this path. If you installed UFO Cut "for everyone", it is <code>C:\Program Files\UFO Cut\ufocut.exe</code> instead.</p>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe</pre></div>
 <h3>Claude Code</h3>
 <p>Run this once in a terminal (PowerShell):</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe&quot; --mcp</pre></div>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe&quot; --mcp</pre></div>
 <h3>Claude desktop app</h3>
 <p>Open <b>Settings › Developer › Edit Config</b> and add:</p>
 <div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">{
   &quot;mcpServers&quot;: {
     &quot;ufo-cut&quot;: {
-      &quot;command&quot;: &quot;C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\concat.exe&quot;,
+      &quot;command&quot;: &quot;C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe&quot;,
       &quot;args&quot;: [&quot;--mcp&quot;]
     }
   }
@@ -51,10 +50,10 @@
 <p>Save, then quit and reopen Claude.</p>
 <h3>Other assistants</h3>
 <p>Any app that can start a local MCP server takes the same two values:</p>
-<table><tr><th>Setting</th><th>Value</th></tr><tr><td>Command</td><td>the full path to <code>concat.exe</code></td></tr><tr><td>Arguments</td><td><code>--mcp</code></td></tr></table>
+<table><tr><th>Setting</th><th>Value</th></tr><tr><td>Command</td><td>the full path to <code>ufocut.exe</code></td></tr><tr><td>Arguments</td><td><code>--mcp</code></td></tr></table>
 <p>Apps that read an <code>mcpServers</code> block (Cursor, Windsurf, VS Code and others) take the same JSON as the Claude desktop app. OpenAI's Codex command line takes it in <code>config.toml</code>:</p>
 <div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">[mcp_servers.ufo-cut]
-command = &#x27;C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe&#x27;
+command = &#x27;C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe&#x27;
 args = [&quot;--mcp&quot;]</pre></div>
 <p><b>ChatGPT:</b> at the time of writing, the ChatGPT app connects to MCP servers that run on the internet, not to a program on your own PC, so it cannot start UFO Cut directly. Use one of the apps above, or check ChatGPT's current help pages, since this changes often.</p>
 <h3>Working with the window open</h3>
@@ -70,25 +69,24 @@ args = [&quot;--mcp&quot;]</pre></div>
 <h3>La forma rápida</h3>
 <ol><li>Abre UFO Cut y ve a <b>Ajustes › Automatización</b>.</li><li>En <b>Asistentes de IA</b>, pulsa uno de los dos botones de copiar. La ruta de tu programa ya viene incluida.</li><li>Pégalo donde indican los pasos de abajo y reinicia el asistente.</li></ol>
 <h3>Dónde está el programa</h3>
-<p>Los ejemplos usan esta ruta. Si instalaste UFO Cut "para todos", está en <code>C:\Program Files\UFO Cut\concat.exe</code>.</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\TU-NOMBRE\AppData\Local\Programs\UFO Cut\concat.exe</pre></div>
-<p>El archivo se llama <code>concat.exe</code> porque UFO Cut está construido sobre el editor de código abierto Concat.</p>
+<p>Los ejemplos usan esta ruta. Si instalaste UFO Cut "para todos", está en <code>C:\Program Files\UFO Cut\ufocut.exe</code>.</p>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\TU-NOMBRE\AppData\Local\Programs\UFO Cut\ufocut.exe</pre></div>
 <h3>Claude Code</h3>
 <p>Ejecuta esto una vez en una terminal (PowerShell):</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe&quot; --mcp</pre></div>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe&quot; --mcp</pre></div>
 <h3>App de escritorio de Claude</h3>
 <p>Abre <b>Settings › Developer › Edit Config</b> y agrega:</p>
 <div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">{
   &quot;mcpServers&quot;: {
     &quot;ufo-cut&quot;: {
-      &quot;command&quot;: &quot;C:\\Users\\TU-NOMBRE\\AppData\\Local\\Programs\\UFO Cut\\concat.exe&quot;,
+      &quot;command&quot;: &quot;C:\\Users\\TU-NOMBRE\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe&quot;,
       &quot;args&quot;: [&quot;--mcp&quot;]
     }
   }
 }</pre></div>
 <p>Guarda, cierra Claude por completo y vuelve a abrirlo.</p>
 <h3>Otros asistentes</h3>
-<p>Cualquier app que pueda iniciar un servidor MCP local usa los mismos dos valores: el <b>comando</b> es la ruta completa a <code>concat.exe</code> y el <b>argumento</b> es <code>--mcp</code>. Las apps que leen un bloque <code>mcpServers</code> (Cursor, Windsurf, VS Code y otras) aceptan el mismo JSON de arriba.</p>
+<p>Cualquier app que pueda iniciar un servidor MCP local usa los mismos dos valores: el <b>comando</b> es la ruta completa a <code>ufocut.exe</code> y el <b>argumento</b> es <code>--mcp</code>. Las apps que leen un bloque <code>mcpServers</code> (Cursor, Windsurf, VS Code y otras) aceptan el mismo JSON de arriba.</p>
 <p><b>ChatGPT:</b> al momento de escribir esto, la app de ChatGPT se conecta a servidores MCP en internet y no a un programa en tu PC, así que no puede iniciar UFO Cut directamente. Usa una de las apps anteriores o revisa la ayuda actual de ChatGPT, porque esto cambia seguido.</p>
 <h3>Con la ventana abierta</h3>
 <p>Por defecto el asistente usa el motor de UFO Cut en segundo plano, sin ventana. Para que trabaje a través de la ventana abierta, activa antes <b>Ajustes › Automatización › Scripts y apps</b> en UFO Cut. El asistente edita proyectos propios; no toma el proyecto que estás editando.</p>
@@ -103,25 +101,24 @@ args = [&quot;--mcp&quot;]</pre></div>
 <h3>الطريقة السريعة</h3>
 <ol><li>افتح UFO Cut واذهب إلى <b>الإعدادات › الأتمتة</b>.</li><li>تحت <b>مساعدو الذكاء الاصطناعي</b> اضغط أحد زرّي النسخ. مسار برنامجك موجود فيه مسبقًا.</li><li>الصقه في المكان المذكور أدناه ثم أعد تشغيل المساعد.</li></ol>
 <h3>مكان البرنامج</h3>
-<p>الأمثلة تستخدم هذا المسار. إذا ثبّتَّ UFO Cut «للجميع» فالمسار هو <code>C:\Program Files\UFO Cut\concat.exe</code>.</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\concat.exe</pre></div>
-<p>اسم الملف <code>concat.exe</code> لأن UFO Cut مبني على المحرر مفتوح المصدر Concat.</p>
+<p>الأمثلة تستخدم هذا المسار. إذا ثبّتَّ UFO Cut «للجميع» فالمسار هو <code>C:\Program Files\UFO Cut\ufocut.exe</code>.</p>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">C:\Users\YOUR-NAME\AppData\Local\Programs\UFO Cut\ufocut.exe</pre></div>
 <h3>Claude Code</h3>
 <p>نفّذ هذا السطر مرة واحدة في الطرفية (PowerShell):</p>
-<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\concat.exe&quot; --mcp</pre></div>
+<div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">claude mcp add ufo-cut -- &quot;$env:LOCALAPPDATA\Programs\UFO Cut\ufocut.exe&quot; --mcp</pre></div>
 <h3>تطبيق Claude لسطح المكتب</h3>
 <p>افتح <b>Settings › Developer › Edit Config</b> وأضف:</p>
 <div class="code"><button onclick="copy(this)">Copy</button><pre dir="ltr">{
   &quot;mcpServers&quot;: {
     &quot;ufo-cut&quot;: {
-      &quot;command&quot;: &quot;C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\concat.exe&quot;,
+      &quot;command&quot;: &quot;C:\\Users\\YOUR-NAME\\AppData\\Local\\Programs\\UFO Cut\\ufocut.exe&quot;,
       &quot;args&quot;: [&quot;--mcp&quot;]
     }
   }
 }</pre></div>
 <p>احفظ، ثم أغلق Claude تمامًا وافتحه من جديد.</p>
 <h3>مساعدون آخرون</h3>
-<p>أي تطبيق يستطيع تشغيل خادم MCP محلي يحتاج القيمتين نفسيهما: <b>الأمر</b> هو المسار الكامل إلى <code>concat.exe</code> و<b>المعطى</b> هو <code>--mcp</code>. التطبيقات التي تقرأ قسم <code>mcpServers</code> (مثل Cursor و Windsurf و VS Code) تقبل نص JSON نفسه.</p>
+<p>أي تطبيق يستطيع تشغيل خادم MCP محلي يحتاج القيمتين نفسيهما: <b>الأمر</b> هو المسار الكامل إلى <code>ufocut.exe</code> و<b>المعطى</b> هو <code>--mcp</code>. التطبيقات التي تقرأ قسم <code>mcpServers</code> (مثل Cursor و Windsurf و VS Code) تقبل نص JSON نفسه.</p>
 <p><b>ChatGPT:</b> حتى وقت كتابة هذا الدليل يتصل تطبيق ChatGPT بخوادم MCP على الإنترنت وليس ببرنامج على جهازك، لذلك لا يستطيع تشغيل UFO Cut مباشرة. استخدم أحد التطبيقات السابقة أو راجع صفحات المساعدة الحالية لـ ChatGPT، فهذا يتغير كثيرًا.</p>
 <h3>مع النافذة المفتوحة</h3>
 <p>افتراضيًا يشغّل المساعد محرّك UFO Cut في الخلفية دون نافذة. ليعمل عبر النافذة المفتوحة فعّل أولًا <b>الإعدادات › الأتمتة › السكربتات والتطبيقات</b> في UFO Cut. المساعد يحرّر مشاريع خاصة به ولا يستولي على المشروع الذي تعمل عليه.</p>

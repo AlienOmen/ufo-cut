@@ -764,7 +764,6 @@
   "settings.aiHint": "Claude və ya MCP dəstəkləyən başqa köməkçi UFO Cut ilə montaj etsin. Bunlardan birini kopyalayın, köməkçiyə yapışdırın və onu yenidən başladın. Proqramın yanındakı CONNECT-AI.md faylında bütün addımlar var.",
   "settings.aiCopyCommand": "Claude Code üçün kopyala",
   "settings.aiCopyConfig": "Digər tətbiqlər üçün ayarları kopyala",
-  "settings.aboutFork": "A.L.I.E.N. tərəfindən UFO Cut pulsuz açıq mənbəli video redaktor Concat əsasında hazırlanıb və AGPL-3.0 lisenziyası ilə yayımlanır. Mənbə kodu: github.com/AlienOmen/ufo-cut",
   "start.importCapcut": "CapCut-dan idxal et",
   "start.importCapcutNote": "CapCut qaralaması, yeni layihə kimi",
   "start.keyboardShortcuts": "Klaviatura qısayolları",
