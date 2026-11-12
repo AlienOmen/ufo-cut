@@ -40,8 +40,9 @@ const CONCAT: &str = "concat-";
 /// The Concat shelf's categories, as the manifest names them; the sidebar
 /// shows them in the interface's language, after All.
 // UFO Cut: its shelf has two more, which the page names as written.
-pub const CATEGORIES: [&str; 7] = [
-    "Whoosh", "Impact", "Riser", "Ambience", "Music", "Interface", "Sci-fi",
+pub const CATEGORIES: [&str; 14] = [
+    "Whoosh", "Impact", "Riser", "Drops", "Ambience", "Music", "Interface", "Sci-fi", "Powers",
+    "Creatures", "Weapons", "Machines", "Camera", "Oddities",
 ];
 
 /// Where the Concat shelf stands.

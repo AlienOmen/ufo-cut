@@ -2755,11 +2755,12 @@ export component MediaPane inherits Rectangle {
                     spacing: 8px;
 
                     if Sounds.concat-state == 2: sound-chips := Rectangle {
-                        height: 60px;
+                        height: 120px;
                         for label[index] in [
                             I18n.t("common.all"), I18n.t("sounds.catWhoosh"), I18n.t("sounds.catImpact"),
-                            I18n.t("sounds.catRiser"), I18n.t("sounds.catAmbience"), I18n.t("sounds.catMusic"),
-                            "Interface", "Sci-fi"
+                            I18n.t("sounds.catRiser"), "Drops", I18n.t("sounds.catAmbience"),
+                            I18n.t("sounds.catMusic"), "Interface", "Sci-fi", "Powers", "Creatures", "Weapons",
+                            "Machines", "Camera", "Oddities"
                         ]: Rectangle {
                             x: Math.mod(index, 4) * sound-chips.width / 4 + 2px;
                             y: Math.floor(index / 4) * 30px + 2px;

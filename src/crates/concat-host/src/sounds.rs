@@ -327,6 +327,10 @@ pub struct Listed {
     /// Lowercase hex: what the download must match.
     #[serde(default)]
     pub sha256: String,
+    /// UFO Cut: where the file already is, for a sound of a pack on
+    /// this machine ([`packs_dir`]); such a sound is never downloaded.
+    #[serde(skip)]
+    pub local: Option<PathBuf>,
 }
 
 impl Listed {
@@ -342,7 +346,9 @@ impl Listed {
             && is_plain_name(&self.file)
             && self.sha256.len() == 64
             && self.sha256.chars().all(|c| c.is_ascii_hexdigit())
-            && (license == "CC0" || license == "CC0-1.0")
+            // A pack the person put on this machine is theirs to answer
+            // for; what the app itself fetches must be CC0.
+            && (self.local.is_some() || license == "CC0" || license == "CC0-1.0")
     }
 }
 
@@ -372,8 +378,63 @@ pub fn cache_dir(dirs: &AppDirs) -> PathBuf {
 
 /// The manifest as last fetched, when it has been.
 pub fn cached_catalogue(dirs: &AppDirs) -> Option<Catalogue> {
-    let bytes = std::fs::read(cache_dir(dirs).join("manifest.json")).ok()?;
-    Catalogue::parse(&bytes).ok()
+    let fetched = std::fs::read(cache_dir(dirs).join("manifest.json"))
+        .ok()
+        .and_then(|bytes| Catalogue::parse(&bytes).ok());
+    with_packs(dirs, fetched)
+}
+
+/// UFO Cut: where sound packs on this machine live, a folder each with a
+/// `manifest.json` in the shelf's own format and its files beside it:
+/// `<data>/sound-packs/<pack>/`.
+pub fn packs_dir(dirs: &AppDirs) -> PathBuf {
+    dirs.data.join("sound-packs")
+}
+
+/// The fetched list with the packs' sounds added to it; the packs alone
+/// when nothing was fetched, so the shelf works with no connection.
+fn with_packs(dirs: &AppDirs, fetched: Option<Catalogue>) -> Option<Catalogue> {
+    let local = pack_sounds(dirs);
+    if local.is_empty() {
+        return fetched;
+    }
+    let mut catalogue = fetched.unwrap_or_default();
+    catalogue
+        .sounds
+        .retain(|sound| !local.iter().any(|ours| ours.id == sound.id));
+    catalogue.sounds.extend(local);
+    Some(catalogue)
+}
+
+/// Every sound of every pack on this machine whose file is there.
+fn pack_sounds(dirs: &AppDirs) -> Vec<Listed> {
+    let Ok(folders) = std::fs::read_dir(packs_dir(dirs)) else {
+        return Vec::new();
+    };
+    let mut sounds = Vec::new();
+    for folder in folders.flatten().map(|entry| entry.path()) {
+        let Ok(bytes) = std::fs::read(folder.join("manifest.json")) else {
+            continue;
+        };
+        let Ok(pack) = serde_json::from_slice::<Catalogue>(&bytes) else {
+            continue;
+        };
+        for mut sound in pack.sounds {
+            if !is_plain_name(&sound.file) {
+                continue;
+            }
+            let file = folder.join(&sound.file);
+            if !file.is_file() {
+                continue;
+            }
+            sound.sha256.make_ascii_lowercase();
+            sound.local = Some(file);
+            if sound.is_offered() {
+                sounds.push(sound);
+            }
+        }
+    }
+    sounds
 }
 
 /// Fetches the manifest, and keeps it for the sessions after. `Ok(None)`
@@ -390,7 +451,9 @@ pub fn fetch_catalogue(dirs: &AppDirs) -> Result<Option<Catalogue>, String> {
         &|request| request,
     ) {
         Ok(response) => response,
-        Err(failure) if matches!(failure.error, ureq::Error::Status(404, _)) => return Ok(None),
+        Err(failure) if matches!(failure.error, ureq::Error::Status(404, _)) => {
+            return Ok(with_packs(dirs, None));
+        }
         Err(failure) => {
             return Err(format!(
                 "the sound list did not answer: {}: {failure}",
@@ -409,12 +472,15 @@ pub fn fetch_catalogue(dirs: &AppDirs) -> Result<Option<Catalogue>, String> {
     if std::fs::create_dir_all(&dir).is_ok() {
         let _ = std::fs::write(dir.join("manifest.json"), &bytes);
     }
-    Ok(Some(catalogue))
+    Ok(with_packs(dirs, Some(catalogue)))
 }
 
 /// Where `sound` is kept once downloaded: its digest's head in the name,
 /// so new bytes under the same name are a new file.
 pub fn cached_file(dirs: &AppDirs, sound: &Listed) -> PathBuf {
+    if let Some(local) = &sound.local {
+        return local.clone();
+    }
     cache_dir(dirs).join(format!("{}-{}", &sound.sha256[..12], sound.file))
 }
 

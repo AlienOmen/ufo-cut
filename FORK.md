@@ -62,6 +62,8 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
 - The program's file is `ufocut.exe`; a project's file is `ufocut.json` (a
   `concat.json` is still read and renamed); the assistant tool is
   `ufocut_version`. The Media page has a downloader card for links.
+- The sound shelf also lists sound packs placed on the machine
+  (`<data>/sound-packs/<pack>/manifest.json`), and has more categories.
 - Twelve A.L.I.E.N. colour looks (`src/crates/concat/luts/`) are added to
   the user's LUTs on the first run (`src/alien_looks.rs`).
 
