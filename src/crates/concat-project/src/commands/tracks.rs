@@ -37,6 +37,23 @@ pub(super) fn apply(
             })
         }
 
+        Command::InsertTrack { index } => {
+            let timeline = project.active_mut();
+            let id = mint.next("t");
+            let track = Track {
+                id: id.clone(),
+                visible: true,
+                muted: false,
+                extra: Default::default(),
+            };
+            let at = index.min(timeline.tracks.len());
+            timeline.tracks.insert(at, track);
+            Ok(Outcome {
+                created_id: Some(id),
+                applied: true,
+            })
+        }
+
         Command::RemoveTrack { track_id } => {
             let timeline = project.active_mut();
             if timeline.tracks.len() <= 1 {

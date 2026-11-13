@@ -4,6 +4,10 @@
 
 use super::*;
 
+/// UFO Cut: a plan's row at or past this asks for a new lane; see
+/// [`Studio::drop_row`].
+pub const NEW_LANE: i32 = 1000;
+
 impl Studio {
     // ── placing things ──
 
@@ -107,6 +111,37 @@ impl Studio {
         }
     }
 
+    /// UFO Cut: the lane a drag at `y` down the stack means. The middle of
+    /// a lane is that lane. Its top or bottom edge, and anywhere past the
+    /// last lane, is a new lane there: [`NEW_LANE`] plus where in the
+    /// stack it goes, counted from the bottom.
+    pub fn drop_row(&self, y: f32) -> i32 {
+        let heights = self.lane_heights();
+        let lanes = heights.len() as i32;
+        let mut top = 0.0_f32;
+        for (row, height) in heights.iter().enumerate() {
+            let edge = (height / 4.0).min(8.0);
+            if y < top + edge {
+                return NEW_LANE + (lanes - row as i32);
+            }
+            if y < top + height - edge {
+                return row as i32;
+            }
+            top += height;
+        }
+        NEW_LANE
+    }
+
+    /// The row a plan's ghost is drawn on: its own, or for a new lane the
+    /// row at the edge it will open on.
+    pub fn shown_row(&self, row: i32) -> i32 {
+        if row < NEW_LANE {
+            return row;
+        }
+        let lanes = self.timeline().tracks.len() as i32;
+        (lanes - (row - NEW_LANE)).clamp(0, (lanes - 1).max(0))
+    }
+
     /// A drag over the lanes: the pointer names the moment and the lane.
     pub fn plan(&self, payload: &str, seconds: f32, row: i32) -> Option<DropPlan> {
         let mut plan = self.incoming(payload)?;
@@ -114,12 +149,17 @@ impl Studio {
         if lanes == 0 {
             return None;
         }
-        plan.row = row.clamp(0, lanes - 1);
-        if self
-            .row_track(plan.row)
-            .is_none_or(|track| self.locked(&track.id))
-        {
-            return None;
+        if row >= NEW_LANE {
+            // UFO Cut: a lane of its own, made when the drop lands.
+            plan.row = row;
+        } else {
+            plan.row = row.clamp(0, lanes - 1);
+            if self
+                .row_track(plan.row)
+                .is_none_or(|track| self.locked(&track.id))
+            {
+                return None;
+            }
         }
         plan.start = self
             .snapped(seconds.max(0.0), 8.0 * self.lanes.seconds_per_pixel, "")
@@ -154,8 +194,19 @@ impl Studio {
 
     /// Commits a plan that has a lane, and selects what it made.
     pub fn place(&mut self, plan: &DropPlan) {
-        let Some(track_id) = self.row_track(plan.row).map(|track| track.id.clone()) else {
-            return;
+        let track_id = if plan.row >= NEW_LANE {
+            // UFO Cut: the drop was between lanes or past them, so the
+            // lane is made first, where the pointer was.
+            let index = (plan.row - NEW_LANE) as usize;
+            let Some(made) = self.apply(Command::InsertTrack { index }) else {
+                return;
+            };
+            made
+        } else {
+            let Some(found) = self.row_track(plan.row).map(|track| track.id.clone()) else {
+                return;
+            };
+            found
         };
         if let Some(card) = plan.media.strip_prefix("sound:") {
             self.place_card(card, Some(track_id), f64::from(plan.start));

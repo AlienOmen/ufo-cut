@@ -79,6 +79,11 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
   `alien_templates.rs`, `ui/workspace/media-pane.slint`).
 - The link downloader takes several links at once, reports progress and
   saves to a folder of the person's choice (`link_import.rs`).
+- A clip dragged from the library onto the edge of a lane, between two
+  lanes or below the last one makes a new lane there (`InsertTrack` in
+  `concat-project`, `studio/placing.rs`).
+- The launch screen's links go to the UFO Cut guides in the interface's
+  language (`panes/start.rs`).
 
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.

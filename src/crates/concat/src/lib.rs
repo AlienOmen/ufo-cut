@@ -1262,7 +1262,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
                                       payload: SharedString,
                                       seconds: f32,
                                       y: f32| {
-        let row = state.row_at(y);
+        let row = state.drop_row(y);
         state.drop = state.plan(payload.as_str(), seconds, row);
     }));
     editor.on_dropped(on_window!(|state,
@@ -1270,7 +1270,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
                                   seconds: f32,
                                   y: f32| {
         state.drop = None;
-        let row = state.row_at(y);
+        let row = state.drop_row(y);
         if let Some(plan) = state.plan(payload.as_str(), seconds, row) {
             state.place(&plan);
         }

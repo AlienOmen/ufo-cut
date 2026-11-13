@@ -338,10 +338,15 @@ impl Studio {
             Some(plan) => DropData {
                 active: true,
                 kind: plan.kind,
-                label: plan.label.as_str().into(),
+                // UFO Cut: a plus before the name says a lane will be made.
+                label: if plan.row >= super::placing::NEW_LANE {
+                    format!("+ {}", plan.label).into()
+                } else {
+                    plan.label.as_str().into()
+                },
                 start: plan.start,
                 duration: plan.duration,
-                row: plan.row,
+                row: self.shown_row(plan.row),
             },
             None => DropData::default(),
         });

@@ -114,19 +114,34 @@ pub fn link(name: &str) -> Option<String> {
         // now the studio's card and "discord" the course's.
         // UFO Cut's own page has the guide, the news and the way to
         // reach A.L.I.E.N. about a problem.
-        "guides" | "first-edit" | "report" | "release-notes" => format!("{SITE}/ufo-cut/"),
+        "release-notes" => format!("{SITE}/ufo-cut/"),
+        "guides" => format!("{SITE}/ufo-cut/{}/", guides()),
+        "first-edit" => format!("{SITE}/ufo-cut/{}/first-edit/", guides()),
+        "report" => format!("{SITE}/ufo-cut/{}/help/", guides()),
         "github" => STUDIO.to_owned(),
         "tools" => format!("{SITE}/tools/"),
-        "discord" => {
-            let edition = match crate::i18n::current().as_str() {
-                "ar" => "ar",
-                "es" => "es",
-                _ => "en",
-            };
-            format!("{SITE}/designer/{edition}")
-        }
+        "discord" => format!("{SITE}/designer/{}/", edition()),
         _ => return None,
     })
+}
+
+/// The website's edition for the interface's language: Arabic, Spanish,
+/// and English for every other.
+fn edition() -> &'static str {
+    match crate::i18n::current().as_str() {
+        "ar" => "ar",
+        "es" => "es",
+        _ => "en",
+    }
+}
+
+/// Where that edition keeps its guides, under the UFO Cut page.
+fn guides() -> &'static str {
+    match edition() {
+        "ar" => "ar/guides",
+        "es" => "es/guias",
+        _ => "en/guides",
+    }
 }
 
 /// The sheet on the launch screen.

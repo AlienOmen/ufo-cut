@@ -851,6 +851,14 @@ pub enum Command {
         #[serde(default, skip_serializing_if = "std::ops::Not::not")]
         bottom: bool,
     },
+    /// UFO Cut: adds a lane between others, minting a "t" id: at `index`
+    /// of the stack counted from the bottom, so 0 is under every lane and
+    /// the lane count is on top. What a clip dropped between two lanes
+    /// asks for.
+    InsertTrack {
+        /// Where in the stack, from the bottom; held to the lane count.
+        index: usize,
+    },
     /// Deletes a lane and every clip on it. Errs at the floor of one track.
     RemoveTrack {
         /// The lane to delete.
@@ -1373,6 +1381,7 @@ pub fn apply(
             audio::apply(project, mint, command)
         }
         command @ (Command::AddTrack { .. }
+        | Command::InsertTrack { .. }
         | Command::RemoveTrack { .. }
         | Command::SetTrackFlag { .. }) => tracks::apply(project, mint, command),
         command @ (Command::AddTimeline
