@@ -72,6 +72,7 @@ impl Studio {
             // The course lesson's spec check: no default key, reachable by
             // name from a tray or a phone button.
             "check-lesson" => self.check_lesson_spec(),
+            "record-screen" => crate::screen_record::toggle(self),
             // After the selected clip, on its lane, as the menu does; with
             // nothing selected, at the playhead on the rows copied from.
             "paste" => {

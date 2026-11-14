@@ -2598,6 +2598,32 @@ export component MediaPane inherits Rectangle {
 
                                 Rectangle { horizontal-stretch: 1; }
 
+                                // UFO Cut: record the screen into the project.
+                                Rectangle {
+                                    horizontal-stretch: 0;
+                                    height: Theme.h;
+                                    width: record-label.preferred-width + 20px;
+                                    border-radius: Theme.r;
+                                    border-width: 1px;
+                                    border-color: record-go.has-hover ? Theme.accent : Theme.line-strong;
+                                    background: Theme.field;
+
+                                    record-label := Text {
+                                        width: 100%;
+                                        height: 100%;
+                                        horizontal-alignment: center;
+                                        vertical-alignment: center;
+                                        text: I18n.t("mediaPane.recordScreen");
+                                        color: Theme.fg;
+                                        font-size: Theme.fs-sm;
+                                    }
+
+                                    record-go := TouchArea {
+                                        mouse-cursor: pointer;
+                                        clicked => { root.import-link("", 101); }
+                                    }
+                                }
+
                                 // UFO Cut: where the downloads are saved.
                                 Rectangle {
                                     horizontal-stretch: 0;

@@ -2409,6 +2409,13 @@ impl Studio {
                     true,
                 ),
                 row(
+                    "record-screen",
+                    t("studio.recordScreen"),
+                    Glyph::Import,
+                    &keymap::label(&self.prefs, "record-screen"),
+                    true,
+                ),
+                row(
                     "save",
                     t("studio.save"),
                     Glyph::Import,

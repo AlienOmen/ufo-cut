@@ -55,6 +55,11 @@ pub const ACTIONS: &[Action] = &[
         id: "import",
         defaults: &["ctrl+i"],
     },
+    // No default chord: Ctrl+Shift+R is the recorder's own global key.
+    Action {
+        id: "record-screen",
+        defaults: &[],
+    },
     Action {
         id: "export",
         defaults: &["ctrl+e"],
@@ -199,6 +204,7 @@ pub fn name(id: &str) -> String {
     match id {
         "save" => i18n::t("studio.save"),
         "import" => i18n::t("studio.importMedia"),
+        "record-screen" => i18n::t("studio.recordScreen"),
         "export" => i18n::t("studio.export"),
         "settings" => i18n::t("common.settings"),
         "undo" => i18n::t("studio.undo"),

@@ -68,6 +68,7 @@ pub use platform::{LinkOpener, install_link_opener};
 pub use platform::{MicrophoneAccess, install_microphone_access};
 mod panes;
 mod prefs;
+mod screen_record;
 mod setup_language;
 mod presets;
 mod source;
@@ -992,6 +993,11 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
     });
     // UFO Cut: a video from a link, fetched by yt-dlp on this machine.
     editor.on_import_link(on_window!(|state, url: SharedString, quality: i32| {
+        // The Record screen button shares this door; see screen_record.rs.
+        if quality == screen_record::RECORD_CODE {
+            screen_record::toggle(&mut state);
+            return;
+        }
         link_import::start(&mut state, url.to_string(), quality);
     }));
     // Font files, the way media files come in: the system's picker, and
@@ -2495,6 +2501,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
                             },
                         ),
                         "export" => state.handle(Msg::Export(ExportMsg::Open)),
+                        "record-screen" => screen_record::toggle(&mut state),
                         "template" => state.save_template(),
                         "speech" => state.handle(Msg::Speech(SpeechMsg::Open)),
                         "clear-cache" => state.clear_project_cache(),
@@ -2838,6 +2845,8 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
     });
 
     let result = app.run();
+    // A recording still running when the window closes is finished here.
+    screen_record::stop_all_blocking();
     drop(reader_sweep);
     log::info!("close: event loop exited (ok={})", result.is_ok());
     // The loop failing is the window never having run at all - on a phone
