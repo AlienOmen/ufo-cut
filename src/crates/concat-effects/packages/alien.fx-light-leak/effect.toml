@@ -1,0 +1,55 @@
+format = 2
+
+[effect]
+id = "alien.fx-light-leak"
+name = "Light Leak"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 109
+intensity = "amount"
+description = "Warm blooms of light drift across the frame as if the lens or film were leaking. Pick any hue."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 100
+default = 60
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "speed"
+label = "Speed"
+min = 0
+max = 100
+default = 35
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "hue"
+label = "Hue"
+min = -180
+max = 180
+default = 0
+step = 1
+unit = "deg"
+animate = true
+
+[[param]]
+key = "softness"
+label = "Softness"
+min = 0
+max = 100
+default = 60
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

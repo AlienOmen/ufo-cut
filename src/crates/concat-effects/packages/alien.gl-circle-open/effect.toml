@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-circle-open"
+name = "Circle Open"
+kind = "transition"
+category = "GL Transitions"
+order = 25
+description = "A soft-edged circle opens from the centre onto the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

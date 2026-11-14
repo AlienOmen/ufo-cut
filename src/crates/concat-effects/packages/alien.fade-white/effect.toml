@@ -1,0 +1,22 @@
+format = 2
+
+[effect]
+id = "alien.fade-white"
+name = "Dip to White"
+kind = "transition"
+category = "ALIEN"
+order = 11
+description = "The outgoing shot burns out to white and the next emerges from it."
+
+[[param]]
+key = "hold"
+label = "Hold"
+min = 0
+max = 80
+default = 0
+step = 1
+unit = "%"
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

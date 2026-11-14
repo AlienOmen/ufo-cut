@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-squares-wipe"
+name = "Squares Wipe"
+kind = "transition"
+category = "GL Transitions"
+order = 16
+description = "A diagonal sweep of shrinking squares uncovers the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

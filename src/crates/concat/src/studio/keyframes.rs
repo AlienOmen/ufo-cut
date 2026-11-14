@@ -2067,6 +2067,31 @@ impl Studio {
                     && !locked
                     && (clip.kind == model::ClipKind::Video || clip.kind == model::ClipKind::Image),
             ),
+            // The silent gaps of a talk, taken out of its picture and sound.
+            action(
+                "cut-silences",
+                t("studio.cutSilences"),
+                Glyph::None,
+                "",
+                !locked
+                    && match clip.kind {
+                        model::ClipKind::Audio => true,
+                        model::ClipKind::Video => self
+                            .project()
+                            .media_by_id(&clip.media_id)
+                            .is_some_and(|media| media.has_audio),
+                        _ => false,
+                    },
+            ),
+            // The timeline held against a course lesson's spec: a project-level
+            // check, so it is there whichever clip was right-clicked.
+            action(
+                "check-lesson",
+                t("studio.checkLessonSpec"),
+                Glyph::None,
+                "",
+                true,
+            ),
             // The picture restored and enlarged by the model: the row opens
             // the clip's Enhance in the inspector, whose switch runs it.
             action(

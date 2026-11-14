@@ -1,0 +1,55 @@
+format = 2
+
+[effect]
+id = "alien.fx-shake"
+name = "Camera Shake"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 110
+intensity = "amount"
+description = "Handheld camera shake: smooth random drift and tilt with a touch of motion blur. Keyframe Amount to hit a beat."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 100
+default = 40
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "speed"
+label = "Speed"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "tilt"
+label = "Tilt"
+min = 0
+max = 100
+default = 30
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "blur"
+label = "Motion Blur"
+min = 0
+max = 100
+default = 30
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

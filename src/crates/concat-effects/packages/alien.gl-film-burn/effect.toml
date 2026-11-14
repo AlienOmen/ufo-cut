@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-film-burn"
+name = "Film Burn"
+kind = "transition"
+category = "GL Transitions"
+order = 37
+description = "Glowing film-burn light leaks wash over the picture and reveal the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

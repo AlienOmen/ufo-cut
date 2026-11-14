@@ -44,6 +44,7 @@ use concat_project::model::{
 };
 use concat_project::{Command, PlayheadSide};
 
+mod autocut;
 mod backdrop;
 mod consolidate;
 use consolidate::MergeJob;
@@ -57,6 +58,7 @@ mod inspector;
 mod keyboard;
 mod keyframes;
 mod menus;
+mod mission;
 mod monitor;
 mod placing;
 mod project_files;

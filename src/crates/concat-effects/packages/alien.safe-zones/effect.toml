@@ -1,0 +1,34 @@
+format = 2
+
+[effect]
+id = "alien.safe-zones"
+name = "Safe Zones"
+version = 1
+kind = "effect"
+category = "ALIEN"
+order = 20
+intensity = "opacity"
+aliases = ["safe-zones", "safe-zone"]
+description = "Guide overlay for vertical video: shades the areas the app UI covers on Instagram, Facebook, TikTok, Shorts, Amazon, LinkedIn and WhatsApp Status, with thin acid lines on the edge. GUIDE ONLY - hide or remove this layer before export, or it is burned into the video."
+
+[[param]]
+key = "platform"
+label = "Platform"
+type = "enum"
+values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+labels = ["Alien Safe Zone (Instagram + Facebook + TikTok)", "Instagram Reel", "Instagram Story", "Facebook Reel", "Facebook Story", "TikTok Video", "TikTok Ad", "Amazon vertical video ad", "LinkedIn video ad", "YouTube Shorts", "WhatsApp Status"]
+default = 0
+min = 0
+max = 10
+
+[[param]]
+key = "opacity"
+label = "Opacity"
+unit = "%"
+min = 0
+max = 100
+step = 1
+default = 55
+
+[wgsl]
+entry = "effect.wgsl"

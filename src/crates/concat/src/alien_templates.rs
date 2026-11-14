@@ -9,8 +9,9 @@
 
 use std::path::Path;
 
-/// The mark's name. A later set of templates takes a new number.
-const MARK: &str = "alien-templates-1";
+/// The mark's name. A later set of templates takes a new number. Set 2 adds
+/// templates 19 to 30; a folder already in the library is never rewritten.
+const MARK: &str = "alien-templates-2";
 
 /// Each template's folder, its document and its poster.
 const TEMPLATES: &[(&str, &str, &[u8])] = &[
@@ -103,6 +104,66 @@ const TEMPLATES: &[(&str, &str, &[u8])] = &[
         "ALIEN-18-Split-Screen",
         include_str!("../templates/ALIEN-18-Split-Screen/template.json"),
         include_bytes!("../templates/ALIEN-18-Split-Screen/poster.jpg"),
+    ),
+    (
+        "ALIEN-19-Lunar-Roast-Reel-15s",
+        include_str!("../templates/ALIEN-19-Lunar-Roast-Reel-15s/template.json"),
+        include_bytes!("../templates/ALIEN-19-Lunar-Roast-Reel-15s/poster.jpg"),
+    ),
+    (
+        "ALIEN-20-TikTok-Hook",
+        include_str!("../templates/ALIEN-20-TikTok-Hook/template.json"),
+        include_bytes!("../templates/ALIEN-20-TikTok-Hook/poster.jpg"),
+    ),
+    (
+        "ALIEN-21-YouTube-End-Screen",
+        include_str!("../templates/ALIEN-21-YouTube-End-Screen/template.json"),
+        include_bytes!("../templates/ALIEN-21-YouTube-End-Screen/poster.jpg"),
+    ),
+    (
+        "ALIEN-22-Course-Intro",
+        include_str!("../templates/ALIEN-22-Course-Intro/template.json"),
+        include_bytes!("../templates/ALIEN-22-Course-Intro/poster.jpg"),
+    ),
+    (
+        "ALIEN-23-Price-Card",
+        include_str!("../templates/ALIEN-23-Price-Card/template.json"),
+        include_bytes!("../templates/ALIEN-23-Price-Card/poster.jpg"),
+    ),
+    (
+        "ALIEN-24-Testimonial",
+        include_str!("../templates/ALIEN-24-Testimonial/template.json"),
+        include_bytes!("../templates/ALIEN-24-Testimonial/poster.jpg"),
+    ),
+    (
+        "ALIEN-25-Logo-Reveal",
+        include_str!("../templates/ALIEN-25-Logo-Reveal/template.json"),
+        include_bytes!("../templates/ALIEN-25-Logo-Reveal/poster.jpg"),
+    ),
+    (
+        "ALIEN-26-Lower-Third-Vertical",
+        include_str!("../templates/ALIEN-26-Lower-Third-Vertical/template.json"),
+        include_bytes!("../templates/ALIEN-26-Lower-Third-Vertical/poster.jpg"),
+    ),
+    (
+        "ALIEN-27-Arabic-Quote",
+        include_str!("../templates/ALIEN-27-Arabic-Quote/template.json"),
+        include_bytes!("../templates/ALIEN-27-Arabic-Quote/poster.jpg"),
+    ),
+    (
+        "ALIEN-28-Launch-Countdown",
+        include_str!("../templates/ALIEN-28-Launch-Countdown/template.json"),
+        include_bytes!("../templates/ALIEN-28-Launch-Countdown/poster.jpg"),
+    ),
+    (
+        "ALIEN-29-Ramadan-Eid-Greeting",
+        include_str!("../templates/ALIEN-29-Ramadan-Eid-Greeting/template.json"),
+        include_bytes!("../templates/ALIEN-29-Ramadan-Eid-Greeting/poster.jpg"),
+    ),
+    (
+        "ALIEN-30-Animatic-Storyboard",
+        include_str!("../templates/ALIEN-30-Animatic-Storyboard/template.json"),
+        include_bytes!("../templates/ALIEN-30-Animatic-Storyboard/poster.jpg"),
     ),
 ];
 

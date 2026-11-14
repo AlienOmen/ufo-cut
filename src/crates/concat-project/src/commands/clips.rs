@@ -484,6 +484,129 @@ pub(super) fn apply(
             })
         }
 
+        Command::CutRanges {
+            clip_ids,
+            ranges,
+            ripple,
+        } => {
+            // The stretches in order, overlaps joined, so each is cut once.
+            let mut spans: Vec<(f64, f64)> = ranges
+                .iter()
+                .filter(|span| span.end > span.start)
+                .map(|span| (span.start, span.end))
+                .collect();
+            spans.sort_by(|a, b| a.0.total_cmp(&b.0));
+            let mut joined: Vec<(f64, f64)> = Vec::new();
+            for (start, end) in spans {
+                match joined.last_mut() {
+                    Some(last) if start <= last.1 => last.1 = last.1.max(end),
+                    _ => joined.push((start, end)),
+                }
+            }
+            // Worked on a copy and kept only whole, as a batch is.
+            let mut staged = project.clone();
+            let mut doomed: Vec<String> = Vec::new();
+            for clip_id in &clip_ids {
+                // Last stretch first: a split never moves what lies before
+                // it, and the head keeps its id through every one.
+                for &(from, to) in joined.iter().rev() {
+                    let Some(clip) = staged.active().clip(clip_id) else {
+                        break;
+                    };
+                    let (clip_start, clip_end) = (clip.start, clip.start + clip.duration);
+                    let (from, to) = (from.max(clip_start), to.min(clip_end));
+                    if to - from <= MIN_CLIP_DURATION {
+                        continue;
+                    }
+                    // What follows the stretch is split off and left alone.
+                    if to < clip_end - MIN_CLIP_DURATION {
+                        super::apply(
+                            &mut staged,
+                            mint,
+                            Command::SplitClips {
+                                clip_ids: vec![clip_id.clone()],
+                                time: to,
+                            },
+                        )?;
+                    }
+                    if from > clip_start + MIN_CLIP_DURATION {
+                        // The stretch is the piece the second split mints.
+                        let outcome = super::apply(
+                            &mut staged,
+                            mint,
+                            Command::SplitClips {
+                                clip_ids: vec![clip_id.clone()],
+                                time: from,
+                            },
+                        )?;
+                        if let Some(piece) = outcome.created_id {
+                            doomed.push(piece);
+                        }
+                    } else {
+                        // The stretch reaches the head: all that is left of
+                        // the clip goes, and no earlier stretch remains.
+                        doomed.push(clip_id.clone());
+                        break;
+                    }
+                }
+            }
+            if doomed.is_empty() {
+                return Ok(Outcome::default());
+            }
+            let (on_main, off_main): (Vec<String>, Vec<String>) = {
+                let timeline = staged.active();
+                let main = timeline.background_lane();
+                doomed.into_iter().partition(|id| {
+                    timeline
+                        .clip(id)
+                        .is_some_and(|clip| Some(clip.track_id.as_str()) == main)
+                })
+            };
+            let linked = staged.active().linkage;
+            let mut applied = false;
+            if ripple && linked && !on_main.is_empty() && !off_main.is_empty() {
+                // Under linkage the main lane's ripple pulls every other lane
+                // along by what it took out. The other lanes' pieces go first
+                // and leave their gaps for that ripple to close, or what is
+                // left of them would be pulled twice.
+                applied |= super::apply(
+                    &mut staged,
+                    mint,
+                    Command::RemoveClips {
+                        clip_ids: off_main,
+                        ripple: false,
+                    },
+                )?
+                .applied;
+                applied |= super::apply(
+                    &mut staged,
+                    mint,
+                    Command::RemoveClips {
+                        clip_ids: on_main,
+                        ripple: true,
+                    },
+                )?
+                .applied;
+            } else {
+                let mut every = on_main;
+                every.extend(off_main);
+                applied |= super::apply(
+                    &mut staged,
+                    mint,
+                    Command::RemoveClips {
+                        clip_ids: every,
+                        ripple,
+                    },
+                )?
+                .applied;
+            }
+            *project = staged;
+            Ok(Outcome {
+                created_id: None,
+                applied,
+            })
+        }
+
         Command::ReplaceClipMedia {
             clip_id,
             item,

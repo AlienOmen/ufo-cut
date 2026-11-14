@@ -1,0 +1,22 @@
+format = 2
+
+[effect]
+id = "alien.fade-soft"
+name = "Soft Push Dissolve"
+kind = "transition"
+category = "ALIEN"
+order = 15
+description = "A slow dissolve with a gentle drift in scale: the old shot eases outward while the new one settles in."
+
+[[param]]
+key = "drift"
+label = "Drift"
+min = 0
+max = 100
+default = 40
+step = 1
+unit = "%"
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

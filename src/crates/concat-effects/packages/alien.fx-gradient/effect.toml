@@ -1,0 +1,64 @@
+format = 2
+
+[effect]
+id = "alien.fx-gradient"
+name = "Animated Gradient"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 120
+intensity = "amount"
+description = "A slowly moving gradient of acid, magenta and cyan laid over the picture. Rotate the hue to match a brand."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 100
+default = 45
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "speed"
+label = "Speed"
+min = 0
+max = 100
+default = 30
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "angle"
+label = "Angle"
+min = 0
+max = 360
+default = 35
+step = 1
+unit = "deg"
+animate = true
+
+[[param]]
+key = "hue"
+label = "Hue"
+min = -180
+max = 180
+default = 0
+step = 1
+unit = "deg"
+animate = true
+
+[[param]]
+key = "mode"
+label = "Blend"
+min = 0
+max = 2
+default = 0
+step = 1
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

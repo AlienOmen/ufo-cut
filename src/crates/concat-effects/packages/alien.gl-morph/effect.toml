@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-morph"
+name = "Morph"
+kind = "transition"
+category = "GL Transitions"
+order = 27
+description = "Each shot is pushed about by the other's colours as they cross-fade."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

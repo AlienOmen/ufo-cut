@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-color-phase"
+name = "Colour Phase"
+kind = "transition"
+category = "GL Transitions"
+order = 35
+description = "The colour channels hand over to the next shot one after another."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

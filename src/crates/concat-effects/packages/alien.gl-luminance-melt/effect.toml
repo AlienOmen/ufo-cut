@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-luminance-melt"
+name = "Luminance Melt"
+kind = "transition"
+category = "GL Transitions"
+order = 18
+description = "The dark parts of the picture melt downward into the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

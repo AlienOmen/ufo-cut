@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-dreamy-zoom"
+name = "Dreamy Zoom"
+kind = "transition"
+category = "GL Transitions"
+order = 6
+description = "Zooms and turns into a bright flash, then settles on the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

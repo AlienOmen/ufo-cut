@@ -69,6 +69,9 @@ impl Studio {
                 self.menu_target = None;
                 self.freeze_at_playhead();
             }
+            // The course lesson's spec check: no default key, reachable by
+            // name from a tray or a phone button.
+            "check-lesson" => self.check_lesson_spec(),
             // After the selected clip, on its lane, as the menu does; with
             // nothing selected, at the playhead on the rows copied from.
             "paste" => {
@@ -164,6 +167,10 @@ impl Studio {
                 self.split_at(at, true);
             }
             "freeze" => self.freeze_at_playhead(),
+            "cut-silences" => self.cut_silences(id),
+            // Project-level: the lesson check holds the whole timeline, so
+            // the clip it was asked from does not matter.
+            "check-lesson" => self.check_lesson_spec(),
             // The clip right-clicked, or the selection when it is one of
             // it, as Delete takes it.
             "delete-left" | "delete-right" => {

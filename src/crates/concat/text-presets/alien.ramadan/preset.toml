@@ -1,0 +1,15 @@
+id = "alien.ramadan"
+name = "ALIEN Ramadan"
+language = "Arabic"
+order = 41
+offsetY = -0.1
+
+[style]
+content = "رمضان كريم"
+fontFamily = "Noto Sans Arabic UI"
+fontWeight = 700
+fontSize = 0.12
+color = "#c8ff00"
+strokeWidth = 0.006
+strokeColor = "#0a0b0a"
+lineHeight = 1.3

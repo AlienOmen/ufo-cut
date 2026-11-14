@@ -1,0 +1,482 @@
+{
+ "activeTimelineId": "TL1",
+ "clips": [
+  {
+   "duration": 6,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c1",
+   "kind": "image",
+   "mediaId": "m1",
+   "name": "Product photo",
+   "offsetX": 0.0,
+   "offsetY": 0.0,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0,
+   "videoEffects": [],
+   "volume": 1.0,
+   "trackId": "T1"
+  },
+  {
+   "duration": 5.5,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c2",
+   "kind": "text",
+   "mediaId": "",
+   "name": "YOUR OFFER",
+   "offsetX": 0.0,
+   "offsetY": -0.04,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.3,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "pop",
+     "seconds": 0.4
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "#C8FF00",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#0A0B0A",
+    "content": "YOUR OFFER",
+    "fontFamily": "Montserrat",
+    "fontSize": 0.075,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.8,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#0A0B0A",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T2"
+  },
+  {
+   "duration": 5.0,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c3",
+   "kind": "text",
+   "mediaId": "",
+   "name": "00.00",
+   "offsetX": 0.0,
+   "offsetY": 0.17,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 0.8,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "punch",
+     "seconds": 0.4
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#ECEDE4",
+    "content": "00.00",
+    "fontFamily": "Montserrat",
+    "fontSize": 0.13,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": true,
+    "strikethrough": false,
+    "strokeColor": "#0A0B0A",
+    "strokeWidth": 0.012,
+    "textCase": "original",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T3"
+  },
+  {
+   "duration": 4.5,
+   "fadeIn": 0.0,
+   "fadeOut": 0.0,
+   "filters": [],
+   "id": "c4",
+   "kind": "text",
+   "mediaId": "",
+   "name": "Order now",
+   "offsetX": 0.0,
+   "offsetY": 0.3,
+   "opacity": 1.0,
+   "preservePitch": true,
+   "rotation": 0.0,
+   "scale": 1.0,
+   "sourceStart": 0.0,
+   "speed": 1.0,
+   "start": 1.5,
+   "videoEffects": [],
+   "volume": 1.0,
+   "motion": {
+    "in": {
+     "kind": "slide-up",
+     "seconds": 0.4
+    },
+    "out": {
+     "kind": "fade",
+     "seconds": 0.3
+    },
+    "loop": {
+     "kind": "pulse",
+     "seconds": 1.0,
+     "amount": 0.6
+    }
+   },
+   "text": {
+    "align": "center",
+    "background": "#ECEDE4",
+    "backgroundPaddingX": 0.0315,
+    "backgroundPaddingY": 0.018,
+    "backgroundRadius": 0.0,
+    "color": "#0A0B0A",
+    "content": "Order now",
+    "fontFamily": "Montserrat",
+    "fontSize": 0.045,
+    "fontWeight": 900.0,
+    "italic": false,
+    "lineHeight": 1.1,
+    "maxHeight": 0.0,
+    "maxWidth": 0.0,
+    "opacity": 1.0,
+    "shadow": false,
+    "strikethrough": false,
+    "strokeColor": "#0A0B0A",
+    "strokeWidth": 0.0,
+    "textCase": "upper",
+    "tracking": 0.0,
+    "underline": false
+   },
+   "trackId": "T4"
+  }
+ ],
+ "concat": "0.1.0",
+ "fonts": [],
+ "media": [
+  {
+   "id": "m1",
+   "path": "",
+   "name": "Product photo",
+   "duration": 6,
+   "kind": "image",
+   "width": 1080,
+   "height": 1920,
+   "hasAudio": false,
+   "placeholder": true
+  }
+ ],
+ "name": "ALIEN 23 - Price Card",
+ "timelines": [
+  {
+   "clips": [
+    {
+     "duration": 6,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c1",
+     "kind": "image",
+     "mediaId": "m1",
+     "name": "Product photo",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0,
+     "videoEffects": [],
+     "volume": 1.0,
+     "trackId": "T1"
+    },
+    {
+     "duration": 5.5,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c2",
+     "kind": "text",
+     "mediaId": "",
+     "name": "YOUR OFFER",
+     "offsetX": 0.0,
+     "offsetY": -0.04,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.3,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "pop",
+       "seconds": 0.4
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "#C8FF00",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#0A0B0A",
+      "content": "YOUR OFFER",
+      "fontFamily": "Montserrat",
+      "fontSize": 0.075,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.8,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#0A0B0A",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T2"
+    },
+    {
+     "duration": 5.0,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c3",
+     "kind": "text",
+     "mediaId": "",
+     "name": "00.00",
+     "offsetX": 0.0,
+     "offsetY": 0.17,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 0.8,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "punch",
+       "seconds": 0.4
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#ECEDE4",
+      "content": "00.00",
+      "fontFamily": "Montserrat",
+      "fontSize": 0.13,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": true,
+      "strikethrough": false,
+      "strokeColor": "#0A0B0A",
+      "strokeWidth": 0.012,
+      "textCase": "original",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T3"
+    },
+    {
+     "duration": 4.5,
+     "fadeIn": 0.0,
+     "fadeOut": 0.0,
+     "filters": [],
+     "id": "c4",
+     "kind": "text",
+     "mediaId": "",
+     "name": "Order now",
+     "offsetX": 0.0,
+     "offsetY": 0.3,
+     "opacity": 1.0,
+     "preservePitch": true,
+     "rotation": 0.0,
+     "scale": 1.0,
+     "sourceStart": 0.0,
+     "speed": 1.0,
+     "start": 1.5,
+     "videoEffects": [],
+     "volume": 1.0,
+     "motion": {
+      "in": {
+       "kind": "slide-up",
+       "seconds": 0.4
+      },
+      "out": {
+       "kind": "fade",
+       "seconds": 0.3
+      },
+      "loop": {
+       "kind": "pulse",
+       "seconds": 1.0,
+       "amount": 0.6
+      }
+     },
+     "text": {
+      "align": "center",
+      "background": "#ECEDE4",
+      "backgroundPaddingX": 0.0315,
+      "backgroundPaddingY": 0.018,
+      "backgroundRadius": 0.0,
+      "color": "#0A0B0A",
+      "content": "Order now",
+      "fontFamily": "Montserrat",
+      "fontSize": 0.045,
+      "fontWeight": 900.0,
+      "italic": false,
+      "lineHeight": 1.1,
+      "maxHeight": 0.0,
+      "maxWidth": 0.0,
+      "opacity": 1.0,
+      "shadow": false,
+      "strikethrough": false,
+      "strokeColor": "#0A0B0A",
+      "strokeWidth": 0.0,
+      "textCase": "upper",
+      "tracking": 0.0,
+      "underline": false
+     },
+     "trackId": "T4"
+    }
+   ],
+   "id": "TL1",
+   "name": "Timeline 1",
+   "tracks": [
+    {
+     "id": "T1",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T2",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T3",
+     "muted": false,
+     "visible": true
+    },
+    {
+     "id": "T4",
+     "muted": false,
+     "visible": true
+    }
+   ],
+   "video": {
+    "height": 1920,
+    "rateDen": 1,
+    "rateNum": 30,
+    "width": 1080,
+    "canvas": "#0A0B0A"
+   },
+   "background": {
+    "kind": "blur",
+    "amount": 0.7
+   }
+  }
+ ],
+ "tracks": [
+  {
+   "id": "T1",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T2",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T3",
+   "muted": false,
+   "visible": true
+  },
+  {
+   "id": "T4",
+   "muted": false,
+   "visible": true
+  }
+ ],
+ "version": 2,
+ "video": {
+  "height": 1920,
+  "rateDen": 1,
+  "rateNum": 30,
+  "width": 1080,
+  "canvas": "#0A0B0A"
+ }
+}

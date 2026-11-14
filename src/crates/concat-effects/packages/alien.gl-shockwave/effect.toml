@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-shockwave"
+name = "Shockwave"
+kind = "transition"
+category = "GL Transitions"
+order = 34
+description = "A diagonal shockwave breaks the picture into glassy tiles that fall away."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

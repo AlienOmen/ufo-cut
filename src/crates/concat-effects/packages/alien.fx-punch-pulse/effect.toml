@@ -1,0 +1,53 @@
+format = 2
+
+[effect]
+id = "alien.fx-punch-pulse"
+name = "Punch Zoom Pulse"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 111
+intensity = "bpm"
+description = "The picture punches in on every beat and settles back, with a flash of colour split. Set the BPM to the track."
+
+[[param]]
+key = "bpm"
+label = "BPM"
+min = 30
+max = 240
+default = 120
+step = 1
+animate = true
+
+[[param]]
+key = "punch"
+label = "Punch"
+min = 0
+max = 60
+default = 12
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "decay"
+label = "Settle"
+min = 1
+max = 20
+default = 7
+step = 0.5
+animate = true
+
+[[param]]
+key = "split"
+label = "Colour Split"
+min = 0
+max = 100
+default = 30
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

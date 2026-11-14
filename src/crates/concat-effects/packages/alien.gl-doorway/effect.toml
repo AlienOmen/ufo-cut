@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-doorway"
+name = "Doorway"
+kind = "transition"
+category = "GL Transitions"
+order = 36
+description = "Double doors swing open and the next shot comes forward from the room behind."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

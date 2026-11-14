@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-simple-zoom"
+name = "Simple Zoom"
+kind = "transition"
+category = "GL Transitions"
+order = 28
+description = "Zooms into the last shot, then fades to the next."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

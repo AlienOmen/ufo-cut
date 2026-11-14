@@ -1,0 +1,21 @@
+id = "alien.arabic-poster"
+name = "ALIEN Arabic poster"
+language = "Arabic"
+order = 40
+offsetY = -0.05
+
+# A big Arabic line, off-white, with one word in acid. Read right to left.
+[style]
+content = "الفكرة أهم من الأداة"
+fontFamily = "Noto Sans Arabic UI"
+fontWeight = 700
+fontSize = 0.085
+color = "#ecede4"
+lineHeight = 1.4
+maxWidth = 0.84
+shadow = false
+
+[[style.runs]]
+start = 0
+end = 6
+color = "#c8ff00"

@@ -1,0 +1,55 @@
+format = 2
+
+[effect]
+id = "alien.fx-vhs"
+name = "VHS Tape"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 106
+intensity = "wobble"
+description = "Tracking wobble, colour bleed, tape noise and a rolling distortion band: a worn videocassette."
+
+[[param]]
+key = "wobble"
+label = "Wobble"
+min = 0
+max = 100
+default = 40
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "bleed"
+label = "Colour Bleed"
+min = 0
+max = 100
+default = 45
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "noise"
+label = "Noise"
+min = 0
+max = 100
+default = 35
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "band"
+label = "Tracking Band"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

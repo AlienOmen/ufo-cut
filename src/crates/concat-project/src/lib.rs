@@ -21,19 +21,22 @@
 //! document model needs serde, and concat-core's zero-dependency rule is worth
 //! more than the adjacency.
 
+pub mod autocut;
 pub mod capcut;
 pub mod commands;
 pub mod doc;
 pub mod editor;
+pub mod mission;
 pub mod model;
 pub mod placement;
+pub mod preflight;
 pub mod runs;
 pub mod speed;
 pub mod srt;
 
 pub use commands::{
-    Command, CommandError, Outcome, PlayheadSide, consolidation_clips, delete_to_playhead,
-    why_not_merge,
+    Command, CommandError, CutSpan, Outcome, PlayheadSide, consolidation_clips,
+    delete_to_playhead, why_not_merge,
 };
 pub use doc::{DOCUMENT_VERSION, DocumentSettings, document_version, from_document, to_document};
 pub use editor::{Editor, RetiredFields};
@@ -860,6 +863,214 @@ mod tests {
             .clip(clip_id)
             .expect("the clip is still there")
             .start
+    }
+
+    fn cut_span(start: f64, end: f64) -> crate::commands::CutSpan {
+        crate::commands::CutSpan { start, end }
+    }
+
+    /// What is on the active timeline as `(start, duration, source_start)`,
+    /// earliest first.
+    fn pieces(editor: &Editor) -> Vec<(f64, f64, f64)> {
+        let mut found: Vec<(f64, f64, f64)> = editor
+            .project()
+            .active()
+            .clips
+            .iter()
+            .map(|clip| (clip.start, clip.duration, clip.source_start))
+            .collect();
+        found.sort_by(|a, b| a.0.total_cmp(&b.0));
+        found
+    }
+
+    fn pieces_close(a: &[(f64, f64, f64)], b: &[(f64, f64, f64)]) -> bool {
+        a.len() == b.len()
+            && a.iter().zip(b).all(|(x, y)| {
+                (x.0 - y.0).abs() < 1e-9 && (x.1 - y.1).abs() < 1e-9 && (x.2 - y.2).abs() < 1e-9
+            })
+    }
+
+    /// Cutting two stretches out of a ten-second clip with ripple leaves
+    /// three pieces end to end, each still playing the footage it did.
+    #[test]
+    fn cut_ranges_takes_the_stretches_out_and_closes_up() {
+        let (mut editor, _, clip) = fixture();
+        let outcome = editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(6.0, 7.0), cut_span(2.0, 4.0)],
+                ripple: true,
+            })
+            .expect("cuts");
+        assert!(outcome.applied);
+        let found = pieces(&editor);
+        let wanted = [(0.0, 2.0, 0.0), (2.0, 2.0, 4.0), (4.0, 3.0, 7.0)];
+        assert!(pieces_close(&found, &wanted), "{found:?}");
+    }
+
+    #[test]
+    fn cut_ranges_without_ripple_leaves_the_gap() {
+        let (mut editor, _, clip) = fixture();
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(2.0, 4.0)],
+                ripple: false,
+            })
+            .expect("cuts");
+        let found = pieces(&editor);
+        let wanted = [(0.0, 2.0, 0.0), (4.0, 6.0, 4.0)];
+        assert!(pieces_close(&found, &wanted), "{found:?}");
+    }
+
+    /// A stretch at either end of the clip trims it; no empty sliver stays.
+    #[test]
+    fn cut_ranges_at_the_ends_trims_the_clip() {
+        let (mut editor, _, clip) = fixture();
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(0.0, 1.0), cut_span(9.0, 10.0)],
+                ripple: false,
+            })
+            .expect("cuts");
+        let found = pieces(&editor);
+        assert!(pieces_close(&found, &[(1.0, 8.0, 1.0)]), "{found:?}");
+    }
+
+    #[test]
+    fn overlapping_ranges_are_cut_once() {
+        let (mut editor, _, clip) = fixture();
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(2.0, 4.0), cut_span(3.0, 5.0)],
+                ripple: false,
+            })
+            .expect("cuts");
+        let found = pieces(&editor);
+        let wanted = [(0.0, 2.0, 0.0), (5.0, 5.0, 5.0)];
+        assert!(pieces_close(&found, &wanted), "{found:?}");
+    }
+
+    #[test]
+    fn a_range_beyond_the_clip_is_a_tolerated_no_op() {
+        let (mut editor, _, clip) = fixture();
+        let outcome = editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(20.0, 30.0), cut_span(5.0, 5.0)],
+                ripple: true,
+            })
+            .expect("tolerated");
+        assert!(!outcome.applied);
+        assert!(pieces_close(&pieces(&editor), &[(0.0, 10.0, 0.0)]));
+    }
+
+    #[test]
+    fn a_range_over_the_whole_clip_removes_it() {
+        let (mut editor, _, clip) = fixture();
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(-1.0, 11.0)],
+                ripple: true,
+            })
+            .expect("cuts");
+        assert!(pieces(&editor).is_empty());
+    }
+
+    /// A talk's picture and its sound, named together, are cut the same:
+    /// both lanes end up with the same pieces at the same times.
+    #[test]
+    fn cut_ranges_keeps_picture_and_sound_in_step() {
+        let (mut editor, media_id, picture) = fixture();
+        let sound_lane = editor.project().active().tracks[1].id.clone();
+        let sound = lane(&mut editor, &media_id, &sound_lane, &[0.0]);
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![picture, sound[0].clone()],
+                ranges: vec![cut_span(2.0, 4.0)],
+                ripple: true,
+            })
+            .expect("cuts");
+        let found = pieces(&editor);
+        let wanted = [
+            (0.0, 2.0, 0.0),
+            (0.0, 2.0, 0.0),
+            (2.0, 6.0, 4.0),
+            (2.0, 6.0, 4.0),
+        ];
+        assert!(pieces_close(&found, &wanted), "{found:?}");
+    }
+
+    /// With linkage off each lane closes up by its own gaps and nothing is
+    /// pulled twice, so picture and sound still end up the same.
+    #[test]
+    fn cut_ranges_keeps_picture_and_sound_in_step_with_linkage_off() {
+        let (mut editor, media_id, picture) = fixture();
+        let timeline_id = editor.project().active_timeline_id.clone();
+        editor
+            .apply(Command::SetTimelineLinkage {
+                timeline_id,
+                on: false,
+            })
+            .expect("unlinks");
+        let sound_lane = editor.project().active().tracks[1].id.clone();
+        let sound = lane(&mut editor, &media_id, &sound_lane, &[0.0]);
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![picture, sound[0].clone()],
+                ranges: vec![cut_span(2.0, 4.0), cut_span(6.0, 7.0)],
+                ripple: true,
+            })
+            .expect("cuts");
+        let found = pieces(&editor);
+        let wanted = [
+            (0.0, 2.0, 0.0),
+            (0.0, 2.0, 0.0),
+            (2.0, 2.0, 4.0),
+            (2.0, 2.0, 4.0),
+            (4.0, 3.0, 7.0),
+            (4.0, 3.0, 7.0),
+        ];
+        assert!(pieces_close(&found, &wanted), "{found:?}");
+    }
+
+    /// However many stretches go, undo brings them all back in one step.
+    #[test]
+    fn cut_ranges_is_one_undo_step() {
+        let (mut editor, _, clip) = fixture();
+        editor
+            .apply(Command::CutRanges {
+                clip_ids: vec![clip],
+                ranges: vec![cut_span(1.0, 2.0), cut_span(4.0, 5.0), cut_span(7.0, 8.0)],
+                ripple: true,
+            })
+            .expect("cuts");
+        assert_eq!(pieces(&editor).len(), 4);
+        assert!(editor.undo());
+        assert!(pieces_close(&pieces(&editor), &[(0.0, 10.0, 0.0)]));
+    }
+
+    #[test]
+    fn cut_ranges_reads_from_the_wire_and_refuses_a_non_number() {
+        let wire = json!({
+            "op": "cutRanges",
+            "clipIds": ["c1"],
+            "ranges": [{ "start": 1.0, "end": 2.0 }],
+            "ripple": true
+        });
+        let command: Command = serde_json::from_value(wire).expect("parses");
+        assert!(matches!(command, Command::CutRanges { ripple: true, .. }));
+
+        let (mut editor, _, clip) = fixture();
+        let refused = editor.apply(Command::CutRanges {
+            clip_ids: vec![clip],
+            ranges: vec![cut_span(f64::NAN, 2.0)],
+            ripple: false,
+        });
+        assert!(refused.is_err());
     }
 
     fn move_to(clip_id: &str, start: f64, track_id: &str) -> Command {

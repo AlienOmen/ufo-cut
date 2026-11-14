@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-cross-zoom"
+name = "Cross Zoom"
+kind = "transition"
+category = "GL Transitions"
+order = 2
+description = "A cross-fade through a strong zoom blur."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

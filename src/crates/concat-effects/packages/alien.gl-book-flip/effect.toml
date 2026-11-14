@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-book-flip"
+name = "Book Flip"
+kind = "transition"
+category = "GL Transitions"
+order = 39
+description = "The right half turns over like a book page and brings in the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

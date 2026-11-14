@@ -1,0 +1,54 @@
+format = 2
+
+[effect]
+id = "alien.fx-glitch-blocks"
+name = "Glitch Blocks"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 103
+intensity = "amount"
+description = "Bands and blocks of the picture jump sideways and split in colour in short bursts."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "blocks"
+label = "Band Count"
+min = 4
+max = 80
+default = 24
+step = 1
+animate = true
+
+[[param]]
+key = "speed"
+label = "Speed"
+min = 1
+max = 30
+default = 10
+step = 1
+unit = "fps"
+animate = true
+
+[[param]]
+key = "split"
+label = "Colour Split"
+min = 0
+max = 100
+default = 40
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

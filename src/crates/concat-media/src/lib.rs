@@ -13,6 +13,7 @@
 //! [`FrameSink`]. A GPU-decode backend would implement those two and nothing
 //! else in the workspace changes.
 
+pub mod analysis;
 pub mod audio;
 pub mod decode;
 pub mod encode;

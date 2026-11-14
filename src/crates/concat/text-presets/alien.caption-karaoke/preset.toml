@@ -1,0 +1,23 @@
+id = "alien.caption-karaoke"
+name = "ALIEN Karaoke caption"
+language = "Latin"
+order = 3
+offsetY = 0.22
+
+# The spoken word in acid, the rest off-white. Move the run along the words
+# (title_style_words) to follow the voice.
+[style]
+content = "PREMIUM COFFEE IN 30 SECONDS"
+fontFamily = "Montserrat"
+fontWeight = 900
+fontSize = 0.055
+color = "#ecede4"
+strokeWidth = 0.012
+strokeColor = "#0a0b0a"
+maxWidth = 0.84
+lineHeight = 1.1
+
+[[style.runs]]
+start = 0
+end = 7
+color = "#c8ff00"

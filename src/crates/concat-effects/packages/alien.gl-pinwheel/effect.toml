@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-pinwheel"
+name = "Pinwheel"
+kind = "transition"
+category = "GL Transitions"
+order = 20
+description = "A spinning pinwheel of wedges brings in the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

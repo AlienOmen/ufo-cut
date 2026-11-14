@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-bounce"
+name = "Bounce"
+kind = "transition"
+category = "GL Transitions"
+order = 17
+description = "The last shot drops and bounces off the bottom, settling away over the next one."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

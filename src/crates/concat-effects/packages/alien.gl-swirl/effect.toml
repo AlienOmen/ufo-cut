@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-swirl"
+name = "Swirl"
+kind = "transition"
+category = "GL Transitions"
+order = 7
+description = "The picture twists into a swirl that peaks mid-way, changes shot and untwists."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

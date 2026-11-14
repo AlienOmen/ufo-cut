@@ -1,0 +1,35 @@
+format = 2
+
+[effect]
+id = "alien.fx-lens"
+name = "Lens Distortion"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 112
+intensity = "amount"
+description = "Barrel or pincushion distortion, with the picture scaled so no edge shows. Negative values pinch."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = -100
+max = 100
+default = 40
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "zoom"
+label = "Zoom Fix"
+min = 0
+max = 100
+default = 60
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

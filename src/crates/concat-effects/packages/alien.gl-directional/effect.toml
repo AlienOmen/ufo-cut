@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-directional"
+name = "Push Up"
+kind = "transition"
+category = "GL Transitions"
+order = 3
+description = "The next shot pushes the last one out of the frame."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

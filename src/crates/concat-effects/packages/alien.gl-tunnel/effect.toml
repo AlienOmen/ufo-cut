@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-tunnel"
+name = "Tunnel"
+kind = "transition"
+category = "GL Transitions"
+order = 33
+description = "The last shot lines a tunnel the camera flies down into the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

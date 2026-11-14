@@ -1,0 +1,15 @@
+id = "alien.caption-oneword"
+name = "ALIEN One word"
+language = "Latin"
+order = 6
+offsetY = 0.0
+
+# One big word at a time, in the middle of the frame.
+[style]
+content = "NOW"
+fontFamily = "Montserrat"
+fontWeight = 900
+fontSize = 0.16
+color = "#ecede4"
+strokeWidth = 0.016
+strokeColor = "#0a0b0a"

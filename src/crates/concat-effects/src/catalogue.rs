@@ -1025,21 +1025,39 @@ impl Catalogue {
 
     /// The packages compiled into the binary, and nothing else.
     fn compiled_in() -> Catalogue {
+        Self::compiled_in_checked().0
+    }
+
+    /// [`Catalogue::compiled_in`], and the built-ins that would not load.
+    /// A built-in that fails is left out and named here rather than taking
+    /// the whole app down at start (UFO Cut ships many packages, and one
+    /// bad shader must cost one effect, not every launch); the tests read
+    /// this list and fail on any entry, so it is still found before a
+    /// release.
+    pub(crate) fn compiled_in_checked() -> (Catalogue, Vec<String>) {
         let mut catalogue = Catalogue::new();
+        let mut skipped: Vec<String> = Vec::new();
         for (folder, manifest, fixtures, shader) in crate::builtins::BUILTIN_SOURCES {
-            let package = Package::from_sources(manifest, *fixtures, *shader)
-                .unwrap_or_else(|error| panic!("built-in package {folder}: {error}"));
-            assert_eq!(
-                package.id(),
-                *folder,
-                "package folder must be named after its id"
-            );
-            catalogue
-                .add(package)
-                .unwrap_or_else(|error| panic!("built-in package {folder}: {error}"));
+            let package = match Package::from_sources(manifest, *fixtures, *shader) {
+                Ok(package) => package,
+                Err(error) => {
+                    skipped.push(format!("built-in package {folder}: {error}"));
+                    continue;
+                }
+            };
+            if package.id() != *folder {
+                skipped.push(format!(
+                    "built-in package {folder}: the folder must be named after its id, {}",
+                    package.id()
+                ));
+                continue;
+            }
+            if let Err(error) = catalogue.add(package) {
+                skipped.push(format!("built-in package {folder}: {error}"));
+            }
         }
         catalogue.sort();
-        catalogue
+        (catalogue, skipped)
     }
 
     /// Adds a package. Its id and aliases must be new to the catalogue,
@@ -1301,6 +1319,15 @@ impl Catalogue {
 mod tests {
     use super::*;
     use concat_project::model::KeyEase;
+
+    /// Every package compiled into the binary loads. The catalogue leaves a
+    /// bad one out rather than failing at start, so this is where it is
+    /// found: a release is not cut while this list has anything in it.
+    #[test]
+    fn every_built_in_package_loads() {
+        let (_, skipped) = Catalogue::compiled_in_checked();
+        assert!(skipped.is_empty(), "{}", skipped.join("\n"));
+    }
 
     /// A link to a retired key or blur opens as its stand-in, its knobs
     /// carried over as the `[[replaces]]` table says - the screen's colour,

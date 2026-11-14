@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-directional-warp"
+name = "Warp Wipe"
+kind = "transition"
+category = "GL Transitions"
+order = 4
+description = "A diagonal wipe whose edge bends and smears the picture."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

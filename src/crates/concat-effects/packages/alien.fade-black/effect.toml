@@ -1,0 +1,22 @@
+format = 2
+
+[effect]
+id = "alien.fade-black"
+name = "Dip to Black"
+kind = "transition"
+category = "ALIEN"
+order = 10
+description = "The outgoing shot fades to black, holds if you like, and the next fades up out of it."
+
+[[param]]
+key = "hold"
+label = "Hold"
+min = 0
+max = 80
+default = 0
+step = 1
+unit = "%"
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

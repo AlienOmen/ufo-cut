@@ -1,0 +1,55 @@
+format = 2
+
+[effect]
+id = "alien.fx-crt"
+name = "CRT Monitor"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 105
+intensity = "curve"
+description = "Curved glass, scanlines, a phosphor mask and a soft vignette: an old tube television."
+
+[[param]]
+key = "curve"
+label = "Curvature"
+min = 0
+max = 100
+default = 35
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "lines"
+label = "Scanlines"
+min = 0
+max = 100
+default = 55
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "mask"
+label = "Phosphor Mask"
+min = 0
+max = 100
+default = 30
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "flicker"
+label = "Flicker"
+min = 0
+max = 100
+default = 15
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

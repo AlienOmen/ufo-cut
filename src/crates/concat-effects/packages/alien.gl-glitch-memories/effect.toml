@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-glitch-memories"
+name = "Glitch Memories"
+kind = "transition"
+category = "GL Transitions"
+order = 11
+description = "A cross-fade with glitchy, colour-shifted blocks."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

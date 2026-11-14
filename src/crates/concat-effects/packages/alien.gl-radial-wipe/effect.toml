@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-radial-wipe"
+name = "Radial Wipe"
+kind = "transition"
+category = "GL Transitions"
+order = 26
+description = "A wipe sweeps round the centre like a clock hand."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

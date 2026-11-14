@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-static-fade"
+name = "Static Fade"
+kind = "transition"
+category = "GL Transitions"
+order = 29
+description = "The picture dissolves into TV static and back out as the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

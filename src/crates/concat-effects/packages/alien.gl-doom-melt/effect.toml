@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-doom-melt"
+name = "Doom Melt"
+kind = "transition"
+category = "GL Transitions"
+order = 31
+description = "Columns of the picture slide down at different speeds, like the old game's screen melt."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

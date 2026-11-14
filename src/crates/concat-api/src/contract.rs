@@ -13,8 +13,8 @@ use schemars::{JsonSchema, SchemaGenerator, generate::SchemaSettings};
 use serde_json::{Map, Value, json};
 
 use crate::message::{
-    API_VERSION, ApiError, Done, ErrorCode, Event, JobStatus, PackageInfo, Picture, Request,
-    Started, VersionInfo, Written,
+    API_VERSION, ApiError, CutReport, Done, ErrorCode, Event, JobStatus, MissionPlan, PackageInfo,
+    Picture, PreflightReport, Request, SoundReport, Started, VersionInfo, Written,
 };
 
 /// Where the published document lives: the website (ConcatApp/website)
@@ -81,6 +81,10 @@ fn reply_schema(method: &str, generator: &mut SchemaGenerator) -> Option<Value> 
             "description": "The `concat.json` a save would write, as it stands."
         }),
         "media.probe" => of::<MediaSummary>(generator),
+        "clip.analyzeSound" => of::<SoundReport>(generator),
+        "clips.cutSilence" => of::<CutReport>(generator),
+        "project.preflight" => of::<PreflightReport>(generator),
+        "export.missionPlan" => of::<MissionPlan>(generator),
         "catalogue.list" => of::<Vec<PackageInfo>>(generator),
         "template.list" => of::<Vec<TemplateInfo>>(generator),
         "template.save" => of::<TemplateInfo>(generator),

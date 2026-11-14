@@ -1,0 +1,65 @@
+format = 2
+
+[effect]
+id = "alien.fx-vignette"
+name = "Vignette Pro"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 113
+intensity = "amount"
+description = "Darkened corners with size, softness, roundness and an optional acid-green glow instead of black."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 100
+default = 60
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "size"
+label = "Size"
+min = 10
+max = 100
+default = 55
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "softness"
+label = "Softness"
+min = 5
+max = 100
+default = 60
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "round"
+label = "Roundness"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "acid"
+label = "Acid Tint"
+min = 0
+max = 100
+default = 0
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

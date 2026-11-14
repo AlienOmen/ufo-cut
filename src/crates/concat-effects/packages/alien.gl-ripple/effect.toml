@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-ripple"
+name = "Ripple Dissolve"
+kind = "transition"
+category = "GL Transitions"
+order = 8
+description = "Ripples spread from the middle while the shots cross-fade."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

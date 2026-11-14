@@ -1,0 +1,15 @@
+id = "alien.caption-pop"
+name = "ALIEN Pop caption"
+language = "Latin"
+order = 4
+offsetY = 0.2
+
+[style]
+content = "BOOM"
+fontFamily = "Anton"
+fontWeight = 900
+fontSize = 0.1
+color = "#c8ff00"
+strokeWidth = 0.018
+strokeColor = "#0a0b0a"
+tracking = 0.004

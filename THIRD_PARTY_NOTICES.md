@@ -277,3 +277,81 @@ https://unsplash.com/photos/2v921tlqdXE), used under the Unsplash License. The s
 and is embedded in the app; each card is the effect's own shader run over
 it on the GPU when the app first needs the card (`concat-host`'s
 `cards.rs`).
+
+## gl-transitions
+
+The `alien.gl-*` transition packages are WGSL ports of shaders from the
+gl-transitions library (https://github.com/gl-transitions/gl-transitions,
+`transitions/*.glsl`). Every ported shader carries a `License: MIT` header in
+its source; only MIT-licensed transitions were ported. Each package's
+`effect.wgsl` keeps the original author and licence in its header comment.
+Luminance Melt also contains Ashima Arts' simplex noise (webgl-noise, MIT,
+(c) 2011 Ashima Arts, https://github.com/ashima/webgl-noise).
+
+| Package | Transition | Author | Licence |
+|---|---|---|---|
+| alien.gl-cross-warp | CrossWarp.glsl | Eke Péter <peterekepeter@gmail.com> | MIT |
+| alien.gl-cross-zoom | CrossZoom.glsl | rectalogic | MIT |
+| alien.gl-directional | Directional.glsl | Gaëtan Renaudeau | MIT |
+| alien.gl-directional-warp | DirectionalWarp.glsl | pschroen | MIT |
+| alien.gl-dreamy | Dreamy.glsl | mikolalysenko | MIT |
+| alien.gl-dreamy-zoom | DreamyZoom.glsl | Zeh Fernando | MIT |
+| alien.gl-swirl | Swirl.glsl | Sergey Kosarevsky | MIT |
+| alien.gl-ripple | Ripple.glsl | gre | MIT |
+| alien.gl-water-drop | WaterDrop.glsl | Paweł Płóciennik | MIT |
+| alien.gl-glitch-displace | GlitchDisplace.glsl | Matt DesLauriers | MIT |
+| alien.gl-glitch-memories | GlitchMemories.glsl | Gunnar Roth | MIT |
+| alien.gl-pixelize | Pixelize.glsl | gre | MIT |
+| alien.gl-wind | Wind.glsl | gre | MIT |
+| alien.gl-window-blinds | WindowBlinds.glsl | Fabien Benetou | MIT |
+| alien.gl-window-slices | WindowSlices.glsl | gre | MIT |
+| alien.gl-squares-wipe | SquaresWipe.glsl | gre | MIT |
+| alien.gl-bounce | Bounce.glsl | Adrian Purser | MIT |
+| alien.gl-luminance-melt | LuminanceMelt.glsl | 0gust1 | MIT |
+| alien.gl-polka-dots-curtain | PolkaDotsCurtain.glsl | bobylito | MIT |
+| alien.gl-pinwheel | Pinwheel.glsl | Mr Speaker | MIT |
+| alien.gl-rotate-scale-fade | RotateScaleFade.glsl | Fernando Kuteken | MIT |
+| alien.gl-squeeze | Squeeze.glsl | gre | MIT |
+| alien.gl-hexagonalize | Hexagonalize.glsl | Fernando Kuteken | MIT |
+| alien.gl-kaleidoscope | Kaleidoscope.glsl | nwoeanhinnogaehr | MIT |
+| alien.gl-circle-open | CircleOpen.glsl | gre | MIT |
+| alien.gl-radial-wipe | RadialWipe.glsl | Xaychru | MIT |
+| alien.gl-morph | Morph.glsl | paniq | MIT |
+| alien.gl-simple-zoom | SimpleZoom.glsl | 0gust1 | MIT |
+| alien.gl-static-fade | StaticFade.glsl | Ben Lucas | MIT |
+| alien.gl-zoom-in-circles | ZoomInCircles.glsl | dycm8009 | MIT |
+| alien.gl-doom-melt | DoomMelt.glsl | Zeh Fernando | MIT |
+| alien.gl-undulating-burn-out | UndulatingBurnOut.glsl | pthrasher | MIT |
+| alien.gl-tunnel | Tunnel.glsl | gre | MIT |
+| alien.gl-shockwave | Shockwave.glsl | Gilad Levi, github @Giladx | MIT |
+| alien.gl-color-phase | ColorPhase.glsl | gre | MIT |
+| alien.gl-doorway | Doorway.glsl | gre | MIT |
+| alien.gl-film-burn | FilmBurn.glsl | Anastasia Dunbar | MIT |
+| alien.gl-vortex | Vortex.glsl | gre | MIT |
+| alien.gl-book-flip | BookFlip.glsl | hong | MIT |
+| alien.gl-grid-flip | GridFlip.glsl | TimDonselaar | MIT |
+
+The library's licence text, which applies to each of the above:
+
+    MIT License
+
+    Copyright (c) 2017-present gl-transitions contributors
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+

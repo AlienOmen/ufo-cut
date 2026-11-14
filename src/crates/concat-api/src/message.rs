@@ -30,8 +30,8 @@ use concat_host::media::MediaSummary;
 use concat_host::session::EditorView;
 use concat_host::templates::TemplateInfo;
 use concat_host::{AppDirs, ProjectInfo};
-use concat_project::Command;
 use concat_project::model::VideoSettings;
+use concat_project::{Command, CutSpan};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -156,6 +156,85 @@ pub enum Request {
         path: String,
         /// The file to import.
         file: String,
+    },
+    /// Reads the sound of one clip and reports where it falls silent, where
+    /// it is present and where its beat lands - as seconds of timeline - without
+    /// changing anything. A clip under a speed curve is refused.
+    #[serde(rename = "clip.analyzeSound")]
+    ClipAnalyzeSound {
+        /// The project folder.
+        path: String,
+        /// The clip: a video with sound, or an audio clip.
+        clip_id: String,
+        /// The level, in dB below full scale (a negative number), under which
+        /// sound counts as silence. Louder is nearer zero. Default -40.
+        #[serde(default)]
+        threshold_db: Option<f64>,
+        /// The shortest silence reported, in seconds. Default 0.35.
+        #[serde(default)]
+        min_silence: Option<f64>,
+        /// Seconds of each silence left out of it on the sides that touch
+        /// sound, so a cut does not clip a word. Default 0.06.
+        #[serde(default)]
+        padding: Option<f64>,
+        /// How many beats are found, 0 (only the hardest hits) to 1 (nearly
+        /// every rise). Default 0.5.
+        #[serde(default)]
+        sensitivity: Option<f64>,
+    },
+    /// Cuts the silent gaps out of clips as one undoable edit: the silences
+    /// of one clip's sound (`analyzeClipId`, else the first of `clipIds`) are
+    /// taken out of every clip named, so a talk's picture and its sound stay
+    /// in step. Replies with what was cut. `clip.analyzeSound` shows the
+    /// silences first.
+    #[serde(rename = "clips.cutSilence")]
+    ClipsCutSilence {
+        /// The project folder.
+        path: String,
+        /// The clips to cut: the talk's picture and sound.
+        clip_ids: Vec<String>,
+        /// The clip whose sound is read; the first of `clipIds` when absent.
+        #[serde(default)]
+        analyze_clip_id: Option<String>,
+        /// The level, in dB below full scale (negative), under which sound
+        /// counts as silence. Default -40.
+        #[serde(default)]
+        threshold_db: Option<f64>,
+        /// The shortest silence cut, in seconds. Default 0.35.
+        #[serde(default)]
+        min_silence: Option<f64>,
+        /// Seconds of silence kept beside sound. Default 0.06.
+        #[serde(default)]
+        padding: Option<f64>,
+        /// Whether the lanes close up behind each cut. Default true.
+        #[serde(default)]
+        ripple: Option<bool>,
+    },
+    /// Holds an open project's active timeline against what a course lesson
+    /// asks of its video (frame, rate, length, captions, sound) and lists
+    /// what to fix, each with a plain-language step. Changes nothing.
+    #[serde(rename = "project.preflight")]
+    ProjectPreflight {
+        /// The project folder.
+        path: String,
+        /// The lesson: "E.19", "E.20", "I.09", "C.07", ...
+        lesson_code: String,
+    },
+    /// Says where a lesson's video files go and what they are called - the
+    /// exact names, the student's ALIEN_OS folder, the next free version so
+    /// nothing is overwritten - and what to export with, plus the project's
+    /// preflight. Exports nothing and writes nothing.
+    #[serde(rename = "export.missionPlan")]
+    ExportMissionPlan {
+        /// The project folder.
+        path: String,
+        /// The lesson: "E.19", "E.20", "I.09", "C.07", ...
+        lesson_code: String,
+        /// The student's name: the folder is `ALIEN_OS_<name>`.
+        student_name: String,
+        /// The folder the student's `ALIEN_OS_<name>` folder is in (or is to
+        /// be made in).
+        root: String,
     },
 
     /// Every effect package the build knows, with its parameters, so a
@@ -320,6 +399,14 @@ pub enum Reply {
     Document(Value),
     /// [`Request::MediaProbe`].
     Media(MediaSummary),
+    /// [`Request::ClipAnalyzeSound`].
+    Sound(SoundReport),
+    /// [`Request::ClipsCutSilence`].
+    Cut(CutReport),
+    /// [`Request::ProjectPreflight`].
+    Preflight(PreflightReport),
+    /// [`Request::ExportMissionPlan`].
+    Mission(MissionPlan),
     /// [`Request::CatalogueList`].
     Packages(Vec<PackageInfo>),
     /// [`Request::TemplateList`].
@@ -390,6 +477,137 @@ pub struct Written {
     pub width: u32,
     /// Its picture size.
     pub height: u32,
+}
+
+/// What a clip's sound holds, as seconds of timeline.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SoundReport {
+    /// The silences long enough to cut, padded as asked, in order.
+    pub silences: Vec<CutSpan>,
+    /// Where sound is present, in order.
+    pub voice: Vec<CutSpan>,
+    /// The beats, in order.
+    pub beats: Vec<f64>,
+    /// The tempo the beats suggest, in beats per minute, when there are
+    /// enough of them to say.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bpm: Option<f64>,
+}
+
+/// What a silence cut took out.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CutReport {
+    /// The stretches cut, in timeline seconds as the clips stood before the
+    /// cut, in order.
+    pub cut: Vec<CutSpan>,
+    /// How many seconds that is in all.
+    pub seconds_removed: f64,
+}
+
+/// One thing a lesson preflight found.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FindingInfo {
+    /// A stable code: "FRAME_SIZE", "FRAME_RATE", "DURATION", "NO_SOUND",
+    /// "NO_CAPTIONS", "CAPTION_LINES", "CAPTION_TOO_FAST",
+    /// "CAPTION_SAFE_ZONE", "CUT_OFF_MARKER", "END_CARD_MOVES",
+    /// "PICTURE_GAP" or "NO_CLIPS".
+    pub code: String,
+    /// "error" (breaks a rule of the lesson) or "warning" (worth a look).
+    pub severity: String,
+    /// What is wrong, in plain words.
+    pub message: String,
+    /// The step that fixes it, in plain words.
+    pub fix: String,
+    /// Where on the timeline it is, in seconds, when it is somewhere.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub at: Option<f64>,
+}
+
+/// A project held against a lesson: [`Request::ProjectPreflight`]'s reply.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PreflightReport {
+    /// The lesson's code.
+    pub lesson: String,
+    /// The lesson's title.
+    pub title: String,
+    /// True when no finding is an error; warnings may remain.
+    pub passed: bool,
+    /// How many findings are errors.
+    pub errors: u32,
+    /// How many findings are warnings.
+    pub warnings: u32,
+    /// The findings, errors first.
+    pub findings: Vec<FindingInfo>,
+}
+
+/// What to export a mission file with.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MissionExport {
+    /// Frame width.
+    pub width: u32,
+    /// Frame height.
+    pub height: u32,
+    /// Frame rate numerator.
+    pub rate_num: i64,
+    /// Frame rate denominator.
+    pub rate_den: i64,
+    /// "h264", "hevc" or "av1".
+    pub codec: String,
+    /// Constant rate factor; lower is better and bigger.
+    pub crf: u8,
+    /// The x264 preset.
+    pub preset: String,
+}
+
+/// One file of a lesson's hand-in.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MissionFile {
+    /// What it is: "master", "proof", "captioned", "subtitles", "animatic",
+    /// "motion", "animation".
+    pub role: String,
+    /// Its exact name.
+    pub name: String,
+    /// Its full path: give this as `output` to `export_start`.
+    pub path: String,
+    /// What to export it with; absent for a file UFO Cut does not render
+    /// (the .srt).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub export: Option<MissionExport>,
+}
+
+/// Where a lesson's files go and what they are called:
+/// [`Request::ExportMissionPlan`]'s reply.
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MissionPlan {
+    /// The lesson's code.
+    pub lesson: String,
+    /// The lesson's title.
+    pub title: String,
+    /// The folder every file goes in. It may not exist yet.
+    pub folder: String,
+    /// The files, in the lesson's order.
+    pub files: Vec<MissionFile>,
+    /// What the student should know, in plain words.
+    pub notes: Vec<String>,
+    /// True when the project passes the lesson's preflight (no errors) and
+    /// is ready to export; true too for a lesson that has no preflight.
+    pub ready: bool,
+    /// The project's preflight findings for this lesson, errors first.
+    pub findings: Vec<FindingInfo>,
 }
 
 /// A job the API has begun. Every event about it carries `job`.

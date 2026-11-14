@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-pixelize"
+name = "Pixelize"
+kind = "transition"
+category = "GL Transitions"
+order = 12
+description = "Both shots pixelate, change at the coarsest, and sharpen again."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

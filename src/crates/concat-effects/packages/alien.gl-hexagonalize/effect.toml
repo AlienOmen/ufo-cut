@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-hexagonalize"
+name = "Hexagonalize"
+kind = "transition"
+category = "GL Transitions"
+order = 23
+description = "Both shots turn into hexagons, change at the coarsest, and sharpen again."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

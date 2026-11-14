@@ -1,0 +1,16 @@
+id = "alien.caption-box-acid"
+name = "ALIEN Box caption acid"
+language = "Latin"
+order = 5
+offsetY = 0.22
+
+[style]
+content = "Still building?"
+fontFamily = "Montserrat"
+fontWeight = 800
+fontSize = 0.05
+color = "#0a0b0a"
+background = "#c8ff00"
+backgroundRadius = 0.01
+shadow = false
+maxWidth = 0.82

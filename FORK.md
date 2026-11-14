@@ -85,6 +85,59 @@ Changes made in this fork, as AGPL section 5(a) asks, starting 2026-11-10:
 - The launch screen's links go to the UFO Cut guides in the interface's
   language (`panes/start.rs`).
 
+- **Cut silences** (written, never compiled): right-click a clip with sound
+  and choose "Cut silences" to take the quiet gaps out of it and out of the
+  rest of the selection (a talk's picture and sound), as one undo step with
+  the lanes closed up. The waveform analysis is `concat-media/src/analysis.rs`
+  (silences, where sound is present, beats and tempo, all from the peaks the
+  timeline already keeps); the cut is a new command, `Command::CutRanges`
+  (`concat-project/src/commands/clips.rs`), built from the existing split and
+  remove so it cannot disagree with them; `concat-project/src/autocut.rs`
+  maps the file's seconds onto the timeline; `concat-host/src/autocut.rs`
+  reads the clip. The same is available to assistants as `clip_analyze_sound`,
+  `clips_cut_silence` and `clips_cut_ranges` (`concat-api`, `concat-mcp`,
+  `docs/MCP.md`). Strings: `studio.cutSilences`, `studio.noSilencesFound`,
+  `studio.silencesCut` in the English, Spanish and Arabic locale files (the
+  rest show the English).
+
+## UFO Cut 2.0
+
+The release named "version 2". The workspace version is 2.0.0 (`src/Cargo.toml`
+and the 17 `concat*` entries of `src/Cargo.lock`); the installer, start screen,
+About and updater read that one number. Written without a compiler: the first
+CI build is also the first compile of everything below.
+
+- **Safe against a bad package:** a built-in effect package that fails to load
+  is left out and named (`Catalogue::compiled_in_checked`, test
+  `every_built_in_package_loads`) instead of panicking the app at start, since
+  this release adds 67 packages.
+- **40 GL Transitions** (`concat-effects/packages/alien.gl-*`): ported from
+  gl-transitions, MIT-licensed files only, headers kept, listed in
+  `THIRD_PARTY_NOTICES.md`. Fixed defaults, no knobs.
+- **6 fades** (`alien.fade-*`: black, white, acid, additive, grain, soft) and
+  **20 effects** (`alien.fx-*`: chroma, RGB split, glitch blocks, pixel streak,
+  CRT, VHS, grain, bloom, light leak, shake, punch pulse, lens, vignette,
+  halftone, duotone, posterize, edge glow, kaleido, liquid glass, gradient),
+  all original (`docs/THIRD_PARTY_DATAPACK.md`).
+- **12 more colour looks** (`luts/`, seeded once under marker `alien-looks-2`).
+- **Safe-zone overlay** `alien.safe-zones` (add as an effect layer, hide before
+  export). Numbers in `docs/SAFE_ZONES.md`; no platform publishes an official
+  pixel table, so they are conservative defaults with stated confidence.
+- **12 more templates** (ALIEN-19 to ALIEN-30, including the LUNAR ROAST 15 s
+  reel) and **9 text presets** (Alien Lesson, karaoke, pop, box, one-word,
+  shadow, Arabic poster, Ramadan, Eid); templates are seeded once under marker
+  `alien-templates-2`. The library now holds thirty templates.
+- **Lesson spec check and mission plan** (`concat-project/src/preflight.rs`,
+  `mission.rs`; MCP `project_preflight`, `export_mission_plan`; clip menu row
+  "Check lesson spec"): the E.19/E.20/I.09/C.07 deliverables with exact file
+  names and the ALIEN_OS path. Defaults the course does not settle are named
+  constants marked `TODO(owner)`.
+- **Add-ons:** nothing new is needed to drop packs in; see
+  `.claude/council/sessions/ufo-cut-ideas-2026-11-14/ADDONS_CATALOG.md`.
+
+Not yet seen by anyone in the window or run by any compiler: everything in this
+section and the "Cut silences" item above.
+
 Internal names (the `concat-*` crates, the `concat` binary, file formats and
 effect ids) are unchanged, so UFO Cut projects stay compatible with Concat.
 

@@ -1,0 +1,74 @@
+format = 2
+
+[effect]
+id = "alien.fx-kaleido"
+name = "Kaleidoscope Mirror"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 118
+intensity = "segments"
+description = "Folds the picture into mirrored wedges around a point. Two wedges is a plain mirror."
+
+[[param]]
+key = "segments"
+label = "Segments"
+min = 2
+max = 16
+default = 6
+step = 1
+animate = true
+
+[[param]]
+key = "spin"
+label = "Spin"
+min = -100
+max = 100
+default = 15
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "zoom"
+label = "Zoom"
+min = 25
+max = 300
+default = 100
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "angle"
+label = "Angle"
+min = 0
+max = 360
+default = 0
+step = 1
+unit = "deg"
+animate = true
+
+[[param]]
+key = "cx"
+label = "Centre X"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "cy"
+label = "Centre Y"
+min = 0
+max = 100
+default = 50
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

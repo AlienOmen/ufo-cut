@@ -1,0 +1,22 @@
+format = 2
+
+[effect]
+id = "alien.fade-acid"
+name = "Dip to Acid"
+kind = "transition"
+category = "ALIEN"
+order = 12
+description = "A dip to A.L.I.E.N. acid green (#C8FF00): the signature cut."
+
+[[param]]
+key = "hold"
+label = "Hold"
+min = 0
+max = 80
+default = 0
+step = 1
+unit = "%"
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

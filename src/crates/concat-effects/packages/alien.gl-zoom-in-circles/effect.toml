@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-zoom-in-circles"
+name = "Zoom Rings"
+kind = "transition"
+category = "GL Transitions"
+order = 30
+description = "Rings of the picture zoom at different speeds until the next shot takes over."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

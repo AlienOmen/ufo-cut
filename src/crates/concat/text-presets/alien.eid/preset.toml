@@ -1,0 +1,20 @@
+id = "alien.eid"
+name = "ALIEN Eid"
+language = "Arabic"
+order = 42
+offsetY = -0.1
+
+[style]
+content = "عيد مبارك"
+fontFamily = "Noto Sans Arabic UI"
+fontWeight = 700
+fontSize = 0.12
+color = "#ecede4"
+strokeWidth = 0.006
+strokeColor = "#0a0b0a"
+lineHeight = 1.3
+
+[[style.runs]]
+start = 0
+end = 3
+color = "#c8ff00"

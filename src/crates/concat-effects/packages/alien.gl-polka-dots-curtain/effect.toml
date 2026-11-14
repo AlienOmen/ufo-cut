@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-polka-dots-curtain"
+name = "Polka Dots"
+kind = "transition"
+category = "GL Transitions"
+order = 19
+description = "Dots grow from a corner and fuse into the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

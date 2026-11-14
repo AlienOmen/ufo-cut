@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-glitch-displace"
+name = "Glitch Displace"
+kind = "transition"
+category = "GL Transitions"
+order = 10
+description = "Blocks of the picture are displaced in a glitch that flashes into the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

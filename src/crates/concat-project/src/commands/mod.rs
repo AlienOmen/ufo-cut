@@ -45,6 +45,17 @@ pub(crate) use crate::model::ranges::{
     MIN_STRETCH, wrap_rotation,
 };
 
+/// A stretch of the timeline, in seconds, for [`Command::CutRanges`].
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[derive(Clone, Copy, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CutSpan {
+    /// Where the stretch begins, in timeline seconds.
+    pub start: f64,
+    /// Where it ends. A span that ends at or before its start is ignored.
+    pub end: f64,
+}
+
 /// Which end of a clip a trim drags. The two are not symmetric: see
 /// [`Command::TrimClip`].
 #[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
@@ -648,6 +659,24 @@ pub enum Command {
         /// The cut point, in timeline seconds.
         time: f64,
     },
+    /// Takes stretches of time out of clips - the silent gaps of a talk, the
+    /// dead air before a beat - as one undoable edit. Each span is cut out of
+    /// every named clip it runs through (a picture and its sound, on two
+    /// lanes, are named together so they stay in step); what is left is the
+    /// clips' head, between the spans and tail, each source-continuous as a
+    /// split leaves them. Spans that overlap are one; a span past a clip's
+    /// ends is trimmed to them, and one that covers a clip whole removes it.
+    /// `ripple` closes the gaps as a ripple delete does. Nothing to cut is a
+    /// tolerated no-op.
+    CutRanges {
+        /// The clips to cut, normally a talk's picture and sound.
+        clip_ids: Vec<String>,
+        /// The stretches to take out, in timeline seconds, in any order.
+        ranges: Vec<CutSpan>,
+        /// Whether the lanes close up behind each stretch taken.
+        #[serde(default)]
+        ripple: bool,
+    },
     /// Points a clip at another file - the enhanced or reversed copy of
     /// its media - adding the file to the bin first when it is not there.
     /// The clip's length, looks and name are kept, and its in-point unless
@@ -1206,6 +1235,9 @@ impl Command {
             Command::MoveClips { moves } => bad(moves.iter().map(|wanted| wanted.start)),
             Command::TrimClip { delta, .. } => bad([*delta]),
             Command::SplitClips { time, .. } => bad([*time]),
+            Command::CutRanges { ranges, .. } => {
+                bad(ranges.iter().flat_map(|span| [span.start, span.end]))
+            }
             Command::FreezeFrame { time, duration, .. } => bad([*time]) || bad(*duration),
             Command::ReplaceClipMedia {
                 item,
@@ -1353,6 +1385,7 @@ pub fn apply(
         | Command::MoveClips { .. }
         | Command::TrimClip { .. }
         | Command::SplitClips { .. }
+        | Command::CutRanges { .. }
         | Command::FreezeFrame { .. }
         | Command::ReplaceClipMedia { .. }
         | Command::SetClipEnhanced { .. }

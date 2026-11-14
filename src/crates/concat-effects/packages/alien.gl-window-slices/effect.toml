@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-window-slices"
+name = "Window Slices"
+kind = "transition"
+category = "GL Transitions"
+order = 15
+description = "Vertical slices sweep across and turn the frame over to the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

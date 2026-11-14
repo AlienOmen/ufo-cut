@@ -44,6 +44,7 @@ use concat_effects::Catalogue;
 use concat_effects::manifest::Kind;
 use concat_export::{ExportClip, ExportRequest};
 pub use concat_host::AppDirs;
+use concat_host::autocut::{self as sound, BeatSettings, SilenceSettings};
 use concat_host::cutout::{self, AnalyseRequest, Cutouts};
 use concat_host::export::{self, Exporter};
 use concat_host::preview::{FrameSpec, Monitor};
@@ -51,13 +52,18 @@ use concat_host::session::EditorView;
 use concat_host::stabilize::{StabilizeRequest, Stabilizers};
 use concat_host::templates::{self, SlotFill};
 use concat_host::{ProjectInfo, Session, Titles, lock, media, projects};
-use concat_project::Command;
+use concat_project::{Command, mission, preflight};
 use concat_project::model::VideoSettings;
 
 pub use message::{
-    API_VERSION, ApiError, Dirs, Done, ErrorCode, Event, ExportSpec, Fill, JobState, JobStatus,
-    PackageInfo, ParamInfo, Picture, Reply, Request, Response, Started, VersionInfo, Written,
+    API_VERSION, ApiError, CutReport, Dirs, Done, ErrorCode, Event, ExportSpec, Fill, FindingInfo,
+    JobState, JobStatus, MissionExport, MissionFile, MissionPlan, PackageInfo, ParamInfo, Picture,
+    PreflightReport, Reply, Request, Response, SoundReport, Started, VersionInfo, Written,
 };
+
+/// Gaps in sound shorter than this, in seconds, are bridged when reporting
+/// where sound is present: a breath is not the end of a sentence.
+const VOICE_HOLD: f64 = 0.3;
 
 /// The export sheet's middle quality, and what an export gets when the
 /// caller says nothing.
@@ -469,6 +475,112 @@ impl Api {
                 Ok(Reply::Media(media::probe(&path).map_err(ApiError::failed)?))
             }
             Request::MediaImport { path, file } => view(self.import(&path, &file)?),
+            Request::ClipAnalyzeSound {
+                path,
+                clip_id,
+                threshold_db,
+                min_silence,
+                padding,
+                sensitivity,
+            } => {
+                let silence = silence_settings(threshold_db, min_silence, padding)?;
+                let beat = BeatSettings {
+                    sensitivity: setting(sensitivity, 0.5, "sensitivity")? as f32,
+                    ..BeatSettings::default()
+                };
+                let session = self.session_mut(&path)?;
+                let folder = session.path().to_owned();
+                let project = session.project();
+                let failed = ApiError::failed;
+                let silences = sound::silences(project, &clip_id, Some(&folder), &silence)
+                    .map_err(failed)?;
+                let voice = sound::voice(
+                    project,
+                    &clip_id,
+                    Some(&folder),
+                    silence.threshold_db,
+                    VOICE_HOLD,
+                )
+                .map_err(failed)?;
+                let (beats, bpm) =
+                    sound::beats(project, &clip_id, Some(&folder), &beat).map_err(failed)?;
+                Ok(Reply::Sound(SoundReport {
+                    silences,
+                    voice,
+                    beats,
+                    bpm,
+                }))
+            }
+            Request::ClipsCutSilence {
+                path,
+                clip_ids,
+                analyze_clip_id,
+                threshold_db,
+                min_silence,
+                padding,
+                ripple,
+            } => {
+                let silence = silence_settings(threshold_db, min_silence, padding)?;
+                let reads = analyze_clip_id
+                    .or_else(|| clip_ids.first().cloned())
+                    .ok_or_else(|| refused("name at least one clip to cut".to_owned()))?;
+                let spans = {
+                    let session = self.session_mut(&path)?;
+                    let folder = session.path().to_owned();
+                    sound::silences(session.project(), &reads, Some(&folder), &silence)
+                        .map_err(ApiError::failed)?
+                };
+                let seconds_removed: f64 = spans.iter().map(|span| span.end - span.start).sum();
+                if !spans.is_empty() {
+                    self.apply(
+                        &path,
+                        Command::CutRanges {
+                            clip_ids,
+                            ranges: spans.clone(),
+                            ripple: ripple.unwrap_or(true),
+                        },
+                    )?;
+                }
+                Ok(Reply::Cut(CutReport {
+                    cut: spans,
+                    seconds_removed,
+                }))
+            }
+            Request::ProjectPreflight { path, lesson_code } => {
+                let lesson = known_lesson(&lesson_code)?;
+                let spec = lesson.spec.ok_or_else(|| {
+                    ApiError::new(
+                        ErrorCode::Invalid,
+                        format!("lesson {} has no spec to check", lesson.code),
+                    )
+                })?;
+                let findings = preflight::check(self.session(&path)?.project(), &spec);
+                Ok(Reply::Preflight(report_of(lesson, &findings)))
+            }
+            Request::ExportMissionPlan {
+                path,
+                lesson_code,
+                student_name,
+                root,
+            } => {
+                let lesson = known_lesson(&lesson_code)?;
+                let findings = match lesson.spec {
+                    Some(spec) => preflight::check(self.session(&path)?.project(), &spec),
+                    None => {
+                        // Still the project's to name: it has to be open.
+                        self.session(&path)?;
+                        Vec::new()
+                    }
+                };
+                let plan = mission::plan(
+                    lesson,
+                    &student_name,
+                    Path::new(&root),
+                    &|taken: &Path| taken.exists(),
+                )
+                .map_err(|why| ApiError::new(ErrorCode::Invalid, why))?;
+                Ok(Reply::Mission(plan_of(&plan, &findings)))
+            }
             Request::CatalogueList { kind } => Ok(Reply::Packages(catalogue(kind.as_deref())?)),
             Request::TemplateList => Ok(Reply::Templates(templates::list(&self.dirs.config))),
             Request::TemplateInstantiate {
@@ -1154,6 +1266,125 @@ fn not_open(path: &str) -> ApiError {
 /// The edit layer's no, as the code that says so.
 fn refused(message: String) -> ApiError {
     ApiError::new(ErrorCode::Refused, message)
+}
+
+/// A number the caller gave, or `default` when they gave none; a value
+/// that is not a finite number is the caller's mistake.
+fn setting(value: Option<f64>, default: f64, name: &str) -> Result<f64, ApiError> {
+    match value {
+        None => Ok(default),
+        Some(value) if value.is_finite() => Ok(value),
+        Some(_) => Err(ApiError::new(
+            ErrorCode::Invalid,
+            format!("{name} must be a number"),
+        )),
+    }
+}
+
+/// What counts as silence, from the three numbers a caller may give: the
+/// level under which sound is silence (a negative number of dB), the
+/// shortest silence worth cutting and the padding kept beside sound.
+fn silence_settings(
+    threshold_db: Option<f64>,
+    min_silence: Option<f64>,
+    padding: Option<f64>,
+) -> Result<SilenceSettings, ApiError> {
+    let defaults = SilenceSettings::default();
+    let threshold = setting(threshold_db, f64::from(defaults.threshold_db), "thresholdDb")?;
+    let shortest = setting(min_silence, defaults.min_silence, "minSilence")?;
+    let padding = setting(padding, defaults.padding, "padding")?;
+    if !(-90.0..=-5.0).contains(&threshold) {
+        return Err(ApiError::new(
+            ErrorCode::Invalid,
+            "thresholdDb must be between -90 and -5 (dB below full scale)".to_owned(),
+        ));
+    }
+    if shortest < 0.05 || padding < 0.0 {
+        return Err(ApiError::new(
+            ErrorCode::Invalid,
+            "minSilence must be at least 0.05 s and padding cannot be negative".to_owned(),
+        ));
+    }
+    Ok(SilenceSettings {
+        threshold_db: threshold as f32,
+        min_silence: shortest,
+        padding,
+    })
+}
+
+/// The course lesson a caller named, or the error that lists the ones there
+/// are.
+fn known_lesson(code: &str) -> Result<&'static mission::Lesson, ApiError> {
+    mission::lesson(code).ok_or_else(|| {
+        ApiError::new(
+            ErrorCode::Invalid,
+            format!(
+                "no lesson {code:?}; the lessons with a video are {}",
+                mission::codes().join(", ")
+            ),
+        )
+    })
+}
+
+/// The preflight's findings as the API carries them.
+fn finding_infos(findings: &[preflight::Finding]) -> Vec<FindingInfo> {
+    findings
+        .iter()
+        .map(|finding| FindingInfo {
+            code: finding.code.to_owned(),
+            severity: finding.severity.label().to_owned(),
+            message: finding.message.clone(),
+            fix: finding.fix.clone(),
+            at: finding.at,
+        })
+        .collect()
+}
+
+/// A preflight's findings as [`Request::ProjectPreflight`]'s reply.
+fn report_of(lesson: &mission::Lesson, findings: &[preflight::Finding]) -> PreflightReport {
+    let errors = findings
+        .iter()
+        .filter(|finding| finding.severity == preflight::Severity::Error)
+        .count() as u32;
+    PreflightReport {
+        lesson: lesson.code.to_owned(),
+        title: lesson.title.to_owned(),
+        passed: errors == 0,
+        errors,
+        warnings: findings.len() as u32 - errors,
+        findings: finding_infos(findings),
+    }
+}
+
+/// A lesson's plan, and the project's findings, as
+/// [`Request::ExportMissionPlan`]'s reply.
+fn plan_of(plan: &mission::Plan, findings: &[preflight::Finding]) -> MissionPlan {
+    MissionPlan {
+        lesson: plan.lesson.code.to_owned(),
+        title: plan.lesson.title.to_owned(),
+        folder: plan.folder.to_string_lossy().into_owned(),
+        files: plan
+            .files
+            .iter()
+            .map(|file| MissionFile {
+                role: file.role.to_owned(),
+                name: file.name.clone(),
+                path: file.path.to_string_lossy().into_owned(),
+                export: file.export.map(|profile| MissionExport {
+                    width: profile.width,
+                    height: profile.height,
+                    rate_num: profile.rate_num,
+                    rate_den: profile.rate_den,
+                    codec: profile.codec.to_owned(),
+                    crf: profile.crf,
+                    preset: profile.preset.to_owned(),
+                }),
+            })
+            .collect(),
+        notes: plan.notes.clone(),
+        ready: preflight::passed(findings),
+        findings: finding_infos(findings),
+    }
 }
 
 /// Writes RGBA pixels as a PNG, creating the folder above the file.

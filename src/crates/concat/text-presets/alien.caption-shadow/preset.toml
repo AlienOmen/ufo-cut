@@ -1,0 +1,14 @@
+id = "alien.caption-shadow"
+name = "ALIEN Drop shadow"
+language = "Latin"
+order = 7
+offsetY = 0.22
+
+[style]
+content = "Clean and readable"
+fontFamily = "Montserrat"
+fontWeight = 800
+fontSize = 0.05
+color = "#ffffff"
+shadow = true
+maxWidth = 0.84

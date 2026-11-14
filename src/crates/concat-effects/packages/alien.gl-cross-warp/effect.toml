@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-cross-warp"
+name = "Cross Warp"
+kind = "transition"
+category = "GL Transitions"
+order = 1
+description = "The last shot zooms away while the next zooms into place, sweeping across the frame."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

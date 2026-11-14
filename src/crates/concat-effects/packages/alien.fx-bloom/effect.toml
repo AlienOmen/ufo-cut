@@ -1,0 +1,45 @@
+format = 2
+
+[effect]
+id = "alien.fx-bloom"
+name = "Bloom"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 108
+intensity = "amount"
+description = "Highlights spill into a wide soft glow. The luminous look of lights and screens."
+
+[[param]]
+key = "amount"
+label = "Amount"
+min = 0
+max = 200
+default = 70
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "threshold"
+label = "Threshold"
+min = 0
+max = 150
+default = 55
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "radius"
+label = "Radius"
+min = 2
+max = 120
+default = 28
+step = 1
+unit = "px"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

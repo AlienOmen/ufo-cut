@@ -1,0 +1,22 @@
+format = 2
+
+[effect]
+id = "alien.fade-additive"
+name = "Film Dissolve"
+kind = "transition"
+category = "ALIEN"
+order = 13
+description = "An additive dissolve: both shots add their light at the middle, so the cut blooms bright like a film lap dissolve."
+
+[[param]]
+key = "glow"
+label = "Glow"
+min = 0
+max = 100
+default = 60
+step = 1
+unit = "%"
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

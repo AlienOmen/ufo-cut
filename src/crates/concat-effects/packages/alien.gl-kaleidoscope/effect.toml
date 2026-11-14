@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-kaleidoscope"
+name = "Kaleidoscope"
+kind = "transition"
+category = "GL Transitions"
+order = 24
+description = "A cross-fade through a spinning kaleidoscope."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

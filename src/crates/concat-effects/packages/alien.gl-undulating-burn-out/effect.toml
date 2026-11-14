@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-undulating-burn-out"
+name = "Burn Out"
+kind = "transition"
+category = "GL Transitions"
+order = 32
+description = "A wavering ring burns out from the centre and leaves the next shot."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

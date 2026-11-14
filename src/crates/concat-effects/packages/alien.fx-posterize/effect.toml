@@ -1,0 +1,44 @@
+format = 2
+
+[effect]
+id = "alien.fx-posterize"
+name = "Posterize"
+version = 1
+kind = "effect"
+category = "ALIEN FX"
+shelves = ["ALIEN"]
+order = 116
+intensity = "levels"
+description = "Reduces the picture to a few tonal steps per channel for a graphic, screen-printed look."
+
+[[param]]
+key = "levels"
+label = "Levels"
+min = 2
+max = 16
+default = 5
+step = 1
+animate = true
+
+[[param]]
+key = "soft"
+label = "Edge Softness"
+min = 0
+max = 100
+default = 10
+step = 1
+unit = "%"
+animate = true
+
+[[param]]
+key = "sat"
+label = "Saturation"
+min = 0
+max = 200
+default = 110
+step = 1
+unit = "%"
+animate = true
+
+[wgsl]
+entry = "effect.wgsl"

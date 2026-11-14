@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-wind"
+name = "Wind Wipe"
+kind = "transition"
+category = "GL Transitions"
+order = 13
+description = "A ragged-edged wipe, as if the last shot were blown away."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

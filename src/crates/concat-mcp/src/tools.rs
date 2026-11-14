@@ -255,6 +255,22 @@ pub fn catalogue() -> Vec<Tool> {
         )
         .idempotent(),
         method(
+            "clip_analyze_sound",
+            "Find silences and beats",
+            "Reads the sound of one clip (a video with sound, or an audio clip) and reports, as seconds of timeline and without changing anything: `silences` (stretches quieter than `thresholdDb`, a negative number of dB below full scale, default -40, at least `minSilence` seconds long, default 0.35, each shortened by `padding` seconds, default 0.06, where it touches sound), `voice` (where sound is present), `beats` (hits, more of them as `sensitivity` goes from 0 to 1, default 0.5) and a `bpm` when there are enough beats. Use it to look before `clips_cut_silence`. A clip whose speed changes along its length is refused.",
+            "clip.analyzeSound",
+            Raw,
+        )
+        .reading(),
+        method(
+            "clips_cut_silence",
+            "Cut the silences",
+            "Takes the silent gaps out of clips as one undoable step: the silences of one clip's sound (`analyzeClipId`, else the first of `clipIds`) are cut out of every clip named in `clipIds`, so a talk's picture and its sound stay in step. `thresholdDb` (negative, default -40), `minSilence` (seconds, default 0.35) and `padding` (seconds kept beside sound, default 0.06) are as in `clip_analyze_sound`, which shows what would be cut. `ripple` (default true) closes the gaps; false leaves them. Replies with the stretches cut and the seconds removed.",
+            "clips.cutSilence",
+            Raw,
+        )
+        .destroying(),
+        method(
             "edit_apply",
             "Apply an edit",
             "Applies any one edit command to an open project, as one undoable step. `command` is an object tagged by `op` - every edit the window can make is one, with the same limits and refusals; the typed tools below are the common ones. `{\"op\": \"batch\", \"commands\": [...]}` applies several commands as one atomic, undoable step: all land or none does, and `createdId` is the last id minted inside. A refusal comes back as the sentence the window would show, with nothing changed. Returns the project summary; a command that creates something puts its id in `createdId`.",
@@ -312,6 +328,29 @@ pub fn catalogue() -> Vec<Tool> {
             "removeClips",
         )
         .destroying(),
+        command(
+            "clips_cut_ranges",
+            "Cut stretches out of clips",
+            "Takes stretches of timeline out of the named clips as one undoable step: each of `ranges` (`{start, end}` in seconds of timeline, any order, overlaps joined) is cut out of every clip in `clipIds` it runs through, so a picture and its sound stay in step. A range past a clip's ends is trimmed to them; one that covers a clip whole removes it. `ripple: true` closes the gaps as a ripple delete does. Nothing to cut changes nothing.",
+            "cutRanges",
+        )
+        .destroying(),
+        method(
+            "project_preflight",
+            "Check a lesson's spec",
+            "Holds an open project's active timeline against what a course lesson (`lessonCode`: \"E.19\", \"E.20\", \"I.09\" or \"C.07\") asks of its video, and changes nothing. E.19 and E.20 ask for a 1080x1920 frame at 30 fps, exactly 15 seconds, captions of at most two lines inside the safe area, and (E.20, C.07) sound and captions present. Replies with `passed` (no errors), counts, and `findings`, errors first: each has a `code`, a `severity` (\"error\" or \"warning\"), what is wrong (`message`), the step that fixes it (`fix`) and where (`at`, seconds). Run it before `export_mission_plan`.",
+            "project.preflight",
+            Raw,
+        )
+        .reading(),
+        method(
+            "export_mission_plan",
+            "Plan a lesson's export",
+            "Says, without exporting anything, where a course lesson's video files go and what they are called: the exact names (for E.19 `E.19_LunarRoast_15s_MASTER_v01.mp4` and `E.19_LunarRoast_15s_PROOF_v01.mp4`), the full paths in the student's `ALIEN_OS_<studentName>` folder under `root`, with the next free version so nothing is overwritten and never the word final, and the export settings for each file (width, height, rateNum, rateDen, codec, crf, preset). Also returns the project's preflight `findings` and `ready` (no errors). To render a file, pass its `path` as `output` and its settings to `export_start`; the .srt has no settings. Nothing is written or created.",
+            "export.missionPlan",
+            Raw,
+        )
+        .reading(),
         command(
             "clip_update",
             "Change a clip",
@@ -988,6 +1027,26 @@ mod tests {
                 json!({ "path": "/tmp/Cut", "video": { "width": 1920, "height": 1080, "rateNum": 30000, "rateDen": 1001 } }),
             ),
             ("media_probe", json!({ "path": "/tmp/a.mp4" })),
+            (
+                "clip_analyze_sound",
+                json!({ "path": "/tmp/Cut", "clipId": "c1", "thresholdDb": -40.0, "minSilence": 0.35, "sensitivity": 0.5 }),
+            ),
+            (
+                "clips_cut_silence",
+                json!({ "path": "/tmp/Cut", "clipIds": ["c1", "c2"], "thresholdDb": -38.0, "minSilence": 0.4, "padding": 0.06, "ripple": true }),
+            ),
+            (
+                "clips_cut_ranges",
+                json!({ "path": "/tmp/Cut", "clipIds": ["c1"], "ranges": [{ "start": 2.0, "end": 3.5 }], "ripple": true }),
+            ),
+            (
+                "project_preflight",
+                json!({ "path": "/tmp/Cut", "lessonCode": "E.19" }),
+            ),
+            (
+                "export_mission_plan",
+                json!({ "path": "/tmp/Cut", "lessonCode": "E.20", "studentName": "Sara", "root": "/tmp" }),
+            ),
             (
                 "media_import",
                 json!({ "path": "/tmp/Cut", "file": "/tmp/a.mp4" }),

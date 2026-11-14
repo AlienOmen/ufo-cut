@@ -1,0 +1,13 @@
+format = 2
+
+[effect]
+id = "alien.gl-dreamy"
+name = "Dreamy Wave"
+kind = "transition"
+category = "GL Transitions"
+order = 5
+description = "A cross-fade with a gentle wavy drift."
+
+[transition]
+fallback = "cross-fade"
+entry = "effect.wgsl"

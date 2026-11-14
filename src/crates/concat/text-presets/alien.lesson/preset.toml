@@ -1,0 +1,21 @@
+id = "alien.lesson"
+name = "ALIEN Lesson caption"
+language = "Latin"
+order = 2
+offsetY = 0.22
+
+# The course caption: off-white on a transparent void bar, two lines at most,
+# inside the safe zone. Cairo is not bundled, so Montserrat stands in.
+[style]
+content = "Premium coffee\nin 30 seconds"
+fontFamily = "Montserrat"
+fontWeight = 700
+fontSize = 0.042
+color = "#ecede4"
+background = "#0a0b0ab3"
+backgroundRadius = 0.012
+backgroundPaddingX = 0.026
+backgroundPaddingY = 0.014
+lineHeight = 1.15
+maxWidth = 0.82
+shadow = false
